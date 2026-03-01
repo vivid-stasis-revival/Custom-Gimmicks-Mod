@@ -1,0 +1,5 @@
+{
+    "Name": "obj_custom_gimmick",
+    "Parent": "obj_base_gimmick",
+    "Awake": true
+}

@@ -1,0 +1,40 @@
+[
+    {
+        "Entry": "gml_Object_obj_base_gimmick_Create_0",
+        "Find": "var i = lastExtraModIndex | 128;",
+        "ExternalFile": "gmk_lim_remove.gml",
+        "Type": 1
+    },
+    {
+        "Entry": "gml_Object_o_gameplay_jacketoverlay_Create_0",
+        "Function": "",
+        "Value": "default_jacket = jacket;",
+        "Type": 3
+    },{
+        "Entry": "gml_Object_cc_Create_0",
+        "Find": "mod_freeze = 0;",
+        "ExternalFile": "cc_extended_gmk.gml",
+        "Type": 1
+    },
+    {
+        "Entry": "gml_Object_cc_Step_0",
+        "Find": "ppos = cpos;",
+        "ExternalFile":"basegmk_extend.gml",
+        "Type": 1
+    },
+    {
+        "Entry": "gml_Object_initiategame_Create_0",
+        "ExternalFile": "mod_info.gml",
+        "Type": 2
+    },{
+        "Entry": "gml_Object_obj_laneoverlay_Create_0",
+        "Find": "image_index = ind;",
+        "Value":"image_index = ind;affection=1;",
+        "Type": 1
+    },{
+        "Entry": "gml_Object_obj_laneoverlay_Draw_0",
+        "Find": "image_alpha = cc.mod_bgalph;",
+        "Value":"image_alpha = cc.mod_bgalph * affection;",
+        "Type": 1
+    }
+]
