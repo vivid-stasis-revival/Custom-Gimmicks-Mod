@@ -34,7 +34,7 @@ draw_rectangle_colour(0, 165, display_get_gui_width(), display_get_gui_height(),
 
 draw_set_alpha(1);
 
-with (ds_list_find_value(proxies, curRenderingProxy))
+with (proxies[curRenderingProxy])
 {
     var _xsc = przm * przmb * przmc * przx * cos(degtorad(prrx));
     var _ysc = przm * przmb * przmc * przy * cos(degtorad(prry));

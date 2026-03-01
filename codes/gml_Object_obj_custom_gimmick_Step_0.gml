@@ -75,7 +75,7 @@ if (cc.mod_wflash > 0)
 if (proxyCount<=0){
     exit;
 }
-with (ds_list_find_value(proxies, curRenderingProxy))
+with (proxies[curRenderingProxy])
 {
     var _trackalp=prta;
     with (obj_laneoverlay){
