@@ -17,7 +17,7 @@
         "Type": 1
     },
     {
-        "Entry": "gml_Object_cc_Step_0",
+        "Entry": "gml_Object_cc_Step_1",
         "Find": "ppos = cpos;",
         "ExternalFile":"basegmk_extend.gml",
         "Type": 1

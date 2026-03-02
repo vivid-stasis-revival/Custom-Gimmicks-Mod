@@ -7,10 +7,10 @@ colarray[1] = color_get_green(make_color_hsv(curcolor, 255, 255));
 colarray[2] = color_get_blue(make_color_hsv(curcolor, 255, 255));
 
 if (proxyCount!=0){
-    event_user(11);
+    //pass
 }
 else{
-    if (aftsprite != undefined && sprite_exists(aftsprite))
+        if (aftsprite != undefined && sprite_exists(aftsprite))
 {
     sprite_delete(aftsprite);
     aftsprite = undefined;

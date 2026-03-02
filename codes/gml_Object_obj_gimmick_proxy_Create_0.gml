@@ -37,5 +37,4 @@ shfl = 0;
 shcr = 0;
 shfr = 0;
 //ex
-prta = 1;
 prsy = 0;

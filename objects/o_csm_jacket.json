@@ -1,4 +1,5 @@
 {
     "Name": "o_csm_jacket",
-    "Awake": true
+    "Awake": true,
+    "Parent":""
 }
