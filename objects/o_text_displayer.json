@@ -1,4 +1,5 @@
 {
     "Name": "o_text_displayer",
-    "Awake": true
+    "Awake": true,
+    "Parent":""
 }

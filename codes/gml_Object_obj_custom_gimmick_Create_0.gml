@@ -349,6 +349,3 @@ function spawnfunc()
 }
 shouldPixelate = true;
 main_shader = custom_shader;
-
-//proxies
-curRenderingProxy=0

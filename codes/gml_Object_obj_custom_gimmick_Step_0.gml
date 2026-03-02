@@ -71,14 +71,3 @@ layer_background_alpha(bgEleId, cc.mod_ditortedBG_alp);
 layer_background_blend(bgEleId, make_color_rgb(color_get_blue(cc.mod_ditortedBG_col_rgb),color_get_green(cc.mod_ditortedBG_col_rgb),color_get_red(cc.mod_ditortedBG_col_rgb)));
 if (cc.mod_wflash > 0)
     draw_sprite_ext(sp_opt_bgwhite, 0, 0, 0, 1, 1, 0, c_white, cc.mod_wflash);
-
-if (proxyCount<=0){
-    exit;
-}
-with (proxies[curRenderingProxy])
-{
-    var _trackalp=prta;
-    with (obj_laneoverlay){
-        affection = _trackalp
-    }
-}
