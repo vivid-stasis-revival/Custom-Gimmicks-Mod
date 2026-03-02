@@ -2,7 +2,7 @@ event_inherited();
 if (!instance_exists(cc))
     exit;
 
-global.NOTE_SIZE*=cc.mod_note_size;
+//global.NOTE_SIZE*=cc.mod_note_size;
 
 if (!instance_exists(cc))
     exit;
