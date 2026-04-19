@@ -25,8 +25,16 @@
     {
         "Entry": "gml_Object_initiategame_Create_0",
         "ExternalFile": "mod_info.gml",
+        "Function":"",
         "Type": 2
-    },{
+    },
+    {
+        "Entry":"gml_GlobalScript_Matrices",
+        "ExternalFile":"more_matrices.gml",
+        "Function":"",
+        "Type":2
+    },
+    {
         "Entry": "gml_Object_obj_laneoverlay_Create_0",
         "Find": "image_index = ind;",
         "Value":"image_index = ind;affection=1;",

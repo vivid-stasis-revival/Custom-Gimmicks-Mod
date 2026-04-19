@@ -52,6 +52,8 @@ while (i-- > 0)
         var _alpha = pra;
         var _skewx = prsx;
         var _skewy = prsy;
+        var _prtrX = prtrX;
+        var _prtrY = prtrY;
         var top = 0;
         var bottom = 165;
         var left = 113 - shxa;
@@ -82,12 +84,14 @@ while (i-- > 0)
         var MScale = MatrixScale(_xsc, _ysc);
         var MScaleTrans = MatrixScaleTrans(_x, _y, _xsc, _ysc);
         var MRot = MatrixRotateZ(_ang * rotdir);
+        var MTrape=global.MatrixTrapezoidal(_prtrX,_prtrY);
         var M = other.i_matrix;
         M = matrix_multiply(M, other.MToOrigin);
         M = matrix_multiply(M, MScale);
         M = matrix_multiply(M, MRot);
         M = matrix_multiply(M, MSkew);
         M = matrix_multiply(M, MTrans);
+        M = matrix_multiply(M,MTrape);
         M = matrix_multiply(M, other.MFromOrigin);
         matrix_set(2, M);
         

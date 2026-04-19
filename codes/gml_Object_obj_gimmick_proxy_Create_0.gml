@@ -38,3 +38,5 @@ shcr = 0;
 shfr = 0;
 //ex
 prsy = 0;
+prtrX = 0;
+prtrY = 0;

@@ -134,7 +134,6 @@ addExtraMod("uialpha");
 addExtraMod("cover1");
 addExtraMod("cover2");
 addExtraMod("cover3");
-addExtraMod("wflash");
 addExtraMod("rainbow");
 addExtraMod("sides");
 addExtraMod("notealp");
@@ -156,7 +155,6 @@ addExtraMod("glitchoffset");
 addExtraMod("uhnoise");
 addExtraMod("abberationxamp");
 addExtraMod("abberationyamp");
-addExtraMod("fish");
 addExtraMod("static");
 addExtraMod("fx_hue_hue");
 addExtraMod("fx_hue_saturation");
@@ -349,3 +347,5 @@ function spawnfunc()
 }
 shouldPixelate = true;
 main_shader = custom_shader;
+
+//gmks
