@@ -66,60 +66,57 @@
 | set_slash_col  |         调整slash_anycol的颜色         |                 将hex颜色转为10进制后填入<br>*受col_convertion影响*                  |
 |     cover1     |            调整遮盖不透明度            |                虽然不是新的gmk，但是作用变了：控制的是整个屏幕的遮盖                 |
 
-#### 官方gmk部分
-|          gmk名          | 作用  | 其它描述 |
-| :---------------------: | :---: | :------: |
-|         uialpha         |       |          |
-|         cover1          |       |          |
-|         cover2          |       |          |
-|         cover3          |       |          |
-|         wflash          |       |          |
-|         rainbow         |       |          |
-|          sides          |       |          |
-|         notealp         |       |          |
-|          video          |       |          |
-|     noteoverlayalp      |       |          |
-|        scorealph        |       |          |
-|         bgalph          |       |          |
-|          gray           |       |          |
-|         barrel          |       |          |
-|         barrel2         |       |          |
-|        hdistort         |       |          |
-|          fish           |       |          |
-|           vig           |       |          |
-|           abx           |       |          |
-|           aby           |       |          |
-|         aberamp         |       |          |
-|        glitchamp        |       |          |
-|      glitchoffset       |       |          |
-|         uhnoise         |       |          |
-|     abberationxamp      |       |          |
-|     abberationyamp      |       |          |
-|         static          |       |          |
-|       fx_hue_hue        |       |          |
-|    fx_hue_saturation    |       |          |
-|         fx_edge         |       |          |
-|      fx_posterize       |       |          |
-|        fx_twirl         |       |          |
-|    fx_posterize_vis     |       |          |
-|      fx_underwater      |       |          |
-|          bloom          |       |          |
-| angelstar_checker_alpha |       |          |
-|  angelstar_checker_set  |       |          |
-|         fx_zoom         |       |          |
-|         fx_red          |       |          |
-|         recolor         |       |          |
-|    holdoverlayalpha     |       |          |
-|     plaudite_pburst     |       |          |
-|       hide_combo        |       |          |
-|  plaudite_red_particle  |       |          |
-|      slash_anycol       |       |          |
-|      set_slash_col      |       |          |
-|      df_sideline2       |       |          |
-|        df_sides         |       |          |
-|       df_sideline       |       |          |
-|       df_whitebg        |       |          |
-|      df_grid_alpha      |       |          |
-|       df_grid_top       |       |          |
-|     df_grid_bottom      |       |          |
-|     plaudite_jacket     |       |          |
+### 非自定义部分的完整清单
+|          gmk名          | 作用  |    说明    |
+| :---------------------: | :---: | :--------: |
+|         uialpha         |       |            |
+|         cover1          |       |            |
+|         cover2          |       |            |
+|         cover3          |       |            |
+|         rainbow         |       |            |
+|          sides          |       |            |
+|         notealp         |       |            |
+|     noteoverlayalp      |       |            |
+|        scorealph        |       |            |
+|         bgalph          |       |            |
+|          gray           |       |            |
+|         barrel          |       |            |
+|         barrel2         |       |            |
+|        hdistort         |       |            |
+|          fish           |       |            |
+|           vig           |       |            |
+|           abx           |       | 暂时无作用 |
+|           aby           |       | 暂时无作用 |
+|         aberamp         |       | 暂时无作用 |
+|        glitchamp        |       | 暂时无作用 |
+|      glitchoffset       |       | 暂时无作用 |
+|         uhnoise         |       |            |
+|     abberationxamp      |       | 暂时无作用 |
+|     abberationyamp      |       | 暂时无作用 |
+|         static          |       |            |
+|       fx_hue_hue        |       |            |
+|    fx_hue_saturation    |       |            |
+|         fx_edge         |       |            |
+|      fx_posterize       |       |            |
+|        fx_twirl         |       |            |
+|    fx_posterize_vis     |       |            |
+|      fx_underwater      |       |            |
+|          bloom          |       |            |
+| angelstar_checker_alpha |       |            |
+|  angelstar_checker_set  |       |            |
+|         fx_zoom         |       |            |
+|         fx_red          |       |            |
+|         recolor         |       |            |
+|    holdoverlayalpha     |       |            |
+|     plaudite_pburst     |       | 暂时无作用 |
+|       hide_combo        |       |            |
+|  plaudite_red_particle  |       | 暂时无作用 |
+|      df_sideline2       |       |            |
+|        df_sides         |       |            |
+|       df_sideline       |       |            |
+|       df_whitebg        |       |            |
+|      df_grid_alpha      |       |            |
+|       df_grid_top       |       |            |
+|     df_grid_bottom      |       |            |
+|         wflash          |       |            |
+|     plaudite_jacket     |       |            |

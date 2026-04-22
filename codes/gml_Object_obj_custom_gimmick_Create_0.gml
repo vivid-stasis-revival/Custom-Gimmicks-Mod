@@ -137,7 +137,6 @@ addExtraMod("cover3");
 addExtraMod("rainbow");
 addExtraMod("sides");
 addExtraMod("notealp");
-addExtraMod("video");
 addExtraMod("noteoverlayalp");
 addExtraMod("scorealph");
 addExtraMod("bgalph");
@@ -196,7 +195,6 @@ pixelated_topscreen = -1;
 aftsprite = -1;
 //plaudite
 sidespawner = 0;
-videospawned = 0;
 
 uTime1 = shader_get_uniform(shader_angelstar_main, "time");
 uTime2 = shader_get_uniform(shader_supernova_main, "time");
@@ -279,7 +277,6 @@ cc.mod_wflash = 0;
 cc.mod_rainbow = 0;
 cc.mod_sides = 0;
 cc.mod_notealp = 1;
-cc.mod_video = 0;
 cc.mod_noteoverlayalp = 1;
 cc.mod_abberationxamp = 0;
 cc.mod_abberationyamp = 0;
