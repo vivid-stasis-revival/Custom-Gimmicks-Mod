@@ -27,6 +27,7 @@ else{
             addExtraMod(string("textcolrgb_{0}",tid),0);    //dec
             addExtraMod(string("textscale_{0}",tid),0);
             addExtraMod(string("textsep_{0}",tid),0);
+            addExtraMod(string("textmaxwidth_{0}",tid),0);
             variable_instance_set(cc,string("mod_textX_{0}",tid),room_width*0.5);
             variable_instance_set(cc,string("mod_textY_{0}",tid),room_width*0.5);
             variable_instance_set(cc,string("mod_textX_{0}b",tid),0);
@@ -36,6 +37,7 @@ else{
             variable_instance_set(cc,string("mod_textcolrgb_{0}",tid),16777215);
             variable_instance_set(cc,string("mod_textscale_{0}",tid),1);
             variable_instance_set(cc,string("mod_textsep_{0}",tid),2);
+            variable_instance_set(cc,string("mod_textmaxwidth_{0}",tid),20);
             instance_create_depth(0,0,-10,o_text_displayer_ext,{
                 textID:tid,
                 text_path:tpath

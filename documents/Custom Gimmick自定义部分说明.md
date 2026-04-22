@@ -24,17 +24,18 @@
 在v1.5及以后，可以使用多文件字幕，要使用要创建文件：```[难度]_text_[编号].txt```，如ENCORE难度的2号字幕就创建一个```ENCORE_text_2.txt```
 内部格式同单文件字幕，但是使用的gmk不太一样，下面记指定的字幕文件的编号为```[tid]```
 
-|      gmk名       |         作用          |                其它描述                |
-| :--------------: | :-------------------: | :------------------------------------: |
-|   textX_[tid]    |  调整字幕tid的横坐标  | 实际横坐标为textX\_[tid]+textX\_[tid]b |
-|   textX_[tid]b   |  调整字幕tid的横坐标  |                                        |
-|   textY_[tid]    |  调整字幕tid的纵坐标  | 实际纵坐标为textY\_[tid]+textY\_[tid]b |
-|   textY_[tid]b   |  调整字幕tid的纵坐标  |                                        |
-|  textalp_[tid]   |  调整字幕tid的透明度  |               范围[0,1]                |
-|  textrot_[tid]   | 调整字幕tid的旋转角度 |                 角度制                 |
-| textcolrgb_[tid] |    调整字幕tid颜色    |       将hex颜色转为10进制后填入        |
-| textscale_[tid]  |    调整字幕tid大小    |                默认为1                 |
-|  textsep_[tid]   |    调整字幕tid大小    |                默认为1                 |
+|       gmk名        |                作用                 |                其它描述                |
+| :----------------: | :---------------------------------: | :------------------------------------: |
+|    textX_[tid]     |         调整字幕tid的横坐标         | 实际横坐标为textX\_[tid]+textX\_[tid]b |
+|    textX_[tid]b    |         调整字幕tid的横坐标         |                                        |
+|    textY_[tid]     |         调整字幕tid的纵坐标         | 实际纵坐标为textY\_[tid]+textY\_[tid]b |
+|    textY_[tid]b    |         调整字幕tid的纵坐标         |                                        |
+|   textalp_[tid]    |         调整字幕tid的透明度         |               范围[0,1]                |
+|   textrot_[tid]    |        调整字幕tid的旋转角度        |                 角度制                 |
+|  textcolrgb_[tid]  |           调整字幕tid颜色           |       将hex颜色转为10进制后填入        |
+|  textscale_[tid]   |           调整字幕tid大小           |                默认为1                 |
+|   textsep_[tid]    |         调整字幕tid的行间距         |                默认为1                 |
+| textmaxwidth_[tid] | 调整字幕tid的行最大宽度（单位字符） |                默认为20                |
 
 #### 背景
 |       gmk名        |         作用         |                      其它描述                      |

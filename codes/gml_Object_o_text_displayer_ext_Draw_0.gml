@@ -8,5 +8,5 @@ if (textalp>0 and enable_text_gimmick){
     var col=textcolrgb
     col=make_color_rgb(color_get_blue(col),color_get_green(col),color_get_red(col))
     draw_set_color(col);
-    draw_text_ext_transformed(textX,textY,current_text,textsep,20,textscale,textscale,textrot);
+    draw_text_ext_transformed(textX,textY,current_text,textsep,textmaxwidth,textscale,textscale,textrot);
 }

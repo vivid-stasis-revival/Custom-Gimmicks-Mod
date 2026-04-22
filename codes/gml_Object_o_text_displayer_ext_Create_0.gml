@@ -40,6 +40,8 @@ text_array_length=array_length(text_array)
 
 file_text_close(file)
 //variables
+charWidth=font_get_size(global.default_font)
+
 textX=room_width*0.5
 textY=room_width*0.5
 textalp=1
@@ -47,3 +49,4 @@ textrot=0
 textcolrgb=16777215
 textscale=1
 textsep=2
+textmaxwidth=20*charWidth

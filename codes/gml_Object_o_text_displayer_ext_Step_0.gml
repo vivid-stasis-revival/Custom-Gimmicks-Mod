@@ -19,3 +19,4 @@ textrot = variable_instance_get(cc, string("mod_textrot_{0}", textID));
 textcolrgb = variable_instance_get(cc, string("mod_textcolrgb_{0}", textID));
 textscale = variable_instance_get(cc, string("mod_textscale_{0}", textID));
 textsep = variable_instance_get(cc, string("mod_textsep_{0}", textID));
+textmaxwidth = charWidth*variable_instance_get(cc, string("mod_textmaxwidth_{0}", textID));
