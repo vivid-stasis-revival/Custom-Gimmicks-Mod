@@ -7,3 +7,7 @@
 ### v1.6.3
 - 添加了控制行最大宽度的gmk: textmaxwidth
 - 修复了行最大宽度的逻辑，现在是以字符为单位
+  
+### v1.7.0-pre1
+- 支持了abx,aby,barrelabx,barrelaby,vdistort,bloom，具体见文档
+- 支持了angelstar_checker系列

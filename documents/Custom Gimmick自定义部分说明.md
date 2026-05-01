@@ -51,6 +51,8 @@
 | fx_colorise_col_alpha | 调整colorise滤镜的颜色中的alpha值  |                           |
 | fx_colorise_intensity |       调整colorise滤镜的强度       |                           |
 |       vdistort        | 效果与hdistort相同，但是是竖直方向 |                           |
+|       barrelabx       |        调整barrel的横向色散        |                           |
+|       barrelaby       |        调整barrel的竖向色散        |                           |
 - 注：fx_red与fx_colorise实则使用的同一个滤镜，区别在于fx_red只能使用recolor随机改变颜色
 
 #### 轨道Gimmick
