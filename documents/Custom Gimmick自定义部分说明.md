@@ -44,18 +44,20 @@
 | ditortedBG_col_rgb |  调整扭曲背景的颜色  |             将hex颜色转为10进制后填入              |
 |  plaudite_jacket   |    切换粒子的背景    | 虽然不是新的gmk，但是多了新的参数:11，代表默认背景 |
 #### 滤镜/shader
-|         gmk名         |               作用                |         其它描述          |
-| :-------------------: | :-------------------------------: | :-----------------------: |
-|   fx_red_intensity    |       调整fx_red的滤镜强度        |                           |
-|  fx_colorise_col_rgb  |      调整colorise滤镜的颜色       | 将hex颜色转为10进制后填入 |
-| fx_colorise_col_alpha | 调整colorise滤镜的颜色中的alpha值 |                           |
-| fx_colorise_intensity |      调整colorise滤镜的强度       |                           |
+|         gmk名         |                作用                |         其它描述          |
+| :-------------------: | :--------------------------------: | :-----------------------: |
+|   fx_red_intensity    |        调整fx_red的滤镜强度        |                           |
+|  fx_colorise_col_rgb  |       调整colorise滤镜的颜色       | 将hex颜色转为10进制后填入 |
+| fx_colorise_col_alpha | 调整colorise滤镜的颜色中的alpha值  |                           |
+| fx_colorise_intensity |       调整colorise滤镜的强度       |                           |
+|       vdistort        | 效果与hdistort相同，但是是竖直方向 |                           |
 - 注：fx_red与fx_colorise实则使用的同一个滤镜，区别在于fx_red只能使用recolor随机改变颜色
 
 #### 轨道Gimmick
-| gmk名 |   作用   | 其它描述 |
-| :---: | :------: | :------: |
-| prsy  | 纵向斜切 | 默认为0  |
+| gmk名 |   作用    | 其它描述 |
+| :---: | :-------: | :------: |
+| prtx  | 绕x轴旋转 | 默认为0  |
+| prty  | 绕y轴旋转 | 默认为0  |
 
 #### 其它
 |     gmk名      |                  作用                  |                                       其它描述                                       |

@@ -1,0 +1,257 @@
+#version 120
+#define LOWPREC 
+#define lowp
+#define mediump
+#define highp
+#define precision
+// Uniforms look like they're shared between vertex and fragment shaders in GLSL, so we have to be careful to avoid name clashes
+
+uniform sampler2D gm_BaseTexture;
+
+uniform bool gm_PS_FogEnabled;
+uniform vec4 gm_FogColour;
+uniform bool gm_AlphaTestEnabled;
+uniform float gm_AlphaRefValue;
+
+void DoAlphaTest(vec4 SrcColour)
+{
+	if (gm_AlphaTestEnabled)
+	{
+		if (SrcColour.a <= gm_AlphaRefValue)
+		{
+			discard;
+		}
+	}
+}
+
+void DoFog(inout vec4 SrcColour, float fogval)
+{
+	if (gm_PS_FogEnabled)
+	{
+		SrcColour = mix(SrcColour, gm_FogColour, clamp(fogval, 0.0, 1.0)); 
+	}
+}
+
+#define _YY_GLSL_ 1
+#define BARREL_ITER 10
+#define BARREL_AMP 0.5
+#define BARREL_DIFF 0.5
+#define lofi(x,d) (floor((x)/(d))*(d))
+#define HUGE 9E16
+#define PI 3.14159265
+#define saturate(i) clamp(i,0.,1.)
+
+const float blurSize = 4.0/512.0;
+
+// ---- bunch of uniforms for controlling the main efects
+
+varying vec2 v_vTexcoord;
+varying vec4 v_vColour;
+
+uniform float uBarrelAmp;
+uniform float uGrayAmp;
+uniform float uVigAmp;
+uniform float uFishAmp;
+uniform float uHDistortAmp;
+uniform float uVDistortAmp;
+uniform float aberrationx;
+uniform float aberrationy;
+uniform float abX;
+uniform float abY;
+uniform float time;
+uniform float bloom;
+
+//these from supanova,won't be used yet
+uniform sampler2D samplerRandom;
+uniform float stime;
+uniform float glitchAmp;
+uniform float uHnoise;
+//
+
+
+// ---- bunch of funcs that get used in the main effects
+
+float gray( vec3 rgb ) {
+  return 0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b;
+}
+
+float rand(vec2 co){
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+bool isValidUV( vec2 v ) { return 0.0 < v.x && v.x < 1.0 && 0.0 < v.y && v.y < 1.0; }
+
+vec3 barrel( float amp, vec2 uv ) {
+	float corn = length( vec2( 0.5 ) );
+	float a = min( 3.0 * sqrt( amp ), corn * PI );
+	float zoom = corn / ( tan( corn * a ) + corn );
+	vec2 p = saturate(
+    ( uv + normalize( uv - 0.5 ) * tan( length( uv - 0.5 ) * a ) ) * zoom +
+    0.5 * ( 1.0 - zoom )
+  );
+  
+  
+	//aberration
+	vec4 cola;
+	if (aberrationx == 0.0 && aberrationy == 0.0)
+	{
+		cola = vec4(texture2D( gm_BaseTexture, (p) ));
+	}
+	else
+	{
+		float r = texture2D( gm_BaseTexture, (vec2(p.x+.02*aberrationx,p.y+.02*aberrationy)) ).r;
+		float g = texture2D( gm_BaseTexture, (p)                                              ).g;
+		float b = texture2D( gm_BaseTexture, (vec2(p.x-.02*aberrationx,p.y-.02*aberrationy)) ).b;
+		cola = vec4(r, g, b, 1.0);
+	}
+  
+	return cola.xyz;
+}
+
+vec4 abberation(float abx,float aby,vec2 uv){
+	vec4 cola;
+	if (abx == 0.0 && aby == 0.0)
+	{
+		cola = vec4(0);
+	}
+	else
+	{
+	vec3 center = texture2D(gm_BaseTexture, fract(uv)).rgb;
+	float r = texture2D(gm_BaseTexture, fract(uv + vec2(0.02*abx, 0.02*aby))).r;
+    float g = texture2D(gm_BaseTexture, fract(uv)).g;
+    float b = texture2D(gm_BaseTexture, fract(uv - vec2(0.02*abx, 0.02*aby))).b;
+	cola = vec4(r-center.r, g-center.g, b-center.b, 1.0);
+	}
+	return cola;
+}
+
+//these from supernova
+
+float fractSin( float x ) {
+  return fract( 127.461 * sin( 228.671 * x ) );
+}
+
+vec2 doDeform( vec2 uv ) {
+  vec2 sum = vec2( 0.0 );
+  float p = 1.0;
+  if ( glitchAmp != 0.0 ) {
+    for ( int i = 0; i < 4; i ++ ) {
+      p *= 0.4;
+      vec2 v = vec2( 0.0, lofi( uv.y, 0.2 * p ) );
+      float modOffset = fractSin( v.y );
+      v.x = lofi( uv.x + modOffset, p ) - modOffset;
+      vec4 tex = texture2D( samplerRandom, fract( v + 0.1 * (time+stime) ) );
+      sum += mix( 1.0 - glitchAmp, 1.0, p ) < tex.z ? ( tex.xy - 0.5 ) * p : vec2( 0.0 );
+    }
+  }
+  sum.x += 0.0 != uHnoise
+    ? uHnoise * ( texture2D( samplerRandom, vec2( uv.y, fract( 0.2 * time ) ) ).x - 0.5 )
+    : 0.0;
+  return sum;
+}
+
+//original effect t. daikyi & fms_cat, modified by TaroNuke
+vec2 Spiral( vec2 p, vec2 o, float a, float d)
+{
+    p.x=p.x-o.x;
+    p.y=p.y-o.y;
+	float maxdist = d;
+    float r = length(p);//length(p * vec2(1,(imageSize.y/imageSize.x)));
+    float theta = mix(atan(p.y, p.x) + ((1.0/(r*r))*a*0.05), atan(p.y, p.x), r/maxdist);
+	
+    float x = r * cos(theta);
+    float y = r * sin(theta);
+	
+	if (r > maxdist)
+	{
+		x = p.x;
+		y = p.y;
+	}
+	
+    return vec2(x+o.x, y+o.y);
+}
+
+// ---- main
+
+void main()
+{
+	vec2 uv = v_vTexcoord;
+	
+	
+	vec2 resolution = vec2(320.0, 180.0);
+	
+	//glitchlines
+	uv.x = uv.x - (uHDistortAmp/2.0) + (rand(vec2(v_vTexcoord.y, time)) * uHDistortAmp);
+	uv.y = uv.y - (uVDistortAmp/2.0) + (rand(vec2(v_vTexcoord.x, time)) * uVDistortAmp);
+  
+	//fisheye
+	uv -= 0.5;
+	uv *= 1.0 - uFishAmp / 2.0;
+
+	float r = sqrt(dot(uv,uv));
+	uv *= 1.0 + r * uFishAmp;
+	uv += 0.5;
+
+	vec2 res = resolution;
+	uv = clamp( uv, 1.0 / res, (res - 1.0) / res );
+
+	vec3 tex = vec3( 0.0 );
+	
+	float testBarrel = max(uBarrelAmp,0.0);
+	
+	//barrel
+	for ( int i = 0; i < BARREL_ITER; i ++ ) {
+		float fi = ( float( i ) + 0.5 ) / float( BARREL_ITER );
+		vec3 a = saturate( vec3(
+		    1.0 - 3.0 * abs( 1.0 / 6.0 - fi ),
+		    1.0 - 3.0 * abs( 1.0 / 2.0 - fi ),
+		    1.0 - 3.0 * abs( 5.0 / 6.0 - fi )
+		) ) / float( BARREL_ITER ) * 4.0;
+		vec3 b = vec3(1.0 / float(BARREL_ITER));
+		tex += mix(b, a, smoothstep(0.0, 0.2, testBarrel)) * barrel( BARREL_AMP * testBarrel + BARREL_DIFF * testBarrel * fi, uv );
+	}
+	
+	//grayscale
+	vec3 grayOut = vec3(gray(tex.rgb));
+	tex = mix( tex, grayOut, uGrayAmp );
+	
+	//vig
+	vec2 fragCoord = uv * resolution;
+	vec3 coli = tex.xyz;
+
+	float len = length( fragCoord - resolution * 0.5 ) / resolution.x;
+	coli -= uVigAmp * vec3( 0.1, 0.3, 0.3 ) * len;
+
+	//instagram
+	coli = mix(
+		coli,
+		vec3(
+		    smoothstep( 0.0, 1.0, coli.x ),
+		    smoothstep( 0.2, 0.8, coli.y ),
+		    smoothstep( -0.1, 1.1, coli.z )
+		),
+		uVigAmp
+	);
+	
+	
+	vec4 sum = vec4(0.0);
+	if (bloom != 0.0){		
+		sum += texture2D(gm_BaseTexture, vec2(v_vTexcoord.x - 4.0*blurSize, v_vTexcoord.y)) * 0.05;
+		sum += texture2D(gm_BaseTexture, vec2(v_vTexcoord.x - 3.0*blurSize, v_vTexcoord.y)) * 0.09;
+		sum += texture2D(gm_BaseTexture, vec2(v_vTexcoord.x - 2.0*blurSize, v_vTexcoord.y)) * 0.12;
+		sum += texture2D(gm_BaseTexture, vec2(v_vTexcoord.x - blurSize, v_vTexcoord.y)) * 0.15;
+		sum += texture2D(gm_BaseTexture, vec2(v_vTexcoord.x, v_vTexcoord.y)) * 0.16;
+		sum += texture2D(gm_BaseTexture, vec2(v_vTexcoord.x + blurSize, v_vTexcoord.y)) * 0.15;
+		sum += texture2D(gm_BaseTexture, vec2(v_vTexcoord.x + 2.0*blurSize, v_vTexcoord.y)) * 0.12;
+		sum += texture2D(gm_BaseTexture, vec2(v_vTexcoord.x + 3.0*blurSize, v_vTexcoord.y)) * 0.09;
+		sum += texture2D(gm_BaseTexture, vec2(v_vTexcoord.x + 4.0*blurSize, v_vTexcoord.y)) * 0.05;
+	   
+		sum += texture2D(gm_BaseTexture, vec2(v_vTexcoord.x, v_vTexcoord.y - 2.0*blurSize)) * 0.12;
+		sum += texture2D(gm_BaseTexture, vec2(v_vTexcoord.x, v_vTexcoord.y - blurSize)) * 0.15;
+		sum += texture2D(gm_BaseTexture, vec2(v_vTexcoord.x, v_vTexcoord.y)) * 0.16;
+		sum += texture2D(gm_BaseTexture, vec2(v_vTexcoord.x, v_vTexcoord.y + blurSize)) * 0.15;
+		sum += texture2D(gm_BaseTexture, vec2(v_vTexcoord.x, v_vTexcoord.y + 2.0*blurSize)) * 0.12;
+	}
+	vec4 abApd=abberation(abX,abY,uv);
+    gl_FragColor = (sum * bloom * .7) + vec4( coli, 1.0 )+abApd;
+}

@@ -33,16 +33,5 @@
         "ExternalFile":"more_matrices.gml",
         "Function":"",
         "Type":2
-    },
-    {
-        "Entry": "gml_Object_obj_laneoverlay_Create_0",
-        "Find": "image_index = ind;",
-        "Value":"image_index = ind;affection=1;",
-        "Type": 1
-    },{
-        "Entry": "gml_Object_obj_laneoverlay_Draw_0",
-        "Find": "image_alpha = cc.mod_bgalph;",
-        "Value":"image_alpha = cc.mod_bgalph * affection;",
-        "Type": 1
     }
 ]

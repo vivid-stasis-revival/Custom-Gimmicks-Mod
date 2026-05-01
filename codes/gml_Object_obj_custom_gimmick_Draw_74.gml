@@ -15,16 +15,21 @@ else{
     sprite_delete(aftsprite);
     aftsprite = undefined;
 }
-    shader_set(shader_angelstar_main);
-    shader_set_uniform_f(uTime1, cc.currentms / 1000);
+    shader_set(shader_custom_main);
+    shader_set_uniform_f(uTime, cc.currentms / 1000);
     shader_set_uniform_f(uGrayAmp, cc.mod_gray);
     shader_set_uniform_f(uBarrelAmp, cc.mod_barrel + cc.mod_barrel2);
     shader_set_uniform_f(uHDistortAmp, cc.mod_hdistort);
-    shader_set_uniform_f(uSTime, cc.mod_glitchoffset);
+    shader_set_uniform_f(uVDistortAmp, cc.mod_vdistort);
     shader_set_uniform_f(uFishAmp, cc.mod_fish);
     shader_set_uniform_f(uVigAmp, cc.mod_vig);
     shader_set_uniform_f(bloom, cc.mod_bloom);
+    shader_set_uniform_f(uAbX, cc.mod_abx);
+    shader_set_uniform_f(uAbY, cc.mod_aby);
+    shader_set_uniform_f(uAbberationX, cc.mod_barrelabx);
+    shader_set_uniform_f(uAbberationY, cc.mod_barrelaby);
     draw_surface_stretched(application_surface, 0, 0, 320, 180);
+    
     shader_reset();
 }
 //custom
