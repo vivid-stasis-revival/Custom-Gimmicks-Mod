@@ -71,3 +71,10 @@ layer_background_alpha(bgEleId, cc.mod_ditortedBG_alp);
 layer_background_blend(bgEleId, make_color_rgb(color_get_blue(cc.mod_ditortedBG_col_rgb),color_get_green(cc.mod_ditortedBG_col_rgb),color_get_red(cc.mod_ditortedBG_col_rgb)));
 if (cc.mod_wflash > 0)
     draw_sprite_ext(sp_opt_bgwhite, 0, 0, 0, 1, 1, 0, c_white, cc.mod_wflash);
+
+if (cc.mod_angelstar_checker_mode==0)
+    o_angelstar_checker.depth=721;
+else if (cc.mod_angelstar_checker_mode==1)
+    o_angelstar_checker.depth=301;
+else if (cc.mod_angelstar_checker_mode==2)
+    o_angelstar_checker.depth=-50;

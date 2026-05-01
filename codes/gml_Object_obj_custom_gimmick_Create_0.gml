@@ -156,7 +156,9 @@ addExtraMod("fx_zoom");
 addExtraMod("fx_red");
 addExtraMod("recolor");
 
+//other
 addExtraMod("static");
+addExtraMod("angelstar_checker_mode")
 addExtraMod("angelstar_checker_alpha");
 addExtraMod("angelstar_checker_set");
 addExtraMod("holdoverlayalpha");
@@ -297,6 +299,7 @@ cc.mod_fx_red = 0;
 cc.mod_recolor = 0;
 
 //others
+cc.mod_angelstar_checker_mode=0;
 cc.mod_uialpha = 1;
 cc.mod_cover1 = 0;
 cc.mod_cover2 = 0;

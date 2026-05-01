@@ -54,20 +54,21 @@
 - 注：fx_red与fx_colorise实则使用的同一个滤镜，区别在于fx_red只能使用recolor随机改变颜色
 
 #### 轨道Gimmick
-| gmk名 |   作用    | 其它描述 |
-| :---: | :-------: | :------: |
-| prtx  | 绕x轴旋转 | 默认为0  |
-| prty  | 绕y轴旋转 | 默认为0  |
+| gmk名 |         作用          | 其它描述 |
+| :---: | :-------------------: | :------: |
+| prtrX | 真正意义上的绕x轴旋转 | 默认为0  |
+| prtrY | 真正意义上的绕y轴旋转 | 默认为0  |
 
 #### 其它
-|     gmk名      |                  作用                  |                                       其它描述                                       |
-| :------------: | :------------------------------------: | :----------------------------------------------------------------------------------: |
-|     jumpto     |           跳转至歌曲指定位置           |                                       单位为秒                                       |
-|   playspeed    |            设置谱面播放速度            |                                      默认值为1                                       |
-| col_convertion | 将自定义gmk内部分调整颜色的gmk逻辑转换 | 不为0时会将输入的颜色以rgb的形式使用，否则以bgr的形式<br>受该gmk影响的将在描述中标出 |
-|  slash_anycol  | 生成一个slash，颜色由set_slash_col定义 |                                                                                      |
-| set_slash_col  |         调整slash_anycol的颜色         |                 将hex颜色转为10进制后填入<br>*受col_convertion影响*                  |
-|     cover1     |            调整遮盖不透明度            |                虽然不是新的gmk，但是作用变了：控制的是整个屏幕的遮盖                 |
+|         gmk名          |                                   作用                                   |                                       其它描述                                       |
+| :--------------------: | :----------------------------------------------------------------------: | :----------------------------------------------------------------------------------: |
+|         jumpto         |                            跳转至歌曲指定位置                            |                                       单位为秒                                       |
+|       playspeed        |                             设置谱面播放速度                             |                                      默认值为1                                       |
+|     col_convertion     |                  将自定义gmk内部分调整颜色的gmk逻辑转换                  | 不为0时会将输入的颜色以rgb的形式使用，否则以bgr的形式<br>受该gmk影响的将在描述中标出 |
+|      slash_anycol      |                  生成一个slash，颜色由set_slash_col定义                  |                                                                                      |
+|     set_slash_col      |                          调整slash_anycol的颜色                          |                 将hex颜色转为10进制后填入<br>*受col_convertion影响*                  |
+|         cover1         |                             调整遮盖不透明度                             |                虽然不是新的gmk，但是作用变了：控制的是整个屏幕的遮盖                 |
+| angelstar_checker_mode | 调整angelstar_checker的状态，0为受曲绘影响，1是不受影响，2是大于轨道图层 |                                       默认为0                                        |
 
 ### 非自定义部分的完整清单
 |          gmk名          | 作用  |    说明    |
@@ -88,14 +89,13 @@
 |        hdistort         |       |            |
 |          fish           |       |            |
 |           vig           |       |            |
-|           abx           |       | 暂时无作用 |
-|           aby           |       | 暂时无作用 |
+|           abx           |       |            |
+|          bloom          |       |            |
+|           aby           |       |            |
 |         aberamp         |       | 暂时无作用 |
 |        glitchamp        |       | 暂时无作用 |
 |      glitchoffset       |       | 暂时无作用 |
-|         uhnoise         |       |            |
-|     abberationxamp      |       | 暂时无作用 |
-|     abberationyamp      |       | 暂时无作用 |
+|         uhnoise         |       | 暂时无作用 |
 |         static          |       |            |
 |       fx_hue_hue        |       |            |
 |    fx_hue_saturation    |       |            |
@@ -111,7 +111,7 @@
 |         fx_red          |       |            |
 |         recolor         |       |            |
 |    holdoverlayalpha     |       |            |
-|     plaudite_pburst     |       | 暂时无作用 |
+|     plaudite_pburst     |       |            |
 |       hide_combo        |       |            |
 |  plaudite_red_particle  |       | 暂时无作用 |
 |      df_sideline2       |       |            |
