@@ -2,17 +2,17 @@ mod_freeze = 0;
 mod_jumpto = 0;
 mod_playspeed = 1;
 songInfo = global.song_list[global.last_freeplay_song];
+ENBALE_CHANGEABLE_JACKET=true;
+JACKET_MANAGER="plaudite"//or custom
+ENABLE_TEXT=true;
+ENABLE_NON_BASE_FX=true;
+ENABLE_DF_GRID_AND_SIDELINE=true;
+ENABLE_ANGELSTAR_CHECKER=true;
+ENABLE_DISTORT_BG=true;
+ENABLE_MUSIC_CONTROL=true;
 
 if(struct_exists(songInfo, "is_custom"))
 {
-    ENBALE_CHANGEABLE_JACKET=true;
-    JACKET_MANAGER="plaudite"//or custom
-    ENABLE_TEXT=true;
-    ENABLE_NON_BASE_FX=true;
-    ENABLE_DF_GRID_AND_SIDELINE=true;
-    ENABLE_ANGELSTAR_CHECKER=true;
-    ENABLE_DISTORT_BG=true;
-    ENABLE_MUSIC_CONTROL=true;
     var loadConfig=true;
     var configPath = songInfo.chart_path + string("{0}_cgmk_config.json", global.df_load);
     if (!file_exists(configPath)){
