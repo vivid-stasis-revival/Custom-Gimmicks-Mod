@@ -16,12 +16,6 @@ if (sidespawner == 0 && cc.mod_sides > 0)
 if (sidespawner == 1 && cc.mod_sides == 0)
     sidespawner = 0;
 
-if (cc.mod_recolor > 0)
-{
-    curcolor = irandom(255);
-    cc.mod_recolor = 0;
-}
-
 if (cc.mod_slash_anycol > 0)
 {
     var the = instance_create_depth(0, 0, 255, o_plaudite_slash);
@@ -44,37 +38,52 @@ if (cc.mod_plaudite_pburst > 0)
     mod_pburstleft = 0;
 }
 
-if (cc.mod_df_sideline2 > 0)
-{
-    with (instance_create_depth(0, 0, depth, obj_distortedfate_sideline))
-    {
-        TweenFire(self, EaseOutCirc, 0, true, 0, 0.75, "x", 0, 90);
-        TweenFire(self, EaseOutCirc, 0, true, 0, 0.75, "image_alpha", 1, 0);
-    }
-    
-    with (instance_create_depth(319, 0, depth, obj_distortedfate_sideline))
-    {
-        TweenFire(self, EaseOutCirc, 0, true, 0, 0.75, "x", 319, 229);
-        TweenFire(self, EaseOutCirc, 0, true, 0, 0.75, "image_alpha", 1, 0);
-    }
-    
-    cc.mod_df_sideline2 = 0;
-}
-
 if (cc.mod_sides > 0)
 {
     spawnfunc();
     cc.mod_sides = 0;
 }
 
-layer_background_alpha(bgEleId, cc.mod_ditortedBG_alp);
-layer_background_blend(bgEleId, make_color_rgb(color_get_blue(cc.mod_ditortedBG_col_rgb),color_get_green(cc.mod_ditortedBG_col_rgb),color_get_red(cc.mod_ditortedBG_col_rgb)));
-if (cc.mod_wflash > 0)
-    draw_sprite_ext(sp_opt_bgwhite, 0, 0, 0, 1, 1, 0, c_white, cc.mod_wflash);
+if(cc.ENABLE_NON_BASE_FX)
+{
+    if (cc.mod_recolor > 0)
+    {
+        curcolor = irandom(255);
+        cc.mod_recolor = 0;
+    }
+}
 
-if (cc.mod_angelstar_checker_mode==0)
-    o_angelstar_checker.depth=721;
-else if (cc.mod_angelstar_checker_mode==1)
-    o_angelstar_checker.depth=301;
-else if (cc.mod_angelstar_checker_mode==2)
-    o_angelstar_checker.depth=-50;
+if (cc.ENABLE_DF_GRID_AND_SIDELINE)
+{
+    if (cc.mod_df_sideline2 > 0)
+    {
+        with (instance_create_depth(0, 0, depth, obj_distortedfate_sideline))
+        {
+            TweenFire(self, EaseOutCirc, 0, true, 0, 0.75, "x", 0, 90);
+            TweenFire(self, EaseOutCirc, 0, true, 0, 0.75, "image_alpha", 1, 0);
+        }
+        
+        with (instance_create_depth(319, 0, depth, obj_distortedfate_sideline))
+        {
+            TweenFire(self, EaseOutCirc, 0, true, 0, 0.75, "x", 319, 229);
+            TweenFire(self, EaseOutCirc, 0, true, 0, 0.75, "image_alpha", 1, 0);
+        }
+        
+        cc.mod_df_sideline2 = 0;
+    }
+}
+
+if(cc.ENABLE_DISTORT_BG){
+    layer_background_alpha(bgEleId, cc.mod_ditortedBG_alp);
+    layer_background_blend(bgEleId, make_color_rgb(color_get_blue(cc.mod_ditortedBG_col_rgb),color_get_green(cc.mod_ditortedBG_col_rgb),color_get_red(cc.mod_ditortedBG_col_rgb)));
+}
+
+if(cc.ENABLE_ANGELSTAR_CHECKER)
+{
+    if (cc.mod_angelstar_checker_mode==0)
+        o_angelstar_checker.depth=721;
+    else if (cc.mod_angelstar_checker_mode==1)
+        o_angelstar_checker.depth=301;
+    else if (cc.mod_angelstar_checker_mode==2)
+        o_angelstar_checker.depth=-50;
+}

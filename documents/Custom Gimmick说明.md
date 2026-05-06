@@ -1,4 +1,36 @@
-### Custom Gimmick自定义部分说明
+### Custom Gimmick说明
+
+#### cgmk配置文件
+顾名思义，这个文件是用来管理要不要启用某一部分的gimmick的。
+
+<br>
+
+直接在谱面根目录下创建```[难度]_cgmk_config.json```即可，如FINALE难度的配置就写```FINALE_cgmk_config.json```，如果需要全局的配置文件，就直接创建```cgmk_config.json```。
+- 注意，单独难度的配置的优先级是大于全局的。
+- 如果目录没有配置文件，那么**下述所有配置都会被认为是true**
+
+<br>
+
+以下是可用的配置： 
+|           配置名            |                   作用                   |
+| :-------------------------: | :--------------------------------------: |
+|         ENABLE_TEXT         |             是否启用字幕gmk              |
+|     ENABLE_NON_BASE_FX      |      是否启用不在base obj内的fx gmk      |
+| ENABLE_DF_GRID_AND_SIDELINE |      是否启用df的两侧的线或网格gmk       |
+|  ENABLE_ANGELSTAR_CHECKER   |      是否启用anglestar的背景棋盘gmk      |
+|      ENABLE_DISTORT_BG      |              是否启用扭曲BG              |
+|    ENABLE_MUSIC_CONTROL     | 是否启用控制音乐的gmk(jumpto和playspeed) |
+
+<br>
+
+在json内，你只要像下面这样填入配置信息就好了，你可以从上述的配置种填一或多个，**不填的默认为true**
+
+```json
+{
+    "ENABLE_TEXT":false,
+    "ENABLE_NON_BASE_FX":false
+}
+```
 
 #### 字幕效果：
 
@@ -10,7 +42,7 @@
 [拍数],[字幕的内容]
 ``````
 
-之后就可以使用gmk操作字幕了，以下是可以操作字幕的gmk：
+之后就可以使用gimmick操作字幕了，以下是可以操作字幕的gimmick：
 
 |   gmk名    |        作用        |                      其它描述                       |
 | :--------: | :----------------: | :-------------------------------------------------: |
@@ -50,9 +82,9 @@
 |  fx_colorise_col_rgb  |       调整colorise滤镜的颜色       | 将hex颜色转为10进制后填入 |
 | fx_colorise_col_alpha | 调整colorise滤镜的颜色中的alpha值  |                           |
 | fx_colorise_intensity |       调整colorise滤镜的强度       |                           |
-|       vdistort        | 效果与hdistort相同，但是是竖直方向 |                           |
-|       barrelabx       |        调整barrel的横向色散        |                           |
-|       barrelaby       |        调整barrel的竖向色散        |                           |
+|       vdistort        | 效果与hdistort相同，但是是竖直方向 |          默认为0          |
+|       barrelabx       |        调整barrel的横向色散        |          默认为0          |
+|       barrelaby       |        调整barrel的竖向色散        |          默认为0          |
 - 注：fx_red与fx_colorise实则使用的同一个滤镜，区别在于fx_red只能使用recolor随机改变颜色
 
 #### 轨道Gimmick
@@ -73,55 +105,70 @@
 | angelstar_checker_mode | 调整angelstar_checker的状态，0为受曲绘影响，1是不受影响，2是大于轨道图层 |                                       默认为0                                        |
 
 ### 非自定义部分的完整清单
-|          gmk名          | 作用  |    说明    |
-| :---------------------: | :---: | :--------: |
-|         uialpha         |       |            |
-|         cover1          |       |            |
-|         cover2          |       |            |
-|         cover3          |       |            |
-|         rainbow         |       |            |
-|          sides          |       |            |
-|         notealp         |       |            |
-|     noteoverlayalp      |       |            |
-|        scorealph        |       |            |
-|         bgalph          |       |            |
-|          gray           |       |            |
-|         barrel          |       |            |
-|         barrel2         |       |            |
-|        hdistort         |       |            |
-|          fish           |       |            |
-|           vig           |       |            |
-|           abx           |       |            |
-|          bloom          |       |            |
-|           aby           |       |            |
-|         aberamp         |       | 暂时无作用 |
-|        glitchamp        |       | 暂时无作用 |
-|      glitchoffset       |       | 暂时无作用 |
-|         uhnoise         |       | 暂时无作用 |
-|         static          |       |            |
-|       fx_hue_hue        |       |            |
-|    fx_hue_saturation    |       |            |
-|         fx_edge         |       |            |
-|      fx_posterize       |       |            |
-|        fx_twirl         |       |            |
-|    fx_posterize_vis     |       |            |
-|      fx_underwater      |       |            |
-|          bloom          |       |            |
-| angelstar_checker_alpha |       |            |
-|  angelstar_checker_set  |       |            |
-|         fx_zoom         |       |            |
-|         fx_red          |       |            |
-|         recolor         |       |            |
-|    holdoverlayalpha     |       |            |
-|     plaudite_pburst     |       |            |
-|       hide_combo        |       |            |
-|  plaudite_red_particle  |       | 暂时无作用 |
-|      df_sideline2       |       |            |
-|        df_sides         |       |            |
-|       df_sideline       |       |            |
-|       df_whitebg        |       |            |
-|      df_grid_alpha      |       |            |
-|       df_grid_top       |       |            |
-|     df_grid_bottom      |       |            |
-|         wflash          |       |            |
-|     plaudite_jacket     |       |            |
+|          gmk名          | 作用  |       说明        |
+| :---------------------: | :---: | :---------------: |
+|         uialpha         |       |                   |
+|         cover1          |       |                   |
+|         cover2          |       |                   |
+|         cover3          |       |                   |
+|         rainbow         |       |                   |
+|          sides          |       |                   |
+|         notealp         |       |                   |
+|     noteoverlayalp      |       |                   |
+|        scorealph        |       |                   |
+|         bgalph          |       |                   |
+|          gray           |       |                   |
+|         barrel          |       |                   |
+|         barrel2         |       |                   |
+|        hdistort         |       |                   |
+|          fish           |       |                   |
+|           vig           |       |                   |
+|           abx           |       |                   |
+|          bloom          |       |                   |
+|           aby           |       |                   |
+|         aberamp         |       |                   |
+|        glitchamp        |       |                   |
+|      glitchoffset       |       |                   |
+|         uhnoise         |       |                   |
+|         static          |       |                   |
+|       fx_hue_hue        |       |                   |
+|    fx_hue_saturation    |       |                   |
+|         fx_edge         |       |                   |
+|      fx_posterize       |       |                   |
+|        fx_twirl         |       |                   |
+|    fx_posterize_vis     |       |                   |
+|      fx_underwater      |       |                   |
+|          bloom          |       |                   |
+| angelstar_checker_alpha |       |                   |
+|  angelstar_checker_set  |       |                   |
+|         fx_zoom         |       |                   |
+|         fx_red          |       |                   |
+|         recolor         |       |                   |
+|    holdoverlayalpha     |       |                   |
+|     plaudite_pburst     |       |                   |
+|       hide_combo        |       |                   |
+|  plaudite_red_particle  |       |                   |
+|      df_sideline2       |       |                   |
+|        df_sides         |       |                   |
+|       df_sideline       |       |                   |
+|       df_whitebg        |       |                   |
+|      df_grid_alpha      |       |                   |
+|       df_grid_top       |       |                   |
+|     df_grid_bottom      |       |                   |
+|         wflash          |       |                   |
+|     plaudite_jacket     |       |                   |
+|          sina           |       |                   |
+|          sino           |       |                   |
+|          sinp           |       |                   |
+|          cosa           |       |                   |
+|          cosp           |       |                   |
+|          coso           |       |                   |
+|          tana           |       |                   |
+|          tanp           |       |                   |
+|          tano           |       |                   |
+|          posx           |       |                   |
+|          posy           |       |                   |
+|         twx[id]         |       | [id]范围1~4，下同 |
+|         twy[id]         |       |                   |
+|         twa[id]         |       |                   |
+|         twr[id]         |       |                   |

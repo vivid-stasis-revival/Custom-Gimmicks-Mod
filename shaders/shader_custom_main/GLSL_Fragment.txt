@@ -61,13 +61,20 @@ uniform float abY;
 uniform float time;
 uniform float bloom;
 
-//these from supanova,won't be used yet
+//these from supanova
 uniform sampler2D samplerRandom;
 uniform float stime;
 uniform float glitchAmp;
 uniform float uHnoise;
-//
-
+//these are from _
+uniform vec4 twist1;
+uniform vec4 twist2;
+uniform vec4 twist3;
+uniform vec4 twist4;
+uniform vec3 tanm;
+uniform vec3 sinm;
+uniform vec3 cosm;
+uniform vec2 move;
 
 // ---- bunch of funcs that get used in the main effects
 
@@ -78,8 +85,6 @@ float gray( vec3 rgb ) {
 float rand(vec2 co){
     return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
 }
-
-bool isValidUV( vec2 v ) { return 0.0 < v.x && v.x < 1.0 && 0.0 < v.y && v.y < 1.0; }
 
 vec3 barrel( float amp, vec2 uv ) {
 	float corn = length( vec2( 0.5 ) );
@@ -107,6 +112,7 @@ vec3 barrel( float amp, vec2 uv ) {
   
 	return cola.xyz;
 }
+
 
 vec4 abberation(float abx,float aby,vec2 uv){
 	vec4 cola;
@@ -150,6 +156,8 @@ vec2 doDeform( vec2 uv ) {
   return sum;
 }
 
+//from _
+
 //original effect t. daikyi & fms_cat, modified by TaroNuke
 vec2 Spiral( vec2 p, vec2 o, float a, float d)
 {
@@ -171,19 +179,34 @@ vec2 Spiral( vec2 p, vec2 o, float a, float d)
     return vec2(x+o.x, y+o.y);
 }
 
+
+
 // ---- main
 
 void main()
 {
-	vec2 uv = v_vTexcoord;
+	vec2 uv1,uv2,uv3,uv;
+	uv1=Spiral(v_vTexcoord,vec2(twist1.x,1.0-twist1.y), twist1.z, twist1.a);
+	uv2=Spiral(uv1,vec2(twist2.x,1.0-twist2.y), twist2.z, twist2.a);
+	uv3=Spiral(uv2,vec2(twist3.x,1.0-twist3.y), twist3.z, twist3.a);
+	uv =Spiral(uv3,vec2(twist4.x,1.0-twist4.y), twist4.z, twist4.a);
 	
+	
+	uv+=doDeform(uv);
+	
+	
+	uv.x += (sinm.y==0.0)?0.0:sinm.x*(sin((8.0*(1.0-uv.y)*(1.0/sinm.y)) + sinm.z * PI * 2.0)*0.06);
+	uv.y += (cosm.y==0.0)?0.0:cosm.x*(cos((8.0*uv.x*(1.0/cosm.y)) + cosm.z * PI * 2.0)*0.06);
+	uv.x += (tanm.y==0.0)?0.0:tanm.x*(tan((8.0*(1.0-uv.y)*(1.0/tanm.y)) + tanm.z * PI * 2.0)*0.06);
 	
 	vec2 resolution = vec2(320.0, 180.0);
 	
 	//glitchlines
-	uv.x = uv.x - (uHDistortAmp/2.0) + (rand(vec2(v_vTexcoord.y, time)) * uHDistortAmp);
-	uv.y = uv.y - (uVDistortAmp/2.0) + (rand(vec2(v_vTexcoord.x, time)) * uVDistortAmp);
-  
+	uv.x = uv.x - (uHDistortAmp/2.0) + (rand(vec2(uv.y, time)) * uHDistortAmp);
+	uv.y = uv.y - (uVDistortAmp/2.0) + (rand(vec2(uv.x, time)) * uVDistortAmp);
+	
+	uv+=move;
+	
 	//fisheye
 	uv -= 0.5;
 	uv *= 1.0 - uFishAmp / 2.0;
@@ -232,7 +255,6 @@ void main()
 		),
 		uVigAmp
 	);
-	
 	
 	vec4 sum = vec4(0.0);
 	if (bloom != 0.0){		
