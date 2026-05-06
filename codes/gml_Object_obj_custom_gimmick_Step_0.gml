@@ -13,12 +13,13 @@ if (sidespawner == 0 && cc.mod_sides > 0)
     sidespawner = 1;
 }
 
+
 if (sidespawner == 1 && cc.mod_sides == 0)
     sidespawner = 0;
 
 if (cc.mod_slash_anycol > 0)
 {
-    var the = instance_create_depth(0, 0, 255, o_plaudite_slash);
+    var the = instance_create_depth(0, 0, 255, o_anycol_slash);
     var col = cc.mod_set_slash_col
     if (cc.mod_col_convertion){
         col=make_color_rgb(color_get_blue(col),color_get_green(col),color_get_red(col))

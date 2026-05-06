@@ -2,6 +2,19 @@ event_inherited();
 
 //Initilizers
 function InitCSMJacket(){
+    if (!cc.ENBALE_CHANGEABLE_JACKET)
+        exit;
+    
+    layer_destroy_instances(layer_get_id("Instances_2"))
+    instance_create_layer(0, 32, layer_get_id("Instances_2"), o_csm_jacket)
+    if (cc.JACKET_MANAGER=="plaudite"){
+        addExtraMod("plaudite_jacket");
+        cc.mod_plaudite_jacket = 11;
+    }
+    else{
+        addExtraMod("custom_jacket");
+        cc.mod_custom_jacket = 0;
+    }
 }
 
 function InitText(){
@@ -295,7 +308,6 @@ addExtraMod("hide_combo");
 addExtraMod("slash_anycol")
 addExtraMod("set_slash_col")
 addExtraMod("wflash");
-addExtraMod("plaudite_jacket");
 // addExtraMod("starspawner_timer");
 // addExtraMod("starspd_low");
 // addExtraMod("starspd_high");
@@ -368,7 +380,6 @@ cc.mod_plaudite_pburst = 0;
 cc.mod_hide_combo = 0;
 cc.mod_slash_anycol=0;
 cc.mod_set_slash_col=16777215;
-cc.mod_plaudite_jacket = 11;
 
 //special
 function spawnfunc()
