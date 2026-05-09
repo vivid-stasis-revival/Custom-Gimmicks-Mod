@@ -72,10 +72,10 @@
 | textmaxwidth_[tid] | 调整字幕tid的行最大宽度（单位字符） |                默认为20                |
 
 #### 背景
-对于自定义背景(custom_jacket)，你只要往谱面目录下放入数个图片(jpg或png)并在gmk内使用custom_jacket切换即可，命名格式是```jacket[id```，比如id为的1图片就叫```jacket[1.png```或```jacket[1.jpg```
+对于自定义背景模式(custom)，你只要往谱面目录下放入数个图片(jpg或png)并在gmk内使用custom_jacket切换即可，命名格式是```jacket[id```，比如id为的1图片就叫```jacket[1.png```或```jacket[1.jpg```
 <br>
 
-对于plaudite背景(plaudite_jacket),范围0~11，从0到10分别对应以下曲目的jacket:
+对于plaudite背景(plaudite),范围0~11，从0到10分别对应以下曲目的jacket:
 - transparent（透明背景）
 - pyromania
 - valor
@@ -94,8 +94,8 @@
 | ditortedBG_col_rgb |    调整扭曲背景的颜色    |             将hex颜色转为10进制后填入              |
 |  plaudite_jacket   |      切换粒子的背景      | 虽然不是新的gmk，但是多了新的参数:11，代表默认背景 |
 |   custom_jacket    |      切换粒子的背景      |         填入要切换的图片id，0代表默认背景          |
-|   BG_ditortScale   | 调整扭曲背景的扭曲块大小 |                       默认25                       |
-|  BG_ditortAmount   |  调整扭曲背景的扭曲程度  |                       默认25                       |
+|   BG_ditortScale   | 调整扭曲背景的扭曲块大小 |                       默认0                        |
+|  BG_ditortAmount   |  调整扭曲背景的扭曲程度  |                       默认0                        |
 #### 滤镜/shader
 |         gmk名         |                作用                |         其它描述          |
 | :-------------------: | :--------------------------------: | :-----------------------: |
@@ -168,7 +168,6 @@
 |    holdoverlayalpha     |       |                   |
 |     plaudite_pburst     |       |                   |
 |       hide_combo        |       |                   |
-|  plaudite_red_particle  |       |                   |
 |      df_sideline2       |       |                   |
 |        df_sides         |       |                   |
 |       df_sideline       |       |                   |
