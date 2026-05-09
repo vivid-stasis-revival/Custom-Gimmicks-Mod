@@ -75,8 +75,13 @@ if (cc.ENABLE_DF_GRID_AND_SIDELINE)
 }
 
 if(cc.ENABLE_DISTORT_BG){
-    layer_background_alpha(bgEleId, cc.mod_ditortedBG_alp);
+    layer_background_sprite(bgEleId, o_csm_jacket.jacket);
+    o_csm_particle_system.blackSurfAlpha=1-cc.mod_ditortedBG_alp;
     layer_background_blend(bgEleId, make_color_rgb(color_get_blue(cc.mod_ditortedBG_col_rgb),color_get_green(cc.mod_ditortedBG_col_rgb),color_get_red(cc.mod_ditortedBG_col_rgb)));
+    fx_set_parameter(distortEff, "g_Distort1Scale", cc.mod_BG_ditortScale);
+    fx_set_parameter(distortEff, "g_Distort2Scale", cc.mod_BG_ditortScale);
+    fx_set_parameter(distortEff, "g_Distort1Amount", cc.mod_BG_ditortAmount);
+    fx_set_parameter(distortEff, "g_Distort2Amount", cc.mod_BG_ditortAmount);
 }
 
 if(cc.ENABLE_ANGELSTAR_CHECKER)
@@ -87,4 +92,5 @@ if(cc.ENABLE_ANGELSTAR_CHECKER)
         o_angelstar_checker.depth=301;
     else if (cc.mod_angelstar_checker_mode==2)
         o_angelstar_checker.depth=-50;
+    
 }

@@ -2,8 +2,7 @@ mod_freeze = 0;
 mod_jumpto = 0;
 mod_playspeed = 1;
 songInfo = global.song_list[global.last_freeplay_song];
-ENBALE_CHANGEABLE_JACKET=true;
-JACKET_MANAGER="plaudite"//or custom
+JACKET_MANAGE_MODE="plaudite"//or custom
 ENABLE_TEXT=true;
 ENABLE_NON_BASE_FX=true;
 ENABLE_DF_GRID_AND_SIDELINE=true;
@@ -41,7 +40,7 @@ if(struct_exists(songInfo, "is_custom"))
     }
 }
 
-if(!struct_exists(songInfo, "is_custom") || !ENABLE_NON_BASE_FX){
+if(struct_exists(songInfo, "is_custom") && !ENABLE_NON_BASE_FX){
     layer_destroy(layer_get_id("FX_red"));
     layer_destroy(layer_get_id("FX_twirl"));
     layer_destroy(layer_get_id("FX_posterize"));

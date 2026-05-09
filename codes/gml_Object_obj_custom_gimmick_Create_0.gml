@@ -2,12 +2,13 @@ event_inherited();
 
 //Initilizers
 function InitCSMJacket(){
-    if (!cc.ENBALE_CHANGEABLE_JACKET)
-        exit;
+    
     
     layer_destroy_instances(layer_get_id("Instances_2"))
-    instance_create_layer(0, 32, layer_get_id("Instances_2"), o_csm_jacket)
-    if (cc.JACKET_MANAGER=="plaudite"){
+    layer_destroy_instances(layer_get_id("Instances_1"))
+    instance_create_layer(0, 32, layer_get_id("Instances_2"), o_csm_particle_system)
+    instance_create_layer(0, 32, layer_get_id("Instances_1"), o_csm_jacket)
+    if (cc.JACKET_MANAGE_MODE=="plaudite"){
         addExtraMod("plaudite_jacket");
         cc.mod_plaudite_jacket = 11;
     }
@@ -78,28 +79,34 @@ function InitText(){
 }
 
 function InitDistortBG(){
+    /*This is how I make that:
+    Layers
+    ∟|Instances_2（透明背景）	Depth:700
+     |    ∟o_csm_jacket(绘制彩色粒子)
+     |Instances_1	Depth:800
+     |    ∟粒子系统(产生白色粒子，透明背景)
+     |Blackground（黑色背景）	Depth:850
+     |heathazeBG（热浪曲绘）    Depth:875
+     |Background（白色背景）		Depth:1000
+    */
     if (!cc.ENABLE_DISTORT_BG)
         exit;
-    if (!layer_exists("bg"))
-    {
-        var sprite = global.song_list[global.song_id_last].jacket;
-        var bgEffLayer = layer_create(801);
-        var bgLayer = layer_create(802);
-        var distortEff = fx_create("_filter_heathaze");
-        var blurEff = fx_create("_filter_large_blur");
-        fx_set_parameter(distortEff, "g_Distort1Scale", 25);
-        fx_set_parameter(distortEff, "g_Distort2Scale", 25);
-        fx_set_parameter(distortEff, "g_Distort1Amount", 25);
-        fx_set_parameter(distortEff, "g_Distort2Amount", 25);
-        bgEleId = layer_background_create(bgLayer, sprite);
-        layer_set_fx(bgEffLayer, distortEff);
-        layer_set_fx(bgLayer, blurEff);
-        layer_background_stretch(bgEleId, true);
-    }
-    addExtraMod("ditortedBG_alp")
+    var sprite = global.song_list[global.song_id_last].jacket;
+    bgLayer = layer_create(750);
+    distortEff = fx_create("_filter_heathaze");
+    bgEleId = layer_background_create(bgLayer, sprite);
+    layer_set_fx(bgLayer, distortEff);
+    layer_background_stretch(bgEleId, true);
+    //
+
+    addExtraMod("ditortedBG_alp");
+    addExtraMod("ditortedBG_col");
+    addExtraMod("BG_ditortScale");
+    addExtraMod("BG_ditortAmount");
     cc.mod_ditortedBG_alp = 0;
-    addExtraMod("ditortedBG_col")
     cc.mod_ditortedBG_col_rgb = 16777215;
+    cc.mod_BG_ditortScale = 0;
+    cc.mod_BG_ditortAmount = 0;
 }
 
 function InitNonBaseFX(){
@@ -245,6 +252,7 @@ function InitCustomShader(){
 
 
 //Init some gmk
+InitCSMJacket()
 InitText();
 InitDistortBG();
 InitNonBaseFX();

@@ -12,14 +12,15 @@
 <br>
 
 以下是可用的配置： 
-|           配置名            |                   作用                   |
-| :-------------------------: | :--------------------------------------: |
-|         ENABLE_TEXT         |             是否启用字幕gmk              |
-|     ENABLE_NON_BASE_FX      |      是否启用不在base obj内的fx gmk      |
-| ENABLE_DF_GRID_AND_SIDELINE |      是否启用df的两侧的线或网格gmk       |
-|  ENABLE_ANGELSTAR_CHECKER   |      是否启用anglestar的背景棋盘gmk      |
-|      ENABLE_DISTORT_BG      |              是否启用扭曲BG              |
-|    ENABLE_MUSIC_CONTROL     | 是否启用控制音乐的gmk(jumpto和playspeed) |
+|           配置名            |                         作用                         |
+| :-------------------------: | :--------------------------------------------------: |
+|     JACKET_MANAGE_MODE      | 调整换背景的模式，可填plaudite或custom，默认plaudite |
+|         ENABLE_TEXT         |                   是否启用字幕gmk                    |
+|     ENABLE_NON_BASE_FX      |            是否启用不在base obj内的fx gmk            |
+| ENABLE_DF_GRID_AND_SIDELINE |            是否启用df的两侧的线或网格gmk             |
+|  ENABLE_ANGELSTAR_CHECKER   |            是否启用anglestar的背景棋盘gmk            |
+|      ENABLE_DISTORT_BG      |                    是否启用扭曲BG                    |
+|    ENABLE_MUSIC_CONTROL     |       是否启用控制音乐的gmk(jumpto和playspeed)       |
 
 <br>
 
@@ -28,11 +29,12 @@
 ```json
 {
     "ENABLE_TEXT":false,
-    "ENABLE_NON_BASE_FX":false
+    "ENABLE_NON_BASE_FX":false,
+    "JACKET_MANAGE_MODE":"custom"
 }
 ```
 
-#### 字幕效果：
+#### 字幕效果
 
 首先要在谱面的目录下创建一个文件： ``` [难度]_text.txt```，如ENCORE难度就创建一个```ENCORE_text.txt```
 
@@ -70,11 +72,30 @@
 | textmaxwidth_[tid] | 调整字幕tid的行最大宽度（单位字符） |                默认为20                |
 
 #### 背景
-|       gmk名        |         作用         |                      其它描述                      |
-| :----------------: | :------------------: | :------------------------------------------------: |
-|   ditortedBG_alp   | 调整扭曲背景的透明度 |                     范围[0,1]                      |
-| ditortedBG_col_rgb |  调整扭曲背景的颜色  |             将hex颜色转为10进制后填入              |
-|  plaudite_jacket   |    切换粒子的背景    | 虽然不是新的gmk，但是多了新的参数:11，代表默认背景 |
+对于自定义背景(custom_jacket)，你只要往谱面目录下放入数个图片(jpg或png)并在gmk内使用custom_jacket切换即可，命名格式是```jacket[id```，比如id为的1图片就叫```jacket[1.png```或```jacket[1.jpg```
+<br>
+
+对于plaudite背景(plaudite_jacket),范围0~11，从0到10分别对应以下曲目的jacket:
+- transparent（透明背景）
+- pyromania
+- valor
+- unraveling
+- supernova
+- libertia
+- stopmotion
+- convergence
+- red（纯红色背景）
+- plaudite
+- astellion
+
+|       gmk名        |           作用           |                      其它描述                      |
+| :----------------: | :----------------------: | :------------------------------------------------: |
+|   ditortedBG_alp   |  调整扭曲背景的不透明度  |                     范围[0,1]                      |
+| ditortedBG_col_rgb |    调整扭曲背景的颜色    |             将hex颜色转为10进制后填入              |
+|  plaudite_jacket   |      切换粒子的背景      | 虽然不是新的gmk，但是多了新的参数:11，代表默认背景 |
+|   custom_jacket    |      切换粒子的背景      |         填入要切换的图片id，0代表默认背景          |
+|   BG_ditortScale   | 调整扭曲背景的扭曲块大小 |                       默认25                       |
+|  BG_ditortAmount   |  调整扭曲背景的扭曲程度  |                       默认25                       |
 #### 滤镜/shader
 |         gmk名         |                作用                |         其它描述          |
 | :-------------------: | :--------------------------------: | :-----------------------: |

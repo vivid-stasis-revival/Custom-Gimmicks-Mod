@@ -4,7 +4,7 @@ if (enablePlaudite){
     jacketID=cc.mod_plaudite_jacket;
 }
 else if(enableCustom){
-    jacketID=cc.mod_plaudite_jacket;
+    jacketID=cc.mod_custom_jacket;
 }
 
 jacket=jackets[jacketID]
