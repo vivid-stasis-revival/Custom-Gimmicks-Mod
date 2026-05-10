@@ -24,3 +24,8 @@
 - 支持了中途更换自定义的bg，具体可见文档
 - distortedBG系列的扭曲滤镜现在可以被部分控制（BG_ditortScale BG_ditortAmount）了，具体见文档
 - 再度修复了游玩官谱会崩溃的bug(???)
+
+### v1.8.1
+- 修复了游玩切出窗口时因surface不存在导致的崩溃
+- 修复了cover盖不住note的问题
+- 再度优化粒子系统（？
