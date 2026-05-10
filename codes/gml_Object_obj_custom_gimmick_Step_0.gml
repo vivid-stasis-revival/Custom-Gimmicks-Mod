@@ -78,6 +78,8 @@ if(cc.ENABLE_DISTORT_BG){
     layer_background_sprite(bgEleId, o_csm_jacket.jacket);
     o_csm_particle_system.blackSurfAlpha=1-cc.mod_ditortedBG_alp;
     layer_background_blend(bgEleId, make_color_rgb(color_get_blue(cc.mod_ditortedBG_col_rgb),color_get_green(cc.mod_ditortedBG_col_rgb),color_get_red(cc.mod_ditortedBG_col_rgb)));
+    fx_set_parameter(blurEff, "g_Radius", cc.mod_BG_blurRadius);
+    fx_set_parameter(blurEff, "g_NoiseTexture ", noisetex);
     fx_set_parameter(distortEff, "g_Distort1Scale", cc.mod_BG_ditortScale);
     fx_set_parameter(distortEff, "g_Distort2Scale", cc.mod_BG_ditortScale);
     fx_set_parameter(distortEff, "g_Distort1Amount", cc.mod_BG_ditortAmount);

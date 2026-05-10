@@ -1,13 +1,14 @@
 event_inherited();
 
+depth=-400
 //Initilizers
 function InitCSMJacket(){
-    
-    
     layer_destroy_instances(layer_get_id("Instances_2"))
     layer_destroy_instances(layer_get_id("Instances_1"))
-    instance_create_layer(0, 32, layer_get_id("Instances_2"), o_csm_particle_system)
-    instance_create_layer(0, 32, layer_get_id("Instances_1"), o_csm_jacket)
+    var Lparticle=layer_create(401)
+    var LBG=layer_create(404)
+    instance_create_layer(0, 32, Lparticle, o_csm_particle_system)
+    instance_create_layer(0, 32, LBG, o_csm_jacket)
     if (cc.JACKET_MANAGE_MODE=="plaudite"){
         addExtraMod("plaudite_jacket");
         cc.mod_plaudite_jacket = 11;
@@ -92,10 +93,14 @@ function InitDistortBG(){
     if (!cc.ENABLE_DISTORT_BG)
         exit;
     var sprite = global.song_list[global.song_id_last].jacket;
-    bgLayer = layer_create(750);
+    bgLayer = layer_create(402);
+    blurLayer = layer_create(403);
     distortEff = fx_create("_filter_heathaze");
+    blurEff = fx_create("_filter_large_blur");
     bgEleId = layer_background_create(bgLayer, sprite);
+    var noisetex = sprite_get_texture(sp_noise2, 0);
     layer_set_fx(bgLayer, distortEff);
+    layer_set_fx(blurLayer, blurEff);
     layer_background_stretch(bgEleId, true);
     //
 
@@ -103,10 +108,12 @@ function InitDistortBG(){
     addExtraMod("ditortedBG_col");
     addExtraMod("BG_ditortScale");
     addExtraMod("BG_ditortAmount");
+    addExtraMod("BG_blurRadius");
     cc.mod_ditortedBG_alp = 0;
     cc.mod_ditortedBG_col_rgb = 16777215;
     cc.mod_BG_ditortScale = 0;
     cc.mod_BG_ditortAmount = 0;
+    cc.mod_BG_blurRadius = 0;
 }
 
 function InitNonBaseFX(){
