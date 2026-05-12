@@ -1,6 +1,14 @@
 mod_freeze = 0;
 mod_jumpto = 0;
 mod_playspeed = 1;
+mod_xoffset = 0;
+for (var lane=0;lane<7;lane++){
+    variable_instance_set(cc,string("mod_yoffsetind{0}", lane), 0);
+    variable_instance_set(cc,string("mod_xoffsetind{0}", lane), 0);
+    variable_instance_set(cc,string("mod_notealpind{0}", lane), 1);
+    variable_instance_set(cc,string("mod_boost_timeind{0}", lane), 300);
+    variable_instance_set(cc,string("mod_boost_distanceind{0}", lane), 0);
+}
 songInfo = global.song_list[global.last_freeplay_song];
 JACKET_MANAGE_MODE="plaudite"//or custom
 ENABLE_TEXT=true;

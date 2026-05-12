@@ -109,23 +109,35 @@
 - 注：fx_red与fx_colorise实则使用的同一个滤镜，区别在于fx_red只能使用recolor随机改变颜色
 
 #### 轨道Gimmick
-| gmk名 |         作用          | 其它描述 |
-| :---: | :-------------------: | :------: |
-| prtrX | 真正意义上的绕x轴旋转 | 默认为0  |
-| prtrY | 真正意义上的绕y轴旋转 | 默认为0  |
+| gmk名 |         作用          |          其它描述          |
+| :---: | :-------------------: | :------------------------: |
+| prtrX | 真正意义上的绕x轴旋转 | 默认为0<br>*是全局gimmick* |
+| prtrY | 真正意义上的绕y轴旋转 | 默认为0<br>*是全局gimmick* |
+| prsy  |       纵向斜切        | 默认为0<br>*是全局gimmick* |
+
+#### Note效果
+此处[lane]指代第n条轨道，0~3为4k的1~4轨，456为左中右bumper
+|        gmk名         |                   作用                   |                   其它描述                    |
+| :------------------: | :--------------------------------------: | :-------------------------------------------: |
+|       xoffset        |               谱面横向偏移               |           单位px<br>*是全局gimmick*           |
+|   yoffsetind[lane]   |    效果同yoffset，但只对指定轨道生效     |    与yoffset是累加关系<br>*是全局gimmick*     |
+|   xoffsetind[lane]   |    效果同xoffset，但只对指定轨道生效     |    与xoffset是累加关系<br>*是全局gimmick*     |
+|   notealpind[lane]   |    效果同notealp，但只对指定轨道生效     |    与notealp是累乘关系<br>*是全局gimmick*     |
+| boost_timeind[lane]  |   效果同boost_time，但只对指定轨道生效   |   与boost_time是累加关系<br>*是全局gimmick*   |
+| boost_distance[lane] | 效果同boost_distance，但只对指定轨道生效 | 与boost_distance是累加关系<br>*是全局gimmick* |
 
 #### 其它
 |         gmk名          |                                   作用                                   |                                       其它描述                                       |
 | :--------------------: | :----------------------------------------------------------------------: | :----------------------------------------------------------------------------------: |
-|         jumpto         |                            跳转至歌曲指定位置                            |                                       单位为秒                                       |
-|       playspeed        |                             设置谱面播放速度                             |                                      默认值为1                                       |
+|         jumpto         |                            跳转至歌曲指定位置                            |                             单位为秒<br>*是全局gimmick*                              |
+|       playspeed        |                             设置谱面播放速度                             |                             默认值为1<br>*是全局gimmick*                             |
 |     col_convertion     |                  将自定义gmk内部分调整颜色的gmk逻辑转换                  | 不为0时会将输入的颜色以rgb的形式使用，否则以bgr的形式<br>受该gmk影响的将在描述中标出 |
 |      slash_anycol      |                  生成一个slash，颜色由set_slash_col定义                  |                                                                                      |
 |     set_slash_col      |                          调整slash_anycol的颜色                          |                 将hex颜色转为10进制后填入<br>*受col_convertion影响*                  |
 |         cover1         |                             调整遮盖不透明度                             |                虽然不是新的gmk，但是作用变了：控制的是整个屏幕的遮盖                 |
 | angelstar_checker_mode | 调整angelstar_checker的状态，0为受曲绘影响，1是不受影响，2是大于轨道图层 |                                       默认为0                                        |
 
-### 非自定义部分的完整清单
+### 非自定义部分的完整清单（除去全局gmk）
 |          gmk名          | 作用  |       说明        |
 | :---------------------: | :---: | :---------------: |
 |         uialpha         |       |                   |

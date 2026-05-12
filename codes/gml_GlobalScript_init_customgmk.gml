@@ -10,3 +10,11 @@ UnlimitedAddGlobalMod("prsy", 2);
 UnlimitedAddGlobalMod("prtrX", 2);
 UnlimitedAddGlobalMod("prtrY", 2);
 UnlimitedAddGlobalMod("prta", 1);
+UnlimitedAddGlobalMod("xoffset", 1.5);
+for (var lane=0;lane<7;lane++){
+    UnlimitedAddGlobalMod(string("yoffsetind{0}", lane), 1.5);
+    UnlimitedAddGlobalMod(string("xoffsetind{0}", lane), 1.5);
+    UnlimitedAddGlobalMod(string("notealpind{0}", lane), 1.5);
+    UnlimitedAddGlobalMod(string("boost_timeind{0}", lane), 2.5);
+    UnlimitedAddGlobalMod(string("boost_distance{0}", lane), 2.5);
+}
