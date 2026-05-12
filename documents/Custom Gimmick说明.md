@@ -58,18 +58,18 @@
 在v1.5及以后，可以使用多文件字幕，要使用要创建文件：```[难度]_text_[编号].txt```，如ENCORE难度的2号字幕就创建一个```ENCORE_text_2.txt```
 内部格式同单文件字幕，但是使用的gmk不太一样，下面记指定的字幕文件的编号为```[tid]```
 
-|       gmk名        |                作用                 |                其它描述                |
-| :----------------: | :---------------------------------: | :------------------------------------: |
-|    textX_[tid]     |         调整字幕tid的横坐标         | 实际横坐标为textX\_[tid]+textX\_[tid]b |
-|    textX_[tid]b    |         调整字幕tid的横坐标         |                                        |
-|    textY_[tid]     |         调整字幕tid的纵坐标         | 实际纵坐标为textY\_[tid]+textY\_[tid]b |
-|    textY_[tid]b    |         调整字幕tid的纵坐标         |                                        |
-|   textalp_[tid]    |         调整字幕tid的透明度         |               范围[0,1]                |
-|   textrot_[tid]    |        调整字幕tid的旋转角度        |                 角度制                 |
-|  textcolrgb_[tid]  |           调整字幕tid颜色           |       将hex颜色转为10进制后填入        |
-|  textscale_[tid]   |           调整字幕tid大小           |                默认为1                 |
-|   textsep_[tid]    |         调整字幕tid的行间距         |                默认为1                 |
-| textmaxwidth_[tid] | 调整字幕tid的行最大宽度（单位字符） |                默认为20                |
+|       gmk名        |                 作用                  |                其它描述                |
+| :----------------: | :-----------------------------------: | :------------------------------------: |
+|    textX_[tid]     |         调整字幕[tid]的横坐标         | 实际横坐标为textX\_[tid]+textX\_[tid]b |
+|    textX_[tid]b    |         调整字幕[tid]的横坐标         |                                        |
+|    textY_[tid]     |         调整字幕[tid]的纵坐标         | 实际纵坐标为textY\_[tid]+textY\_[tid]b |
+|    textY_[tid]b    |          调整字幕tid的纵坐标          |                                        |
+|   textalp_[tid]    |         调整字幕[tid]的透明度         |               范围[0,1]                |
+|   textrot_[tid]    |        调整字幕[tid]的旋转角度        |                 角度制                 |
+|  textcolrgb_[tid]  |           调整字幕[tid]颜色           |       将hex颜色转为10进制后填入        |
+|  textscale_[tid]   |           调整字幕[tid]大小           |                默认为1                 |
+|   textsep_[tid]    |         调整字幕[tid]的行间距         |                默认为1                 |
+| textmaxwidth_[tid] | 调整字幕[tid]的行最大宽度（单位字符） |                默认为20                |
 
 #### 背景
 对于自定义背景模式(custom)，你只要往谱面目录下放入数个图片(jpg或png)并在gmk内使用custom_jacket切换即可，命名格式是```jacket[id```，比如id为的1图片就叫```jacket[1.png```或```jacket[1.jpg```
@@ -117,14 +117,14 @@
 
 #### Note效果
 此处[lane]指代第n条轨道，0~3为4k的1~4轨，456为左中右bumper
-|        gmk名         |                   作用                   |                   其它描述                    |
-| :------------------: | :--------------------------------------: | :-------------------------------------------: |
-|       xoffset        |               谱面横向偏移               |           单位px<br>*是全局gimmick*           |
-|   yoffsetind[lane]   |    效果同yoffset，但只对指定轨道生效     |    与yoffset是累加关系<br>*是全局gimmick*     |
-|   xoffsetind[lane]   |    效果同xoffset，但只对指定轨道生效     |    与xoffset是累加关系<br>*是全局gimmick*     |
-|   notealpind[lane]   |    效果同notealp，但只对指定轨道生效     |    与notealp是累乘关系<br>*是全局gimmick*     |
-| boost_timeind[lane]  |   效果同boost_time，但只对指定轨道生效   |   与boost_time是累加关系<br>*是全局gimmick*   |
-| boost_distance[lane] | 效果同boost_distance，但只对指定轨道生效 | 与boost_distance是累加关系<br>*是全局gimmick* |
+|        gmk名         |                    作用                    |                   其它描述                    |
+| :------------------: | :----------------------------------------: | :-------------------------------------------: |
+|       xoffset        |                谱面横向偏移                |           单位px<br>*是全局gimmick*           |
+|   yoffsetind[lane]   |    效果同yoffset，但只对[lane]轨道生效     |    与yoffset是累加关系<br>*是全局gimmick*     |
+|   xoffsetind[lane]   |    效果同xoffset，但只对[lane]轨道生效     |    与xoffset是累加关系<br>*是全局gimmick*     |
+|   notealpind[lane]   |    效果同notealp，但只对[lane]轨道生效     |    与notealp是累乘关系<br>*是全局gimmick*     |
+| boost_timeind[lane]  |   效果同boost_time，但只对[lane]轨道生效   |   与boost_time是累加关系<br>*是全局gimmick*   |
+| boost_distance[lane] | 效果同boost_distance，但只对[lane]轨道生效 | 与boost_distance是累加关系<br>*是全局gimmick* |
 
 #### 其它
 |         gmk名          |                                   作用                                   |                                       其它描述                                       |
