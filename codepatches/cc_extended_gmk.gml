@@ -9,7 +9,6 @@ for (var lane=0;lane<7;lane++){
     variable_instance_set(cc,string("mod_boost_timeind{0}", lane), 300);
     variable_instance_set(cc,string("mod_boost_distanceind{0}", lane), 0);
 }
-songInfo = global.song_list[global.last_freeplay_song];
 JACKET_MANAGE_MODE="plaudite"//or custom
 ENABLE_TEXT=true;
 ENABLE_NON_BASE_FX=true;

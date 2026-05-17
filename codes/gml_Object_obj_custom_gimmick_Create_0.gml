@@ -217,6 +217,41 @@ function InitCustomShader(){
     uNoiseSampler = shader_get_sampler_index(shader_supernova_main, "samplerRandom");
     noisetex = sprite_get_texture(sp_noise2, 0);
 
+    addExtraMod("uialpha");
+    addExtraMod("cover1");
+    addExtraMod("cover2");
+    addExtraMod("cover3");
+    addExtraMod("rainbow");
+    addExtraMod("sides");
+    addExtraMod("noteoverlayalp");
+    addExtraMod("scorealph");
+    addExtraMod("bgalph");
+    //shaderRelative
+    addExtraMod("gray");
+    addExtraMod("barrel");
+    addExtraMod("barrel2");
+    addExtraMod("hdistort");
+    addExtraMod("vdistort");
+    addExtraMod("vig");
+    addExtraMod("abx");
+    addExtraMod("aby");
+    addExtraMod("barrelabx")
+    addExtraMod("barrelaby")
+    addExtraMod("fish");
+    addExtraMod("bloom");
+    addExtraMod("glitchamp");
+    addExtraMod("glitchoffset");
+    addExtraMod("uhnoise");
+    addExtraMod("posx");
+    addExtraMod("posy");
+    for (var i = 1; i <= 4; i++)
+    {
+        addExtraMod(string("twx{0}", i));
+        addExtraMod(string("twy{0}", i));
+        addExtraMod(string("twa{0}", i));
+        addExtraMod(string("twr{0}", i));
+    }
+
     cc.mod_gray = 0;
     cc.mod_barrel = 0;
     cc.mod_barrel2 = 0;
@@ -280,40 +315,6 @@ cc.mod_col_convertion = 0;//不为0时自动将所有输入的颜色转为rrggbb
 // draw_w=320;
 // draw_h=180;
 //ANGELSTAR
-addExtraMod("uialpha");
-addExtraMod("cover1");
-addExtraMod("cover2");
-addExtraMod("cover3");
-addExtraMod("rainbow");
-addExtraMod("sides");
-addExtraMod("noteoverlayalp");
-addExtraMod("scorealph");
-addExtraMod("bgalph");
-//shaderRelative
-addExtraMod("gray");
-addExtraMod("barrel");
-addExtraMod("barrel2");
-addExtraMod("hdistort");
-addExtraMod("vdistort");
-addExtraMod("vig");
-addExtraMod("abx");
-addExtraMod("aby");
-addExtraMod("barrelabx")
-addExtraMod("barrelaby")
-addExtraMod("fish");
-addExtraMod("bloom");
-addExtraMod("glitchamp");
-addExtraMod("glitchoffset");
-addExtraMod("uhnoise");
-addExtraMod("posx");
-addExtraMod("posy");
-for (var i = 1; i <= 4; i++)
-{
-    addExtraMod(string("twx{0}", i));
-    addExtraMod(string("twy{0}", i));
-    addExtraMod(string("twa{0}", i));
-    addExtraMod(string("twr{0}", i));
-}
 
 //other
 addExtraMod("static");

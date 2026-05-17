@@ -1,6 +1,8 @@
-function UnlimitedAddGlobalMod(modName,modWeight){
-    static lastIdx = 128;
+function UnlimitedAddGlobalMod(modName,modWeight,callBack=undefined,endCallBack=undefined){
+    static lastIdx = 129;
     variable_struct_set(global.mods, modName, lastIdx);
+    global.mod_callbacks[lastIdx] = callBack;
+    global.mod_end_callbacks[lastIdx] = endCallBack;
     variable_struct_set(global.mod_weight, modName, modWeight);
     lastIdx++;
 }
