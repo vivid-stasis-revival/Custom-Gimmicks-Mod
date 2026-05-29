@@ -21,6 +21,7 @@
 |  ENABLE_ANGELSTAR_CHECKER   |            是否启用anglestar的背景棋盘gmk            |
 |      ENABLE_DISTORT_BG      |                    是否启用扭曲BG                    |
 |    ENABLE_MUSIC_CONTROL     |       是否启用控制音乐的gmk(jumpto和playspeed)       |
+|      ENABLE_DEBUG_INFO      |      是否在屏幕上绘制调试信息，目前只对字幕生效      |
 
 <br>
 
@@ -57,19 +58,22 @@
 
 在v1.5及以后，可以使用多文件字幕，要使用要创建文件：```[难度]_text_[编号].txt```，如ENCORE难度的2号字幕就创建一个```ENCORE_text_2.txt```
 内部格式同单文件字幕，但是使用的gmk不太一样，下面记指定的字幕文件的编号为```[tid]```
+> 从1.10.0开始,tid可以是任意字符串了，之前只能是0~49的数字
 
-|       gmk名        |                 作用                  |                其它描述                |
-| :----------------: | :-----------------------------------: | :------------------------------------: |
-|    textX_[tid]     |         调整字幕[tid]的横坐标         | 实际横坐标为textX\_[tid]+textX\_[tid]b |
-|    textX_[tid]b    |         调整字幕[tid]的横坐标         |                                        |
-|    textY_[tid]     |         调整字幕[tid]的纵坐标         | 实际纵坐标为textY\_[tid]+textY\_[tid]b |
-|    textY_[tid]b    |          调整字幕tid的纵坐标          |                                        |
-|   textalp_[tid]    |         调整字幕[tid]的透明度         |               范围[0,1]                |
-|   textrot_[tid]    |        调整字幕[tid]的旋转角度        |                 角度制                 |
-|  textcolrgb_[tid]  |           调整字幕[tid]颜色           |       将hex颜色转为10进制后填入        |
-|  textscale_[tid]   |           调整字幕[tid]大小           |                默认为1                 |
-|   textsep_[tid]    |         调整字幕[tid]的行间距         |                默认为1                 |
-| textmaxwidth_[tid] | 调整字幕[tid]的行最大宽度（单位字符） |                默认为20                |
+|       gmk名        |                  作用                   |                 其它描述                  |
+| :----------------: | :-------------------------------------: | :---------------------------------------: |
+|    textX_[tid]     |          调整字幕[tid]的横坐标          |  实际横坐标为textX\_[tid]+textX\_[tid]b   |
+|    textX_[tid]b    |          调整字幕[tid]的横坐标          |                                           |
+|    textY_[tid]     |          调整字幕[tid]的纵坐标          |  实际纵坐标为textY\_[tid]+textY\_[tid]b   |
+|    textY_[tid]b    |           调整字幕tid的纵坐标           |                                           |
+|   textalp_[tid]    |          调整字幕[tid]的透明度          |                 范围[0,1]                 |
+|   textrot_[tid]    |         调整字幕[tid]的旋转角度         |                  角度制                   |
+|  textcolrgb_[tid]  |            调整字幕[tid]颜色            |         将hex颜色转为10进制后填入         |
+|  textscale_[tid]   |            调整字幕[tid]大小            |                  默认为1                  |
+|   textsep_[tid]    |          调整字幕[tid]的行间距          |                  默认为1                  |
+| textmaxwidth_[tid] |  调整字幕[tid]的行最大宽度（单位字符）  |                 默认为20                  |
+|  textalignv_[tid]  |      调整字幕[tid]的中心的垂直位置      | 默认为顶部<br>0,1,2分别为顶部，中部，底部 |
+|  textalignh_[tid]  | 调整字幕[tid]的水平对齐方式（单位字符） | 默认为居中<br>0,1,2分别为左侧，居中，右侧 |
 
 #### 背景
 对于自定义背景模式(custom)，你只要往谱面目录下放入数个图片(jpg或png)并在gmk内使用custom_jacket切换即可，命名格式是```jacket[id```，比如id为的1图片就叫```jacket[1.png```或```jacket[1.jpg```
@@ -125,11 +129,13 @@
 |   notealpind[lane]   |    效果同notealp，但只对[lane]轨道生效     |    与notealp是累乘关系<br>*是全局gimmick*     |
 | boost_timeind[lane]  |   效果同boost_time，但只对[lane]轨道生效   |   与boost_time是累加关系<br>*是全局gimmick*   |
 | boost_distance[lane] | 效果同boost_distance，但只对[lane]轨道生效 | 与boost_distance是累加关系<br>*是全局gimmick* |
+|  reset_scrollspeed   |              重置scrollspeed               |                *是全局gimmick*                |
 
 #### 其它
 |         gmk名          |                                   作用                                   |                                       其它描述                                       |
 | :--------------------: | :----------------------------------------------------------------------: | :----------------------------------------------------------------------------------: |
-|         jumpto         |                            跳转至歌曲指定位置                            |                             单位为秒<br>*是全局gimmick*                              |
+|      jumpto_beat       |                             跳转谱面指定位置                             |                 在value2处填具体的值，单位为拍数<br>*是全局gimmick*                  |
+|        jumpto_s        |                             跳转谱面指定位置                             |       当value1>0时单位为秒否则为毫秒，在value2处填具体的值<br>*是全局gimmick*        |
 |       playspeed        |                             设置谱面播放速度                             |                             默认值为1<br>*是全局gimmick*                             |
 |     col_convertion     |                  将自定义gmk内部分调整颜色的gmk逻辑转换                  | 不为0时会将输入的颜色以rgb的形式使用，否则以bgr的形式<br>受该gmk影响的将在描述中标出 |
 |      slash_anycol      |                  生成一个slash，颜色由set_slash_col定义                  |                                                                                      |

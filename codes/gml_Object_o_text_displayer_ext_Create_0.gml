@@ -4,6 +4,9 @@ debugDisplayingID=0;
 
 function textObj(tid) constructor{
 
+    static VERTICAL_ALIGN_MODES=[fa_top, fa_middle, fa_bottom];
+    static HORIZONTAL_ALIGN_MODES=[fa_left, fa_center, fa_right];
+
     static debugShown=["ID",
     "posX",
     "posY",
@@ -75,8 +78,10 @@ function textObj(tid) constructor{
             col=colConvert(variable_instance_get(cc, "mod_textcolrgb_"+string(ID)));
             scale=variable_instance_get(cc, "mod_textscale_"+string(ID));
             sep=variable_instance_get(cc, "mod_textsep_"+string(ID));
-            vAlignMode=variable_instance_get(cc, "mod_textalignv_"+string(ID));
-            hAlignMode=variable_instance_get(cc, "mod_textalignh_"+string(ID));
+            vAlignMode=round(variable_instance_get(cc, "mod_textalignv_"+string(ID)));
+            hAlignMode=round(variable_instance_get(cc, "mod_textalignh_"+string(ID)));
+            vAlignMode=VERTICAL_ALIGN_MODES[vAlignMode%3];
+            hAlignMode=HORIZONTAL_ALIGN_MODES[hAlignMode%3];
             maxRowChars=variable_instance_get(cc, "mod_textmaxwidth_"+string(ID));
             if (curTextIdx<array_length(textDatas)-1 && cc.currentbeataccurate>=textDatas[curTextIdx+1].time)
                 curTextIdx+=1;

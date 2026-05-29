@@ -13,7 +13,6 @@ if (sidespawner == 0 && cc.mod_sides > 0)
     sidespawner = 1;
 }
 
-
 if (sidespawner == 1 && cc.mod_sides == 0)
     sidespawner = 0;
 
@@ -26,17 +25,6 @@ if (cc.mod_slash_anycol > 0)
     }
     the.color = col;
     cc.mod_slash_anycol = 0;
-}
-
-if (cc.mod_plaudite_pburst > 0)
-{
-    for (var i = 0; i < cc.mod_plaudite_pburst; i++)
-    {
-        if (!instance_exists(o_2024pause))
-            spawn_particles_directional(irandom_range(0, 320), -10, 701, o_pt_diamonddust, 1, 0, (delta_time / 10000) * cc.mod_pburstspeed, room_speed * 4, 1);
-    }
-    
-    mod_pburstleft = 0;
 }
 
 if (cc.mod_sides > 0)

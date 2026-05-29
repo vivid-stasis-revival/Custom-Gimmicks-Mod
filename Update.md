@@ -36,3 +36,9 @@
 
 ### v1.9.0
 - 适配新版本体
+
+### v1.10.0
+- 优化了字幕gmk，并新增了调整对齐方式gmk，具体见文档
+- 修复了部分gmk无法使用的问题（plaudite_pburst,playspeed）
+- 将jumpto细化为jumpto_beat和jumpto_s，具体见文档
+- 新增reset_scrollspeed

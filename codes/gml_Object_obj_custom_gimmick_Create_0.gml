@@ -280,7 +280,11 @@ cc.mod_col_convertion = 0;//不为0时自动将所有输入的颜色转为rrggbb
 //other
 addExtraMod("static");
 addExtraMod("holdoverlayalpha");
-addExtraMod("plaudite_pburst");
+addExtraMod("plaudite_pburst",1,function(start, dur, v1, v2)
+{
+    for (var i = 0; i < v2; i++)
+        spawn_particles_directional(irandom_range(0, 320), -10, 701, o_pt_diamonddust_songgameplay, 1, 0, 1.5 * cc.mod_pburstspeed, 240, 1);
+});
 addExtraMod("hide_combo");
 addExtraMod("slash_anycol")
 addExtraMod("set_slash_col")
