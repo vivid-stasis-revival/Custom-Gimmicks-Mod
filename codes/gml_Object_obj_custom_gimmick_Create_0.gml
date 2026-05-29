@@ -43,53 +43,14 @@ function InitText(){
             instance_create_depth(0,0,-10,o_text_displayer,displayerSetting);
         }
     }
-    else{
-        if (!instance_exists(o_text_displayer_ext)){
-            for (var tid=0;tid<50;tid++){
-                tpath = cc.songInfo.chart_path + string("{0}_text_{1}.txt", global.df_load,tid);
-                if (!file_exists(tpath)){
-                    continue;
-                }
-                addExtraMod(string("textX_{0}",tid),0);
-                addExtraMod(string("textY_{0}",tid),0);
-                addExtraMod(string("textX_{0}b",tid),0);
-                addExtraMod(string("textY_{0}b",tid),0);
-                addExtraMod(string("textalp_{0}",tid),0);
-                addExtraMod(string("textrot_{0}",tid),0);
-                addExtraMod(string("textcolrgb_{0}",tid),0);
-                addExtraMod(string("textscale_{0}",tid),0);
-                addExtraMod(string("textsep_{0}",tid),0);
-                addExtraMod(string("textmaxwidth_{0}",tid),0);
-                variable_instance_set(cc,string("mod_textX_{0}",tid),room_width*0.5);
-                variable_instance_set(cc,string("mod_textY_{0}",tid),room_width*0.5);
-                variable_instance_set(cc,string("mod_textX_{0}b",tid),0);
-                variable_instance_set(cc,string("mod_textY_{0}b",tid),0);
-                variable_instance_set(cc,string("mod_textalp_{0}",tid),1);
-                variable_instance_set(cc,string("mod_textrot_{0}",tid),0);
-                variable_instance_set(cc,string("mod_textcolrgb_{0}",tid),16777215);
-                variable_instance_set(cc,string("mod_textscale_{0}",tid),1);
-                variable_instance_set(cc,string("mod_textsep_{0}",tid),2);
-                variable_instance_set(cc,string("mod_textmaxwidth_{0}",tid),20);
-                var displayerSetting={};
-                struct_set(displayerSetting,"text_path",tpath);
-                struct_set(displayerSetting,"textID",tid);
-                instance_create_depth(0,0,-10,o_text_displayer_ext,displayerSetting);
-            }
-        }
+    else if (!instance_exists(o_text_displayer_ext)){
+        var displayerSetting={};
+        struct_set(displayerSetting,"caller",id);
+        instance_create_depth(0,0,-10,o_text_displayer_ext,displayerSetting);
     }
 }
 
 function InitDistortBG(){
-    /*This is how I make that:
-    Layers
-    ∟|Instances_2（透明背景）	Depth:700
-     |    ∟o_csm_jacket(绘制彩色粒子)
-     |Instances_1	Depth:800
-     |    ∟粒子系统(产生白色粒子，透明背景)
-     |Blackground（黑色背景）	Depth:850
-     |heathazeBG（热浪曲绘）    Depth:875
-     |Background（白色背景）		Depth:1000
-    */
     if (!cc.ENABLE_DISTORT_BG)
         exit;
     var sprite = global.song_list[global.song_id_last].jacket;

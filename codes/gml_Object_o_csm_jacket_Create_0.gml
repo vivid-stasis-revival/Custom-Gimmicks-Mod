@@ -20,10 +20,11 @@ function FindJackets()
         }
         
         var _pos = string_last_pos("[", _fileName);
-        
+        var _endPos = string_last_pos(".", _fileName);
+
         if (_pos != 0)
         {
-            var _jID = real(string_copy(_fileName, _pos + 1, 3));
+            var _jID = real(string_copy(_fileName, _pos + 1, _endPos));
             var _spr = sprite_add(path + _filePath, 1, true, true, 0, 0);
             array_set(jackets, _jID, _spr);
             array_push(newAdds, _spr);
