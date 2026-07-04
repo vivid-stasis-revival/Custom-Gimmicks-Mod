@@ -5,7 +5,7 @@ jacketID = 0;
 function FindJackets()
 {
     var avaliablePostfix = [".png", ".jpg"];
-    var path = cc.songInfo.chart_path;
+    var path = cc.chartPath;
     var _filePath = file_find_first(path + "jacket[*.*", 16);
     
     while (_filePath != "")

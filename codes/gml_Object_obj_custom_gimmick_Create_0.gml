@@ -22,7 +22,7 @@ function InitCSMJacket(){
 function InitText(){
     if (!cc.ENABLE_TEXT)
         exit;
-    var tpathOld = cc.songInfo.chart_path + string("{0}_text.txt", global.df_load);
+    var tpathOld = cc.chartPath + string("{0}_text.txt", global.df_load);
     var tpath = "";
     if (file_exists(tpathOld)){
         addExtraMod("textX",0);
@@ -333,7 +333,7 @@ function custom_shader(){
         shader_set_uniform_f(variable_instance_get(cc,string("uTwist{0}",i)), twx, twy, twa * 0.6, twr);
     }
     shader_set_uniform_f(uSinm, cc.mod_sina,cc.mod_sinp,cc.mod_sino);
-    shader_set_uniform_f(uCosm, cc.mod_cosa,cc.mod_sinp,cc.mod_coso);
+    shader_set_uniform_f(uCosm, cc.mod_cosa,cc.mod_cosp,cc.mod_coso);
     shader_set_uniform_f(uTanm, cc.mod_tana,cc.mod_tanp,cc.mod_tano);
     shader_set_uniform_f(uMove, cc.mod_posx,cc.mod_posy);
     texture_set_stage(uNoiseSampler, noisetex);

@@ -42,3 +42,8 @@
 - 修复了部分gmk无法使用的问题（plaudite_pburst,playspeed）
 - 将jumpto细化为jumpto_beat和jumpto_s，具体见文档
 - 新增reset_scrollspeed
+
+### v1.10.1
+- 修复了谱面路径相关问题
+- 修复了cosX滤镜的问题
+- 现在jacket系列如果id值超过现有jacket数量/小于0 会 自动取余/取id最大的jacket

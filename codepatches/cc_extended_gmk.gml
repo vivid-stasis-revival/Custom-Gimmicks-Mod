@@ -9,6 +9,7 @@ for (var lane=0;lane<7;lane++){
     variable_instance_set(cc,string("mod_boost_timeind{0}", lane), 300);
     variable_instance_set(cc,string("mod_boost_distanceind{0}", lane), 0);
 }
+chartPath=get_chart_path_from_chart(global.ch_load);
 JACKET_MANAGE_MODE="plaudite"//or custom
 ENABLE_DEBUG_INFO=false;
 ENABLE_TEXT=true;
@@ -18,12 +19,12 @@ ENABLE_ANGELSTAR_CHECKER=true;
 ENABLE_DISTORT_BG=true;
 ENABLE_MUSIC_CONTROL=true;
 
-if(struct_exists(songInfo, "is_custom"))
+if(struct_exists(getSongEntry(global.ch_load), "is_custom"))
 {
     var loadConfig=true;
-    var configPath = songInfo.chart_path + string("{0}_cgmk_config.json", global.df_load);
+    var configPath = chartPath + string("{0}_cgmk_config.json", global.df_load);
     if (!file_exists(configPath)){
-        configPath = songInfo.chart_path + "cgmk_config.json";
+        configPath = chartPath + "cgmk_config.json";
         if (!file_exists(configPath))
             loadConfig=false;
     }
@@ -46,14 +47,15 @@ if(struct_exists(songInfo, "is_custom"))
             }
         )
     }
+
+    if(!ENABLE_NON_BASE_FX){
+        layer_destroy(layer_get_id("FX_red"));
+        layer_destroy(layer_get_id("FX_twirl"));
+        layer_destroy(layer_get_id("FX_posterize"));
+        layer_destroy(layer_get_id("FX_edge"));
+        layer_destroy(layer_get_id("FX_hue"));
+        layer_destroy(layer_get_id("FX_underwater"));
+        layer_destroy(layer_get_id("FX_zoom"));
+    }
 }
 
-if(struct_exists(songInfo, "is_custom") && !ENABLE_NON_BASE_FX){
-    layer_destroy(layer_get_id("FX_red"));
-    layer_destroy(layer_get_id("FX_twirl"));
-    layer_destroy(layer_get_id("FX_posterize"));
-    layer_destroy(layer_get_id("FX_edge"));
-    layer_destroy(layer_get_id("FX_hue"));
-    layer_destroy(layer_get_id("FX_underwater"));
-    layer_destroy(layer_get_id("FX_zoom"));
-}

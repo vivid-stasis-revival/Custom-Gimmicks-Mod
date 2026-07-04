@@ -1,4 +1,4 @@
-// tpath = cc.songInfo.chart_path + string("{0}_text_{1}.txt", global.df_load,tid);
+
 textObjects=[];
 debugDisplayingID=0;
 
@@ -176,12 +176,12 @@ function textObj(tid) constructor{
 
 var pathPrefix=string("{0}_text_", global.df_load);
 var prefixLength=string_length(pathPrefix);
-var filePath=file_find_first(cc.songInfo.chart_path+pathPrefix+"*.txt", 16);
+var filePath=file_find_first(cc.chartPath+pathPrefix+"*.txt", 16);
 while(filePath != "")
 {
     var tID=string_copy(filePath, prefixLength+1, string_length(filePath)-prefixLength-4);
     var _textObj=new textObj(tID);
-    _textObj.loadText(cc.songInfo.chart_path+filePath);
+    _textObj.loadText(cc.chartPath+filePath);
     if (_textObj.available){
         array_push(textObjects, _textObj);
         _textObj.addMods(caller);
