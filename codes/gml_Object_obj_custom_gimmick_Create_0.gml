@@ -1,4 +1,18 @@
 event_inherited();
+/*
+addExtraMod = function(modName, weight = 1, callBack = undefined, endCallBack = undefined)
+{
+    var i = lastExtraModIndex;
+    lastExtraModIndex++;
+    variable_struct_set(extraMods, modName, i);
+    extraModCallbacks[i] = callBack;
+    extraModEndCallbacks[i] = endCallBack;
+    variable_struct_set(global.mod_weight, modName, weight);
+};
+args of callbacks:
+[start, duration, thismod.v1, thismod.v2, thismod.e]
+*/
+
 
 depth=-400
 //Initilizers
@@ -255,6 +269,7 @@ function InitCustomShader(){
 
 
 //Init some gmk
+InitSkinChange()
 InitCSMJacket()
 InitText();
 InitDistortBG();
@@ -349,7 +364,6 @@ cc.mod_wflash = 0;
 cc.mod_rainbow = 0;
 cc.mod_sides = 0;
 cc.mod_noteoverlayalp = 1;
-cc.mod_scorealph = 1;
 cc.mod_bgalph = 1;
 cc.mod_noteoverlayalp = 1;
 cc.mod_sg_endblip = 0;
