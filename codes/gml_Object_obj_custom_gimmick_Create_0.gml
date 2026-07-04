@@ -2,6 +2,33 @@ event_inherited();
 
 depth=-400
 //Initilizers
+function InitSkinChange(){
+    if (!cc.ENABLE_SKIN_CHANGE)
+        exit;
+    singleSkins=[
+        [sp_note_chip_normal, sp_note_chip_normal, sp_note_hold_nor+mal, sp_note_chip_normal, sp_note_chip_mine_normal],
+        [sp_note_chip_stopmotion, sp_note_hold_start_stopmotion, sp_note_hold_stopmotion, sp_note_hold_end_stopmotion, sp_empty],
+        [sp_note_chip_extendnova, sp_note_chip_extendnova, sp_note_hold_extendnova, sp_note_chip_extendnova, sp_note_chip_mine_normal],
+        [sp_note_chip_stargazers, sp_note_hold_start_stargazers, sp_note_hold_stargazers, sp_note_hold_end_stargazers, sp_empty]
+    ]
+    bumperSkins=[
+        [sp_note_bumper_normal, sp_note_bumper_timing_normal, sp_note_bumper_mine_normal],
+        [sp_note_bumper_stopmotion, sp_empty, sp_empty],
+        [sp_note_bumper_extendnova, sp_note_bumper_timing_normal, sp_note_bumper_mine_normal],
+        [sp_note_bumper_stargazers, sp_note_bumper_timing_stargazers, sp_empty]
+
+    ]
+    addExtraMod("changeskin", 0, function(st,dur,v1,skinID){
+        for (var lane=0;lane<7;lane++)
+        {
+            if (lane<4)
+                obj_note_rendering.lane_sprites[lane]=obj_custom_gimmick.singleSkins[skinID]
+            else
+                obj_note_rendering.lane_sprites[lane]=obj_custom_gimmick.bumperSkins[skinID]
+        }
+    })
+}
+
 function InitCSMJacket(){
     layer_destroy_instances(layer_get_id("Instances_2"))
     layer_destroy_instances(layer_get_id("Instances_1"))
