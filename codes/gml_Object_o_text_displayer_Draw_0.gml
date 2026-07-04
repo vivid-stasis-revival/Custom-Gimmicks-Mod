@@ -14,7 +14,7 @@ if (cc.mod_textalp>0 and enable_text_gimmick){
     draw_set_font(global.default_font);
     var col=cc.mod_textcolhex
     if (cc.mod_col_convertion){
-        col=make_color_rgb(color_get_blue(col),color_get_green(col),color_get_red(col))
+        col=col_convert(col)
     }
     draw_set_color(col);
     draw_text_transformed(cc.mod_textX,cc.mod_textY,current_text,cc.mod_textscale,cc.mod_textscale,cc.mod_textrot);

@@ -24,12 +24,6 @@ function textObj(tid) constructor{
         time=beginTime;
         content=ct;
     }
-    static function colConvert(col){
-        var r=color_get_red(col);
-        var g=color_get_green(col);
-        var b=color_get_blue(col);
-        return make_color_rgb(r,g,b);
-    }
 
     static CHAR_WIDTH=font_get_size(global.default_font)
     static SPECIAL_REPLACE={
@@ -71,11 +65,11 @@ function textObj(tid) constructor{
 
     static function updateSelf(){
         if (instance_exists(cc)){
+            alp=variable_instance_get(cc, "mod_textalp_"+string(ID));
             posX=variable_instance_get(cc, "mod_textX_"+string(ID))+variable_instance_get(cc, "mod_textX_"+string(ID)+"b");
             posY=variable_instance_get(cc, "mod_textY_"+string(ID))+variable_instance_get(cc, "mod_textY_"+string(ID)+"b");
             rotDeg=variable_instance_get(cc, "mod_textrot_"+string(ID));
-            alp=variable_instance_get(cc, "mod_textalp_"+string(ID));
-            col=colConvert(variable_instance_get(cc, "mod_textcolrgb_"+string(ID)));
+            col=col_convert(variable_instance_get(cc, "mod_textcolrgb_"+string(ID)));
             scale=variable_instance_get(cc, "mod_textscale_"+string(ID));
             sep=variable_instance_get(cc, "mod_textsep_"+string(ID));
             vAlignMode=round(variable_instance_get(cc, "mod_textalignv_"+string(ID)));
@@ -131,6 +125,8 @@ function textObj(tid) constructor{
         }
     }
     static function drawSelf(){
+        if (alp==0)
+            return
         draw_set_alpha(alp);
         draw_set_valign(vAlignMode);
         draw_set_halign(hAlignMode);

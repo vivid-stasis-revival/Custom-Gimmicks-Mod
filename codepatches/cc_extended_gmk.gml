@@ -47,7 +47,6 @@ if(struct_exists(getSongEntry(global.ch_load), "is_custom"))
             }
         )
     }
-
     if(!ENABLE_NON_BASE_FX){
         layer_destroy(layer_get_id("FX_red"));
         layer_destroy(layer_get_id("FX_twirl"));
@@ -58,4 +57,3 @@ if(struct_exists(getSongEntry(global.ch_load), "is_custom"))
         layer_destroy(layer_get_id("FX_zoom"));
     }
 }
-
