@@ -166,6 +166,44 @@ function InitDFGridAndLine(){
     cc.mod_df_grid_bottom = 0;
 }
 
+function InitSides(){
+    addExtraMod("unraveling_sidething", function()
+    {
+        instance_create_depth(150, 90, 260, o_unravel_sidething, 
+        {
+            dir: 1
+        });
+        instance_create_depth(170, 90, 260, o_unravel_sidething, 
+        {
+            dir: -1
+        });
+    });
+    addExtraMod("astellion_sidething", function()
+    {
+        instance_create_depth(150, 90, 260, o_astellion_sidething, 
+        {
+            dir: 1
+        });
+        instance_create_depth(170, 90, 260, o_astellion_sidething, 
+        {
+            dir: -1
+        });
+        instance_create_depth(irandom_range(0, 120), irandom_range(0, 180), 260, o_ast_particle);
+        instance_create_depth(irandom_range(200, 320), irandom_range(0, 180), 260, o_ast_particle);
+    });
+    addExtraMod("apocalypse_sidething", function()
+    {
+    instance_create_depth(150, 90, 260, o_apocalypse_sidething, 
+    {
+        dir: 1
+    });
+    instance_create_depth(170, 90, 260, o_apocalypse_sidething, 
+    {
+        dir: -1
+    });
+});
+}
+
 function InitAngelstarChecker(){
     if(!cc.ENABLE_ANGELSTAR_CHECKER)
         exit;
@@ -286,6 +324,7 @@ InitCSMJacket()
 InitText();
 InitDistortBG();
 InitNonBaseFX();
+InitSides()
 InitDFGridAndLine();
 InitAngelstarChecker();
 InitCustomShader();
@@ -296,13 +335,6 @@ for (var i = 0; i < proxyCount; i++)
 //OTHERS
 addExtraMod("col_convertion", 0)
 cc.mod_col_convertion = 0;//不为0时自动将所有输入的颜色转为rrggbb的形式（原本是bbggrr)
-
-//SHADERS
-// surf_1=-1;
-// surf_2=-1;
-// draw_w=320;
-// draw_h=180;
-//ANGELSTAR
 
 //other
 addExtraMod("static");
@@ -316,11 +348,6 @@ addExtraMod("hide_combo");
 addExtraMod("slash_anycol")
 addExtraMod("set_slash_col")
 addExtraMod("wflash");
-// addExtraMod("starspawner_timer");
-// addExtraMod("starspd_low");
-// addExtraMod("starspd_high");
-// addExtraMod("starspd_multiplier");
-
 
 curcolor = 0;
 aft = -1;
@@ -390,13 +417,5 @@ cc.mod_slash_anycol=0;
 cc.mod_set_slash_col=16777215;
 
 //special
-function spawnfunc()
-{
-    with (instance_create_depth(150, 90, 260, o_unravel_sidething))
-        dir = 1;
-    
-    with (instance_create_depth(170, 90, 260, o_unravel_sidething))
-        dir = -1;
-}
 shouldPixelate = true;
 main_shader = custom_shader;

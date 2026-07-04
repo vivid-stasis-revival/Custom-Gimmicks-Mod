@@ -7,15 +7,6 @@ if (!instance_exists(cc))
 if (!instance_exists(cc))
     exit;
 
-if (sidespawner == 0 && cc.mod_sides > 0)
-{
-    spawnfunc();
-    sidespawner = 1;
-}
-
-if (sidespawner == 1 && cc.mod_sides == 0)
-    sidespawner = 0;
-
 if (cc.mod_slash_anycol > 0)
 {
     var the = instance_create_depth(0, 0, 255, o_anycol_slash);
@@ -25,12 +16,6 @@ if (cc.mod_slash_anycol > 0)
     }
     the.color = col;
     cc.mod_slash_anycol = 0;
-}
-
-if (cc.mod_sides > 0)
-{
-    spawnfunc();
-    cc.mod_sides = 0;
 }
 
 if(cc.ENABLE_NON_BASE_FX)

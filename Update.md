@@ -50,3 +50,5 @@
 
 ### v1.11.0
 - 现在支持皮肤更换
+- sides被细化成了unraveling_sidething, astellion_sidething和apocalypse_sidething
+- 暂时废弃ENABLE_DEBUG_INFO

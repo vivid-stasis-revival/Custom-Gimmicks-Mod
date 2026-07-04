@@ -21,7 +21,7 @@
 |  ENABLE_ANGELSTAR_CHECKER   |            是否启用anglestar的背景棋盘gmk            |
 |      ENABLE_DISTORT_BG      |                    是否启用扭曲BG                    |
 |    ENABLE_MUSIC_CONTROL     |       是否启用控制音乐的gmk(jumpto和playspeed)       |
-|      ENABLE_DEBUG_INFO      |      是否在屏幕上绘制调试信息，目前只对字幕生效      |
+|      ENABLE_DEBUG_INFO      |      是否在屏幕上绘制调试信息(于1.11暂时废弃)      |
 
 <br>
 
@@ -154,7 +154,6 @@
 |          sides          |       |                   |
 |         notealp         |       |                   |
 |     noteoverlayalp      |       |                   |
-|        scorealph        |       |                   |
 |         bgalph          |       |                   |
 |          gray           |       |                   |
 |         barrel          |       |                   |
