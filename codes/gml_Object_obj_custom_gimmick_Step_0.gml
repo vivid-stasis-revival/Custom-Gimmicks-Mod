@@ -50,7 +50,7 @@ if (cc.ENABLE_DF_GRID_AND_SIDELINE)
 if(cc.ENABLE_DISTORT_BG){
     layer_background_sprite(bgEleId, o_csm_jacket.jacket);
     o_csm_particle_system.blackSurfAlpha=1-cc.mod_ditortedBG_alp;
-    layer_background_blend(bgEleId, col_convert(cc.mod_ditortedBG_col_rgb));
+    layer_background_blend(bgEleId, global.col_convert(cc.mod_ditortedBG_col_rgb));
     fx_set_parameter(blurEff, "g_Radius", cc.mod_BG_blurRadius);
     fx_set_parameter(blurEff, "g_NoiseTexture ", noisetex);
     fx_set_parameter(distortEff, "g_Distort1Scale", cc.mod_BG_ditortScale);

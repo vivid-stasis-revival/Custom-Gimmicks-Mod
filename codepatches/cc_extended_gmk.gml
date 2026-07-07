@@ -1,3 +1,18 @@
+chartPath=get_chart_path_from_chart(global.ch_load);
+var settings=[
+    ["JACKET_MANAGE_MODE", "plaudite"],
+    ["ENABLE_DEBUG_INFO", false],
+    ["ENABLE_TEXT", true],
+    ["ENABLE_NON_BASE_FX", true],
+    ["ENABLE_DF_GRID_AND_SIDELINE", true],
+    ["ENABLE_ANGELSTAR_CHECKER", true],
+    ["ENABLE_DISTORT_BG", true],
+    ["ENABLE_MUSIC_CONTROL", true],
+    ["ENABLE_STARPARTICLE",false]
+]
+array_foreach(settings, function(ele){
+    variable_instance_set(cc, ele[0], ele[1]);
+})
 mod_freeze = 0;
 mod_jumpto = 0;
 mod_playspeed = 1;
@@ -9,15 +24,7 @@ for (var lane=0;lane<7;lane++){
     variable_instance_set(cc,string("mod_boost_timeind{0}", lane), 300);
     variable_instance_set(cc,string("mod_boost_distanceind{0}", lane), 0);
 }
-chartPath=get_chart_path_from_chart(global.ch_load);
-JACKET_MANAGE_MODE="plaudite"//or custom
-ENABLE_DEBUG_INFO=false;
-ENABLE_TEXT=true;
-ENABLE_NON_BASE_FX=true;
-ENABLE_DF_GRID_AND_SIDELINE=true;
-ENABLE_ANGELSTAR_CHECKER=true;
-ENABLE_DISTORT_BG=true;
-ENABLE_MUSIC_CONTROL=true;
+
 
 if(struct_exists(getSongEntry(global.ch_load), "is_custom"))
 {

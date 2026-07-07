@@ -50,5 +50,8 @@
 
 ### v1.11.0
 - 现在支持皮肤更换
+- 支持图片插入[WIP]
 - sides被细化成了unraveling_sidething, astellion_sidething和apocalypse_sidething
+- 常规SV（支持不等距的那种）支持[WIP]
 - 暂时废弃ENABLE_DEBUG_INFO
+- 星星相关gmk支持

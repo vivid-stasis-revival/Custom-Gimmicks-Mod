@@ -36,6 +36,8 @@ function InitCSMJacket(){
     var LBG=layer_create(404)
     instance_create_layer(0, 32, Lparticle, o_csm_particle_system)
     instance_create_layer(0, 32, LBG, o_csm_jacket)
+    addExtraMod("particle_alpha");
+    cc.mod_particle_alpha = 1;
     if (cc.JACKET_MANAGE_MODE=="plaudite"){
         addExtraMod("plaudite_jacket");
         cc.mod_plaudite_jacket = 11;
@@ -193,15 +195,15 @@ function InitSides(){
     });
     addExtraMod("apocalypse_sidething", function()
     {
-    instance_create_depth(150, 90, 260, o_apocalypse_sidething, 
-    {
-        dir: 1
+        instance_create_depth(150, 90, 260, o_apocalypse_sidething, 
+        {
+            dir: 1
+        });
+        instance_create_depth(170, 90, 260, o_apocalypse_sidething, 
+        {
+            dir: -1
+        });
     });
-    instance_create_depth(170, 90, 260, o_apocalypse_sidething, 
-    {
-        dir: -1
-    });
-});
 }
 
 function InitAngelstarChecker(){
@@ -242,16 +244,6 @@ function InitCustomShader(){
         variable_instance_set(cc,string("uTwist{0}",i),shader_get_uniform(shader_custom_main, string("twist{i}",i)));
     uNoiseSampler = shader_get_sampler_index(shader_supernova_main, "samplerRandom");
     noisetex = sprite_get_texture(sp_noise2, 0);
-
-    addExtraMod("uialpha");
-    addExtraMod("cover1");
-    addExtraMod("cover2");
-    addExtraMod("cover3");
-    addExtraMod("rainbow");
-    addExtraMod("sides");
-    addExtraMod("noteoverlayalp");
-    addExtraMod("scorealph");
-    addExtraMod("bgalph");
     //shaderRelative
     addExtraMod("gray");
     addExtraMod("barrel");
@@ -317,9 +309,87 @@ function InitCustomShader(){
 
 }
 
+function InitStarParticle(){
+    if (!cc.ENABLE_STARPARTICLE)
+        exit;
+    addExtraMod("starspawner_timer")
+    cc.mod_starspawner_timer = 0;
+    addExtraMod("starspd_multiplier")
+    cc.mod_starspd_multiplier = 1;
+    addExtraMod("starspd_low")
+    cc.mod_starspd_low = 0;
+    addExtraMod("starspd_high")
+    cc.mod_starspd_high = 0;
+    addExtraMod("startrans_alpha")
+    cc.mod_startrans_alpha = 1;
+    addExtraMod("starchgcol_alpha")
+    cc.mod_starchgcol_alpha = 1;
+    addExtraMod("active_starchgcol", 0,function(time,dur,v1,stat)
+        {
+            cc.mod_activate_starchgcol = stat;
+        });
+    addExtraMod("active_startrans", 0,function(time,dur,v1,stat)
+        {
+            cc.mod_activate_startrans = stat;
+        });
+    cc.mod_activate_starchgcol = 0;
+    cc.mod_activate_startrans = 0;
+    addExtraMod("starchgcol_up_rgb");
+    cc.mod_starchgcol_up_rgb=c_white;
+    addExtraMod("starchgcol_down_rgb");
+    cc.mod_starchgcol_down_rgb=c_white;
+    object_set_sprite(o_csm_starchangecol, sp_sk_star);
+    object_set_sprite(o_csm_startransparent, sp_sk_star);
+}
+
+function InitMisc(){
+    addExtraMod("cover1");
+    addExtraMod("cover2");
+    addExtraMod("cover3");
+    addExtraMod("rainbow");
+    addExtraMod("sides");
+    addExtraMod("noteoverlayalp");
+    addExtraMod("scorealph");
+    addExtraMod("bgalph");
+    addExtraMod("col_convertion", 0)
+    addExtraMod("static");
+    addExtraMod("holdoverlayalpha");
+    addExtraMod("hide_combo");
+    addExtraMod("slash_anycol")
+    addExtraMod("set_slash_col")
+    addExtraMod("wflash");
+    addExtraMod("plaudite_pburst",0,function(start, dur, v1, v2)
+    {
+        for (var i = 0; i < v2; i++)
+            spawn_particles_directional(irandom_range(0, 320), -10, 701, o_pt_diamonddust_songgameplay, 1, 0, 1.5 * cc.mod_pburstspeed, 240, 1);
+    });
+    addExtraMod("sg_endblip",0 ,function(){
+        instance_create_depth(160, 90, -9000, o_sg_endblip);
+    });
+    addExtraMod("sg_endblip_destroy",0 ,function(){
+        instance_destroy(o_sg_endblip);
+    });
+    cc.mod_col_convertion = 0;
+    cc.mod_cover1 = 0;
+    cc.mod_cover2 = 0;
+    cc.mod_cover3 = 0;
+    cc.mod_wflash = 0;
+    cc.mod_rainbow = 0;
+    cc.mod_noteoverlayalp = 1;
+    cc.mod_scorealph = 1;
+    cc.mod_bgalph = 1;
+    cc.mod_noteoverlayalp = 1;
+    cc.mod_sg_endblip = 0;
+    cc.mod_sg_endblip_destroy = 0;
+    cc.mod_plaudite_pburst = 0;
+    cc.mod_hide_combo = 0;
+    cc.mod_slash_anycol=0;
+    cc.mod_set_slash_col=16777215;
+}
 
 
 //Init some gmk
+InitStarParticle();
 InitCSMJacket()
 InitText();
 InitDistortBG();
@@ -328,26 +398,13 @@ InitSides()
 InitDFGridAndLine();
 InitAngelstarChecker();
 InitCustomShader();
+InitMisc();
 //End of Init
 
 for (var i = 0; i < proxyCount; i++)
     proxies[i].pra = 1;
 //OTHERS
-addExtraMod("col_convertion", 0)
-cc.mod_col_convertion = 0;//不为0时自动将所有输入的颜色转为rrggbb的形式（原本是bbggrr)
 
-//other
-addExtraMod("static");
-addExtraMod("holdoverlayalpha");
-addExtraMod("plaudite_pburst",1,function(start, dur, v1, v2)
-{
-    for (var i = 0; i < v2; i++)
-        spawn_particles_directional(irandom_range(0, 320), -10, 701, o_pt_diamonddust_songgameplay, 1, 0, 1.5 * cc.mod_pburstspeed, 240, 1);
-});
-addExtraMod("hide_combo");
-addExtraMod("slash_anycol")
-addExtraMod("set_slash_col")
-addExtraMod("wflash");
 
 curcolor = 0;
 aft = -1;
@@ -393,28 +450,6 @@ function custom_shader(){
     texture_set_stage(uNoiseSampler, noisetex);
     //SUPANOVA
 }
-
-//others
-cc.mod_uialpha = 1;
-cc.mod_cover1 = 0;
-cc.mod_cover2 = 0;
-cc.mod_cover3 = 0;
-cc.mod_wflash = 0;
-cc.mod_rainbow = 0;
-cc.mod_sides = 0;
-cc.mod_noteoverlayalp = 1;
-cc.mod_scorealph = 1;
-cc.mod_bgalph = 1;
-cc.mod_noteoverlayalp = 1;
-cc.mod_sg_endblip = 0;
-cc.mod_sg_endblip_destroy = 0;
-
-
-//plaudite
-cc.mod_plaudite_pburst = 0;
-cc.mod_hide_combo = 0;
-cc.mod_slash_anycol=0;
-cc.mod_set_slash_col=16777215;
 
 //special
 shouldPixelate = true;

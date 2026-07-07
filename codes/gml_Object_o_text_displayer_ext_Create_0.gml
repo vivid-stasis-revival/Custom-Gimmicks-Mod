@@ -69,7 +69,7 @@ function textObj(tid) constructor{
             posX=variable_instance_get(cc, "mod_textX_"+string(ID))+variable_instance_get(cc, "mod_textX_"+string(ID)+"b");
             posY=variable_instance_get(cc, "mod_textY_"+string(ID))+variable_instance_get(cc, "mod_textY_"+string(ID)+"b");
             rotDeg=variable_instance_get(cc, "mod_textrot_"+string(ID));
-            col=col_convert(variable_instance_get(cc, "mod_textcolrgb_"+string(ID)));
+            col=global.col_convert(variable_instance_get(cc, "mod_textcolrgb_"+string(ID)));
             scale=variable_instance_get(cc, "mod_textscale_"+string(ID));
             sep=variable_instance_get(cc, "mod_textsep_"+string(ID));
             vAlignMode=round(variable_instance_get(cc, "mod_textalignv_"+string(ID)));
