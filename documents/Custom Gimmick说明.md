@@ -102,16 +102,70 @@
 |   BG_ditortScale   | 调整扭曲背景的扭曲块大小 |                       默认0                        |
 |  BG_ditortAmount   |  调整扭曲背景的扭曲程度  |                       默认0                        |
 #### 滤镜/shader
-|         gmk名         |                作用                |         其它描述          |
-| :-------------------: | :--------------------------------: | :-----------------------: |
-|   fx_red_intensity    |        调整fx_red的滤镜强度        |                           |
-|  fx_colorise_col_rgb  |       调整colorise滤镜的颜色       | 将hex颜色转为10进制后填入 |
-| fx_colorise_col_alpha | 调整colorise滤镜的颜色中的alpha值  |                           |
-| fx_colorise_intensity |       调整colorise滤镜的强度       |                           |
-|       vdistort        | 效果与hdistort相同，但是是竖直方向 |          默认为0          |
-|       barrelabx       |        调整barrel的横向色散        |          默认为0          |
-|       barrelaby       |        调整barrel的竖向色散        |          默认为0          |
+|         gmk名         |                         作用                          |                           其它描述                            |
+| :-------------------: | :---------------------------------------------------: | :-----------------------------------------------------------: |
+|        fx_red         |    效果与fx_colorise相同，但是可由recolor随机颜色     |                                                               |
+|        recolor        |                 重新调整fx_red的颜色                  |                                                               |
+|   fx_red_intensity    |                 调整fx_red的滤镜强度                  |                                                               |
+|  fx_colorise_col_rgb  |                调整colorise滤镜的颜色                 |                   将hex颜色转为10进制后填入                   |
+| fx_colorise_col_alpha |           调整colorise滤镜的颜色中的alpha值           |                                                               |
+| fx_colorise_intensity |                调整colorise滤镜的强度                 |                                                               |
+|       vdistort        |                       纵向模糊                        |                            默认为0                            |
+|       hdistort        |                       横向模糊                        |                            默认为0                            |
+|       barrelabx       |                 调整barrel的横向色散                  |                            默认为0                            |
+|       barrelaby       |                 调整barrel的竖向色散                  |                            默认为0                            |
+|         sina          |                  将ui扭曲为正弦波形                   |        这类gmk的a指振幅，o指周期的倒数，p指相位，下同         |
+|         sino          |                                                       |                  默认为0（0代表禁用），下同                   |
+|         sinp          |                                                       |                        p默认为1，下同                         |
+|         cosa          |               将ui扭曲为纵向的正弦波形                |                                                               |
+|         cosp          |                                                       |                                                               |
+|         coso          |                                                       |                                                               |
+|         tana          |               将ui扭曲为纵向的正切波形                |                                                               |
+|         tano          |                                                       |                                                               |
+|         tanp          |                                                       |                                                               |
+|         posx          |                    横向移动ui界面                     |                            默认为0                            |
+|         posy          |                    纵向移动ui界面                     |                            默认为0                            |
+|        twx[id]        |                在屏幕产生一个螺旋扭曲                 | x，y指扭曲中心位置，a指扭曲程度，r指扭曲半径[id]范围1~4，下同 |
+|        twy[id]        |                                                       |                                                               |
+|        twa[id]        |                                                       |                                                               |
+|        twr[id]        |                                                       |                                                               |
+|         gray          |                       灰色滤镜                        |                                                               |
+|        barrel         |                                                       |                   最后效果是barrel+barrel2                    |
+|        barrel2        |                                                       |                                                               |
+|         fish          |                     鱼眼效果幅度                      |                                                               |
+|          vig          |                                                       |                                                               |
+|          abx          |                  调整横向色散的幅度                   |                                                               |
+|          aby          |                  调整纵向色散的幅度                   |                                                               |
+|         bloom         |                       光晕幅度                        |                                                               |
+|       glitchamp       |                                                       |                                                               |
+|     glitchoffset      |                                                       |                                                               |
+|        uhnoise        |                                                       |                                                               |
+|      fx_hue_hue       |                     调整整体色相                      |                                                               |
+|   fx_hue_saturation   |                    调整整体饱和度                     |                                                               |
+|        fx_edge        |                       边缘检测                        |                                                               |
+|     fx_posterize      |                                                       |                                                               |
+|       fx_twirl        | 在屏幕中心产生螺旋扭曲，这个gmk控制这个扭曲的扭曲程度 |                                                               |
+|   fx_posterize_vis    |                 是否启用fx_posterize                  |                                                               |
+|     fx_underwater     |                       水下效果                        |                                                               |
+|        fx_zoom        |                                                       |                                                               |
 - 注：fx_red与fx_colorise实则使用的同一个滤镜，区别在于fx_red只能使用recolor随机改变颜色
+
+#### 粒子相关
+|        gmk名        |               作用               |                    其它描述                     |
+| :-----------------: | :------------------------------: | :---------------------------------------------: |
+|  starspawner_timer  |           控制星星数量           |                                                 |
+| starspd_multiplier  |         星星下落速度倍率         |                                                 |
+|     starspd_low     |         星星最慢下落速度         |                                                 |
+|    starspd_high     |         星星最快下落速度         |                                                 |
+|  active_starchgcol  |         启用渐变色型星星         | 使用hsv进行渐变，方式是h，对h，s和v各自单独补间 |
+|  active_startrans   |          启用蒙版型星星          |           这种星星会在黑色蒙版上挖空            |
+|   startrans_alpha   |        蒙版型星星不透明度        |                                                 |
+|  starchgcol_alpha   |       渐变色型星星不透明度       |                                                 |
+|  starchgcol_up_rgb  | 渐变色型星星在屏幕上半部分的颜色 |         将hex颜色转为十进制后填入，下同         |
+| starchgcol_down_rgb | 渐变色型星星在屏幕下半部分的颜色 |                                                 |
+|   particle_alpha    |      控制菱形粒子的不透明度      |                                                 |
+|       rainbow       |        让菱形粒子变为彩色        |                                                 |
+|   plaudite_pburst   |          从顶部喷射粒子          |               value2控制喷射强度                |
 
 #### 轨道Gimmick
 | gmk名 |         作用          |          其它描述          |
@@ -133,80 +187,31 @@
 |  reset_scrollspeed   |              重置scrollspeed               |                *是全局gimmick*                |
 
 #### 其它
-|         gmk名          |                                   作用                                   |                                       其它描述                                       |
-| :--------------------: | :----------------------------------------------------------------------: | :----------------------------------------------------------------------------------: |
-|      jumpto_beat       |                             跳转谱面指定位置                             |                 在value2处填具体的值，单位为拍数<br>*是全局gimmick*                  |
-|        jumpto_s        |                             跳转谱面指定位置                             |       当value1>0时单位为秒否则为毫秒，在value2处填具体的值<br>*是全局gimmick*        |
-|       playspeed        |                             设置谱面播放速度                             |                             默认值为1<br>*是全局gimmick*                             |
-|     col_convertion     |                  将自定义gmk内部分调整颜色的gmk逻辑转换                  | 不为0时会将输入的颜色以rgb的形式使用，否则以bgr的形式<br>受该gmk影响的将在描述中标出 |
-|      slash_anycol      |                  生成一个slash，颜色由set_slash_col定义                  |                                                                                      |
-|     set_slash_col      |                          调整slash_anycol的颜色                          |                 将hex颜色转为10进制后填入<br>*受col_convertion影响*                  |
-|         cover1         |                             调整遮盖不透明度                             |                虽然不是新的gmk，但是作用变了：控制的是整个屏幕的遮盖                 |
-| angelstar_checker_mode | 调整angelstar_checker的状态，0为受曲绘影响，1是不受影响，2是大于轨道图层 |                                       默认为0                                        |
+|          gmk名          |                                   作用                                   |                                       其它描述                                       |
+| :---------------------: | :----------------------------------------------------------------------: | :----------------------------------------------------------------------------------: |
+|       jumpto_beat       |                             跳转谱面指定位置                             |                 在value2处填具体的值，单位为拍数<br>*是全局gimmick*                  |
+|        jumpto_s         |                             跳转谱面指定位置                             |       当value1>0时单位为秒否则为毫秒，在value2处填具体的值<br>*是全局gimmick*        |
+|        playspeed        |                             设置谱面播放速度                             |                             默认值为1<br>*是全局gimmick*                             |
+|     col_convertion      |                  将自定义gmk内部分调整颜色的gmk逻辑转换                  | 不为0时会将输入的颜色以rgb的形式使用，否则以bgr的形式<br>受该gmk影响的将在描述中标出 |
+|      slash_anycol       |                  生成一个slash，颜色由set_slash_col定义                  |                                                                                      |
+|      set_slash_col      |                          调整slash_anycol的颜色                          |                 将hex颜色转为10进制后填入<br>*受col_convertion影响*                  |
+|         cover1          |                           调整屏幕遮盖不透明度                           |                虽然不是新的gmk，但是作用变了：控制的是整个屏幕的遮盖                 |
+|         cover2          |                          轨道外侧遮盖的不透明度                          |                                                                                      |
+|         cover3          |                            轨道遮盖的不透明度                            |                                                                                      |
+| angelstar_checker_mode  | 调整angelstar_checker的状态，0为受曲绘影响，1是不受影响，2是大于轨道图层 |                                       默认为0                                        |
+| angelstar_checker_alpha |                          调整棋盘效果的不透明度                          |                                                                                      |
+|  angelstar_checker_set  |                               刷新棋盘效果                               |                                                                                      |
+|         wflash          |                                 白色闪屏                                 |                                                                                      |
+|         static          |                          调整雪花效果的不透明度                          |                                                                                      |
+|      df_sideline2       |                生成一对向外移动的黑色竖线，缓动为outCirc                 |                                                                                      |
+|       df_sideline       |                      绘制一对可以控制移动的白色竖线                      |                             范围[0,1]，1代表抵达屏幕边缘                             |
+|    df_sideline_alpha    |                         控制df_sideline的透明度                          |                                                                                      |
+|       df_whitebg        |                                 白色背景                                 |                                                                                      |
+|      df_grid_alpha      |                          df中的网格效果不透明度                          |                                                                                      |
+|       df_grid_top       |                        控制网格可视部分的顶部位置                        |                                                                                      |
+|     df_grid_bottom      |                        控制网格可视部分的底部位置                        |                                                                                      |
+|     noteoverlayalp      |                                                                          |                                                                                      |
+|         bgalph          |                        控制轨道非灰色部分的透明度                        |                                                                                      |
+|    holdoverlayalpha     |                           轨道灰色部分的透明度                           |                                                                                      |
+|       hide_combo        |                              隐藏combo显示                               |                                                                                      |
 
-### 非自定义部分的完整清单（除去全局gmk）
-|          gmk名          | 作用  |       说明        |
-| :---------------------: | :---: | :---------------: |
-|         uialpha         |       |                   |
-|         cover1          |       |                   |
-|         cover2          |       |                   |
-|         cover3          |       |                   |
-|         rainbow         |       |                   |
-|          sides          |       |                   |
-|         notealp         |       |                   |
-|     noteoverlayalp      |       |                   |
-|         bgalph          |       |                   |
-|          gray           |       |                   |
-|         barrel          |       |                   |
-|         barrel2         |       |                   |
-|        hdistort         |       |                   |
-|          fish           |       |                   |
-|           vig           |       |                   |
-|           abx           |       |                   |
-|          bloom          |       |                   |
-|           aby           |       |                   |
-|         aberamp         |       |                   |
-|        glitchamp        |       |                   |
-|      glitchoffset       |       |                   |
-|         uhnoise         |       |                   |
-|         static          |       |                   |
-|       fx_hue_hue        |       |                   |
-|    fx_hue_saturation    |       |                   |
-|         fx_edge         |       |                   |
-|      fx_posterize       |       |                   |
-|        fx_twirl         |       |                   |
-|    fx_posterize_vis     |       |                   |
-|      fx_underwater      |       |                   |
-|          bloom          |       |                   |
-| angelstar_checker_alpha |       |                   |
-|  angelstar_checker_set  |       |                   |
-|         fx_zoom         |       |                   |
-|         fx_red          |       |                   |
-|         recolor         |       |                   |
-|    holdoverlayalpha     |       |                   |
-|     plaudite_pburst     |       |                   |
-|       hide_combo        |       |                   |
-|      df_sideline2       |       |                   |
-|        df_sides         |       |                   |
-|       df_sideline       |       |                   |
-|       df_whitebg        |       |                   |
-|      df_grid_alpha      |       |                   |
-|       df_grid_top       |       |                   |
-|     df_grid_bottom      |       |                   |
-|         wflash          |       |                   |
-|     plaudite_jacket     |       |                   |
-|          sina           |       |                   |
-|          sino           |       |                   |
-|          sinp           |       |                   |
-|          cosa           |       |                   |
-|          cosp           |       |                   |
-|          coso           |       |                   |
-|          tana           |       |                   |
-|          tanp           |       |                   |
-|          tano           |       |                   |
-|          posx           |       |                   |
-|          posy           |       |                   |
-|         twx[id]         |       | [id]范围1~4，下同 |
-|         twy[id]         |       |                   |
-|         twa[id]         |       |                   |
-|         twr[id]         |       |                   |

@@ -125,7 +125,11 @@ function InitNonBaseFX(){
     cc.mod_fx_colorise_intensity = 0;
 
     //NON CUSTOM FX
-    addExtraMod("recolor");
+    cc.mod_curcolor = 0;
+    addExtraMod("recolor",0,function(s,d,v1,v2){
+        if(!cc.ENABLE_NON_BASE_FX && v2<=0) exit;
+        cc.mod_curcolor = irandom(255);
+    });
     addExtraMod("fx_hue_hue");
     addExtraMod("fx_hue_saturation");
     addExtraMod("fx_edge");
@@ -152,16 +156,28 @@ function InitDFGridAndLine(){
     if (!cc.ENABLE_DF_GRID_AND_SIDELINE)
         exit;
     //df
-    addExtraMod("df_sideline2");
-    addExtraMod("df_sides");
+    instance_create_depth(0, 0, 90, o_csm_df_handler)
+    addExtraMod("df_sideline2",0,function(){
+        if (!cc.ENABLE_DF_GRID_AND_SIDELINE && v2<=0) exit;
+        with (instance_create_depth(0, 0, depth, obj_distortedfate_sideline))
+        {
+            TweenFire(self, EaseOutCirc, 0, true, 0, 0.75, "x", 0, 90);
+            TweenFire(self, EaseOutCirc, 0, true, 0, 0.75, "image_alpha", 1, 0);
+        }
+        with (instance_create_depth(319, 0, depth, obj_distortedfate_sideline))
+        {
+            TweenFire(self, EaseOutCirc, 0, true, 0, 0.75, "x", 319, 229);
+            TweenFire(self, EaseOutCirc, 0, true, 0, 0.75, "image_alpha", 1, 0);
+        }
+    });
     addExtraMod("df_sideline");
+    addExtraMod("df_sideline_alpha");
     addExtraMod("df_whitebg");
     addExtraMod("df_grid_alpha");
     addExtraMod("df_grid_top");
     addExtraMod("df_grid_bottom");
-    cc.mod_df_sideline2 = 0;
-    cc.mod_df_sides = 0;
     cc.mod_df_sideline = 0;
+    cc.mod_df_sideline_alpha = 1;
     cc.mod_df_whitebg = 0;
     cc.mod_df_grid_alpha = 0;
     cc.mod_df_grid_top = 0;
@@ -370,6 +386,7 @@ function InitMisc(){
         instance_destroy(o_sg_endblip);
     });
     cc.mod_col_convertion = 0;
+    cc.mod_static=0;
     cc.mod_cover1 = 0;
     cc.mod_cover2 = 0;
     cc.mod_cover3 = 0;
@@ -404,9 +421,6 @@ InitMisc();
 for (var i = 0; i < proxyCount; i++)
     proxies[i].pra = 1;
 //OTHERS
-
-
-curcolor = 0;
 aft = -1;
 pixelated_topscreen = -1;
 aftsprite = -1;

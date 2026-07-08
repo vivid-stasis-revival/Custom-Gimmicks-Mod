@@ -46,9 +46,9 @@ else{
 if (cc.ENABLE_NON_BASE_FX)
 {
     var colarray = [];
-    colarray[0] = color_get_red(make_color_hsv(curcolor, 255, 255));
-    colarray[1] = color_get_green(make_color_hsv(curcolor, 255, 255));
-    colarray[2] = color_get_blue(make_color_hsv(curcolor, 255, 255));
+    colarray[0] = color_get_red(make_color_hsv(cc.mod_curcolor, 255, 255));
+    colarray[1] = color_get_green(make_color_hsv(cc.mod_curcolor, 255, 255));
+    colarray[2] = color_get_blue(make_color_hsv(cc.mod_curcolor, 255, 255));
     var tintarray = []
     tintarray[0] = color_get_blue(cc.mod_fx_colorise_col_rgb);
     tintarray[1] = color_get_green(cc.mod_fx_colorise_col_rgb);

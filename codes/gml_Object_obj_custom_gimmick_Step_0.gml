@@ -18,34 +18,6 @@ if (cc.mod_slash_anycol > 0)
     cc.mod_slash_anycol = 0;
 }
 
-if(cc.ENABLE_NON_BASE_FX)
-{
-    if (cc.mod_recolor > 0)
-    {
-        curcolor = irandom(255);
-        cc.mod_recolor = 0;
-    }
-}
-
-if (cc.ENABLE_DF_GRID_AND_SIDELINE)
-{
-    if (cc.mod_df_sideline2 > 0)
-    {
-        with (instance_create_depth(0, 0, depth, obj_distortedfate_sideline))
-        {
-            TweenFire(self, EaseOutCirc, 0, true, 0, 0.75, "x", 0, 90);
-            TweenFire(self, EaseOutCirc, 0, true, 0, 0.75, "image_alpha", 1, 0);
-        }
-        
-        with (instance_create_depth(319, 0, depth, obj_distortedfate_sideline))
-        {
-            TweenFire(self, EaseOutCirc, 0, true, 0, 0.75, "x", 319, 229);
-            TweenFire(self, EaseOutCirc, 0, true, 0, 0.75, "image_alpha", 1, 0);
-        }
-        
-        cc.mod_df_sideline2 = 0;
-    }
-}
 
 if(cc.ENABLE_DISTORT_BG){
     layer_background_sprite(bgEleId, o_csm_jacket.jacket);
