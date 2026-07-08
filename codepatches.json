@@ -15,8 +15,7 @@
         "ExternalFile": "mod_info.gml",
         "Function":"",
         "Type": 2
-    },
-    {
+    },{
         "Entry":"gml_GlobalScript_Matrices",
         "ExternalFile":"more_matrices.gml",
         "Function":"",
@@ -50,5 +49,34 @@
         "Find":"cc.mod_notealp",
         "Value":"cc.mod_notealp*variable_instance_get(cc, string(\"mod_notealpind{0}\", i))"
 
+    },
+    {
+        "Entry":"gml_Object_obj_note_rendering_Draw_0",
+        "Find":"note.ms",
+        "Type":0,
+        "Value":"note._svCachedDist"
+    },
+    {
+        "Entry":"gml_Object_obj_note_rendering_Draw_0",
+        "Find":"note.holdEnd",
+        "Type":0,
+        "Value":"note._svCachedHoldEndDist"
+    },
+    {
+        "Entry":"gml_GlobalScript_LoadSong",
+        "Find":"if (global.op_mirror)",
+        "Type":0,
+        "ExternalFile":"processLanes.gml"
+    },
+    {
+        "Entry":"gml_Object_obj_pressed_holds_Draw_0",
+        "Find":"note.ms",
+        "Type":0,
+        "Value":"note._svCachedDist"
+    },{
+        "Entry":"gml_Object_obj_pressed_holds_Draw_0",
+        "Find":"note.holdEnd",
+        "Type":0,
+        "Value":"note._svCachedHoldEndDist"
     }
 ]
