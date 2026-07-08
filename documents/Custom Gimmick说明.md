@@ -61,20 +61,20 @@
 内部格式同单文件字幕，但是使用的gmk不太一样，下面记指定的字幕文件的编号为```[tid]```
 > 从1.10.0开始,tid可以是任意字符串了，之前只能是0~49的数字
 
-|       gmk名        |                  作用                   |                 其它描述                  |
-| :----------------: | :-------------------------------------: | :---------------------------------------: |
-|    textX_[tid]     |          调整字幕[tid]的横坐标          |  实际横坐标为textX\_[tid]+textX\_[tid]b   |
-|    textX_[tid]b    |          调整字幕[tid]的横坐标          |                                           |
-|    textY_[tid]     |          调整字幕[tid]的纵坐标          |  实际纵坐标为textY\_[tid]+textY\_[tid]b   |
-|    textY_[tid]b    |           调整字幕tid的纵坐标           |                                           |
-|   textalp_[tid]    |          调整字幕[tid]的透明度          |                 范围[0,1]                 |
-|   textrot_[tid]    |         调整字幕[tid]的旋转角度         |                  角度制                   |
-|  textcolrgb_[tid]  |            调整字幕[tid]颜色            |         将hex颜色转为10进制后填入         |
-|  textscale_[tid]   |            调整字幕[tid]大小            |                  默认为1                  |
-|   textsep_[tid]    |          调整字幕[tid]的行间距          |                  默认为1                  |
-| textmaxwidth_[tid] |  调整字幕[tid]的行最大宽度（单位字符）  |                 默认为20                  |
-|  textalignv_[tid]  |      调整字幕[tid]的中心的垂直位置      | 默认为顶部<br>0,1,2分别为顶部，中部，底部 |
-|  textalignh_[tid]  | 调整字幕[tid]的水平对齐方式（单位字符） | 默认为居中<br>0,1,2分别为左侧，居中，右侧 |
+|       gmk名        |                 作用                  |                 其它描述                  |
+| :----------------: | :-----------------------------------: | :---------------------------------------: |
+|    textX_[tid]     |         调整字幕[tid]的横坐标         |  实际横坐标为textX\_[tid]+textX\_[tid]b   |
+|    textX_[tid]b    |         调整字幕[tid]的横坐标         |                                           |
+|    textY_[tid]     |         调整字幕[tid]的纵坐标         |  实际纵坐标为textY\_[tid]+textY\_[tid]b   |
+|    textY_[tid]b    |          调整字幕tid的纵坐标          |                                           |
+|   textalp_[tid]    |         调整字幕[tid]的透明度         |                 范围[0,1]                 |
+|   textrot_[tid]    |        调整字幕[tid]的旋转角度        |                  角度制                   |
+|  textcolrgb_[tid]  |           调整字幕[tid]颜色           |         将hex颜色转为10进制后填入         |
+|  textscale_[tid]   |           调整字幕[tid]大小           |                  默认为1                  |
+|   textsep_[tid]    |         调整字幕[tid]的行间距         |                  默认为1                  |
+| textmaxwidth_[tid] | 调整字幕[tid]的行最大宽度（单位字符） |                 默认为20                  |
+|  textalignv_[tid]  |      调整字幕[tid]的中心垂直位置      | 默认为顶部<br>0,1,2分别为顶部，中部，底部 |
+|  textalignh_[tid]  |      调整字幕[tid]的中心水平位置      | 默认为居中<br>0,1,2分别为左侧，居中，右侧 |
 
 #### 背景
 对于自定义背景模式(custom)，你只要往谱面目录下放入数个图片(jpg或png)并在gmk内使用custom_jacket切换即可，命名格式是```jacket[id```，比如id为的1图片就叫```jacket[1.png```或```jacket[1.jpg```
