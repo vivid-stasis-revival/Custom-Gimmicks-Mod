@@ -24,7 +24,7 @@
         "Entry":"gml_GlobalScript_NoteMods",
         "Type":0,
         "Find":"var yoff = 144 - (((arg0 - cc.mod_yoffset) / 10) * arg3 * cc.mod_velocity);",
-        "Value":"var yoff = 144 - (((arg0 - cc.mod_yoffset-variable_instance_get(cc, string(\"mod_yoffsetind{0}\", arg1))) / 10) * arg3 * cc.mod_velocity);"
+        "ExternalFile":"noteModsYchange.gml"
 
     },
     {
@@ -48,7 +48,6 @@
         "Type":0,
         "Find":"cc.mod_notealp",
         "Value":"cc.mod_notealp*variable_instance_get(cc, string(\"mod_notealpind{0}\", i))"
-
     },
     {
         "Entry":"gml_Object_obj_note_rendering_Draw_0",

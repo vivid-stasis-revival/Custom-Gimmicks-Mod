@@ -4,9 +4,6 @@ if (!instance_exists(cc))
 
 //global.NOTE_SIZE*=cc.mod_note_size;
 
-if (!instance_exists(cc))
-    exit;
-
 if (cc.mod_slash_anycol > 0)
 {
     var the = instance_create_depth(0, 0, 255, o_anycol_slash);

@@ -88,9 +88,9 @@ while (i-- > 0)
         var M = other.i_matrix;
         M = matrix_multiply(M, other.MToOrigin);
         M = matrix_multiply(M, MScale);
+        M = matrix_multiply(M, MSkew);
         M = matrix_multiply(M,MTrape);
         M = matrix_multiply(M, MRot);
-        M = matrix_multiply(M, MSkew);
         M = matrix_multiply(M, MTrans);
         M = matrix_multiply(M, other.MFromOrigin);
         matrix_set(2, M);

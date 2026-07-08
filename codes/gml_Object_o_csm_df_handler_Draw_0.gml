@@ -1,6 +1,6 @@
 if (!cc.ENABLE_DF_GRID_AND_SIDELINE) exit;
 
-draw_set_alpha(mod_df_sideline_alpha);
+draw_set_alpha(cc.mod_df_sideline_alpha);
 draw_sprite(sp_df_sideline, 0, -1 + (cc.mod_df_sideline * 114), 0);
 draw_sprite(sp_df_sideline, 0, 320 - (cc.mod_df_sideline * 114), 0);
 
