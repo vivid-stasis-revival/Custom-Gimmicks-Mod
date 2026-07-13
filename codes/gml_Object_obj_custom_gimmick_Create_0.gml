@@ -14,13 +14,13 @@ args of callbacks:
 */
 
 
-depth=-400
+depth=50;
 //Initilizers
 function InitSkinChange(){
     if (!cc.ENABLE_SKIN_CHANGE)
         exit;
     singleSkins=[
-        [sp_note_chip_normal, sp_note_chip_normal, sp_note_hold_nor+mal, sp_note_chip_normal, sp_note_chip_mine_normal],
+        [sp_note_chip_normal, sp_note_chip_normal, sp_note_hold_normal, sp_note_chip_normal, sp_note_chip_mine_normal],
         [sp_note_chip_stopmotion, sp_note_hold_start_stopmotion, sp_note_hold_stopmotion, sp_note_hold_end_stopmotion, sp_empty],
         [sp_note_chip_extendnova, sp_note_chip_extendnova, sp_note_hold_extendnova, sp_note_chip_extendnova, sp_note_chip_mine_normal],
         [sp_note_chip_stargazers, sp_note_hold_start_stargazers, sp_note_hold_stargazers, sp_note_hold_end_stargazers, sp_empty]
@@ -170,7 +170,7 @@ function InitDFGridAndLine(){
     if (!cc.ENABLE_DF_GRID_AND_SIDELINE)
         exit;
     //df
-    instance_create_depth(0, 0, 90, o_csm_df_handler)
+    instance_create_depth(0, 0,250, o_csm_df_handler)
     addExtraMod("df_sideline2",0,function(){
         if (!cc.ENABLE_DF_GRID_AND_SIDELINE && v2<=0) exit;
         with (instance_create_depth(0, 0, depth, obj_distortedfate_sideline))
@@ -199,7 +199,7 @@ function InitDFGridAndLine(){
 }
 
 function InitSides(){
-    addExtraMod("unraveling_sidething", function()
+    addExtraMod("sides",0, function()
     {
         instance_create_depth(150, 90, 260, o_unravel_sidething, 
         {
@@ -210,7 +210,18 @@ function InitSides(){
             dir: -1
         });
     });
-    addExtraMod("astellion_sidething", function()
+    addExtraMod("unraveling_sidething",0, function()
+    {
+        instance_create_depth(150, 90, 260, o_unravel_sidething, 
+        {
+            dir: 1
+        });
+        instance_create_depth(170, 90, 260, o_unravel_sidething, 
+        {
+            dir: -1
+        });
+    });
+    addExtraMod("astellion_sidething",0, function()
     {
         instance_create_depth(150, 90, 260, o_astellion_sidething, 
         {
@@ -223,7 +234,7 @@ function InitSides(){
         instance_create_depth(irandom_range(0, 120), irandom_range(0, 180), 260, o_ast_particle);
         instance_create_depth(irandom_range(200, 320), irandom_range(0, 180), 260, o_ast_particle);
     });
-    addExtraMod("apocalypse_sidething", function()
+    addExtraMod("apocalypse_sidething",0, function()
     {
         instance_create_depth(150, 90, 260, o_apocalypse_sidething, 
         {
@@ -372,13 +383,19 @@ function InitStarParticle(){
     object_set_sprite(o_csm_startransparent, sp_sk_star);
 }
 
+function InitImage(){
+    var insEx={
+        caller:id
+    };
+    instance_create_depth(0,0,0,o_sprite_drawer_manager,insEx);
+}
+
 function InitMisc(){
     addExtraMod("cover1");
     addExtraMod("cover2");
     addExtraMod("cover3");
     addExtraMod("rainbow");
     addExtraMod("sides");
-    addExtraMod("noteoverlayalp");
     addExtraMod("scorealph");
     addExtraMod("bgalph");
     addExtraMod("col_convertion", 0)
@@ -390,8 +407,15 @@ function InitMisc(){
     addExtraMod("wflash");
     addExtraMod("plaudite_pburst",0,function(start, dur, v1, v2)
     {
+        if (v1){
+            if (cc.currentms>=start && cc.currentms<=start+dur){
+                spawn_particles_directional(irandom_range(0, 320), -10, 701, o_pt_diamonddust_songgameplay, 1, 0, 1.5 * cc.mod_pburstspeed, 240, 1);
+            }
+        }
+        else{
         for (var i = 0; i < v2; i++)
             spawn_particles_directional(irandom_range(0, 320), -10, 701, o_pt_diamonddust_songgameplay, 1, 0, 1.5 * cc.mod_pburstspeed, 240, 1);
+        }
     });
     addExtraMod("sg_endblip",0 ,function(){
         instance_create_depth(160, 90, -9000, o_sg_endblip);
@@ -406,16 +430,16 @@ function InitMisc(){
     cc.mod_cover3 = 0;
     cc.mod_wflash = 0;
     cc.mod_rainbow = 0;
-    cc.mod_noteoverlayalp = 1;
     cc.mod_scorealph = 1;
     cc.mod_bgalph = 1;
-    cc.mod_noteoverlayalp = 1;
     cc.mod_sg_endblip = 0;
     cc.mod_sg_endblip_destroy = 0;
     cc.mod_plaudite_pburst = 0;
     cc.mod_hide_combo = 0;
     cc.mod_slash_anycol=0;
     cc.mod_set_slash_col=16777215;
+
+    instance_create_depth(0,0,-400,o_csm_screen_cover_handler)
 }
 
 
@@ -431,6 +455,7 @@ InitDFGridAndLine();
 InitAngelstarChecker();
 InitCustomShader();
 InitMisc();
+InitImage();
 //End of Init
 
 for (var i = 0; i < proxyCount; i++)

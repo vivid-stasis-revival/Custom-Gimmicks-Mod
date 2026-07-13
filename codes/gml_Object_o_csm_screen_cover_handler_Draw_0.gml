@@ -1,4 +1,3 @@
-event_inherited();
 if (!instance_exists(cc))
     exit;
 
@@ -14,8 +13,6 @@ if (cc.mod_static > 0)
     draw_sprite_ext(sp_static, (frame + 3) % 4, 0, 90, 2.5, 1.40625, 0, c_white, cc.mod_static);
 }
 
-
 draw_sprite_ext(sp_cover2, 0, 0, 0, 0.25, 0.25, 0, c_black, cc.mod_cover2);
 draw_sprite_ext(sp_cover3, 0, 0, 0, 0.25, 0.25, 0, c_black, cc.mod_cover3);
 draw_sprite_ext(sp_cover4, 0, 0, 0, 0.25, 0.25, 0, c_black, cc.mod_cover1);
-

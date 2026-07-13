@@ -50,10 +50,10 @@
 
 ### v1.11.0
 - 现在支持皮肤更换
-- 支持图片插入[WIP]
+- 支持图片插入
 - sides被细化成了unraveling_sidething, astellion_sidething和apocalypse_sidething
-- 常规SV（支持不等距的那种）支持
+- 常规SV（om的那种）支持
 - 暂时废弃ENABLE_DEBUG_INFO
 - 星星相关gmk支持
 - 修复了df相关特效图层错误问题
-- 改变了轨道变换的顺序，现在是按照prz[]->prs[]->prtr[]->prr[]->pr[]的顺序进行变换
+- 改变了轨道变换的顺序

@@ -12,10 +12,16 @@ function cmd_addVelo(ms,velo){
     array_push(ssList,new velocity(ms,velo));
 }
 
-function cmd_addVeloTween(ms,msEnd,stVelo,edVelo,easing,step=32){
+function cmd_addVeloTween(ms,msEnd,stVelo,edVelo,easing="linear",step=32){
     var easeFunc=struct_get(global.eases, easing);
     var duration=msEnd-ms;
     var change=edVelo-stVelo
+    if (ms>msEnd){
+        var tmp;
+        tmp=ms;
+        ms=msEnd;
+        msEnd=tmp;
+    }
     for (var t=ms; t<=msEnd; t+=1/step){
         var ct=t-ms;
         var velo=easeFunc(ct,stVelo,change,duration);
@@ -25,7 +31,7 @@ function cmd_addVeloTween(ms,msEnd,stVelo,edVelo,easing,step=32){
 
 CommandMap={
     addVelo:cmd_addVelo,
-    addVeloTween:cmd_addVeloTween
+    addVeloTween:cmd_addVeloTween,
 }
 
 CommandArgTypes={
@@ -42,13 +48,15 @@ function vsvLineArgsConvert(cmd,args){
     return oper;
 }
 function vsvLineParser(line){
+    _ln=string_trim(_ln);
+    _ln=string_replace_all(_ln, " ", "");
     var lb=string_pos("(", line);
     var rb=string_pos(")", line);
     var strArgs=string_copy(line, lb+1, rb-lb-1);
     var command=string_copy(line, 1, lb-1);
     var args=string_split(strArgs, ",");
     args=vsvLineArgsConvert(command,args);
-    method_call(struct_get(CommandMap,command),args)
+    method_call(struct_get(CommandMap,command),args);
 }
 
 function loadSSListFromFile(path){
@@ -57,7 +65,7 @@ function loadSSListFromFile(path){
         var fp=file_text_open_read(path);
         while (!file_text_eof(fp)){
             var line=file_text_readln(fp);
-            vsvLineParser(line)
+            vsvLineParser(line);
         }
         array_sort(ssList,function(a,b){
             return a.time-b.time;

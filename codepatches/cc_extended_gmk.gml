@@ -8,8 +8,9 @@ var settings=[
     ["ENABLE_ANGELSTAR_CHECKER", true],
     ["ENABLE_DISTORT_BG", true],
     ["ENABLE_MUSIC_CONTROL", true],
-    ["ENABLE_STARPARTICLE",false]
-]
+    ["ENABLE_STARPARTICLE",false],
+    ["ENABLE_SKIN_CHANGE",false]
+];
 array_foreach(settings, function(ele){
     variable_instance_set(cc, ele[0], ele[1]);
 })
