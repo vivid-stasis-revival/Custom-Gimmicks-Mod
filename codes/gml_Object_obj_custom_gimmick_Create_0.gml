@@ -1,4 +1,5 @@
 event_inherited();
+depth=-1000;
 /*
 addExtraMod = function(modName, weight = 1, callBack = undefined, endCallBack = undefined)
 {
@@ -32,7 +33,7 @@ function InitSkinChange(){
         [sp_note_bumper_stargazers, sp_note_bumper_timing_stargazers, sp_empty]
 
     ]
-    addExtraMod("changeskin", 0, function(st,dur,v1,skinID){
+    addExtraMod("changeskin", 0, function(dur,v1,skinID){
         for (var lane=0;lane<7;lane++)
         {
             if (lane<4)
@@ -46,8 +47,8 @@ function InitSkinChange(){
 function InitCSMJacket(){
     layer_destroy_instances(layer_get_id("Instances_2"))
     layer_destroy_instances(layer_get_id("Instances_1"))
-    var Lparticle=layer_create(401)
-    var LBG=layer_create(404)
+    var Lparticle=layer_create(800,"Lparticle")  
+    var LBG=layer_create(700,"LBG")
     instance_create_layer(0, 32, Lparticle, o_csm_particle_system)
     instance_create_layer(0, 32, LBG, o_csm_jacket)
     addExtraMod("particle_alpha");
@@ -96,18 +97,13 @@ function InitText(){
 function InitDistortBG(){
     if (!cc.ENABLE_DISTORT_BG)
         exit;
-    var sprite = global.song_list[global.song_id_last].jacket;
-    bgLayer = layer_create(402);
-    blurLayer = layer_create(403);
+    instance_create_depth(0,0,801,o_csm_distortbg_handler);
+    bgLayer = layer_get_id("LBG");
+    blurLayer = layer_create(698);
     distortEff = fx_create("_filter_heathaze");
     blurEff = fx_create("_filter_large_blur");
-    bgEleId = layer_background_create(bgLayer, sprite);
-    var noisetex = sprite_get_texture(sp_noise2, 0);
     layer_set_fx(bgLayer, distortEff);
     layer_set_fx(blurLayer, blurEff);
-    layer_background_stretch(bgEleId, true);
-    //
-
     addExtraMod("ditortedBG_alp");
     addExtraMod("ditortedBG_col");
     addExtraMod("BG_ditortScale");
@@ -365,11 +361,11 @@ function InitStarParticle(){
     cc.mod_startrans_alpha = 1;
     addExtraMod("starchgcol_alpha")
     cc.mod_starchgcol_alpha = 1;
-    addExtraMod("active_starchgcol", 0,function(time,dur,v1,stat)
+    addExtraMod("active_starchgcol", 0,function(start,dur,v1,stat)
         {
             cc.mod_activate_starchgcol = stat;
         });
-    addExtraMod("active_startrans", 0,function(time,dur,v1,stat)
+    addExtraMod("active_startrans", 0,function(start,dur,v1,stat)
         {
             cc.mod_activate_startrans = stat;
         });
@@ -379,8 +375,8 @@ function InitStarParticle(){
     cc.mod_starchgcol_up_rgb=c_white;
     addExtraMod("starchgcol_down_rgb");
     cc.mod_starchgcol_down_rgb=c_white;
-    object_set_sprite(o_csm_starchangecol, sp_sk_star);
-    object_set_sprite(o_csm_startransparent, sp_sk_star);
+    instance_create_depth(0, 0, 750, o_csm_startransparent_spawner);
+    instance_create_depth(0, 0, 101, o_csm_starchangecol_spawner);
 }
 
 function InitImage(){
@@ -405,16 +401,16 @@ function InitMisc(){
     addExtraMod("slash_anycol")
     addExtraMod("set_slash_col")
     addExtraMod("wflash");
-    addExtraMod("plaudite_pburst",0,function(start, dur, v1, v2)
+    addExtraMod("plaudite_pburst",0,function(start,dur, msRepeat, repeatTime)
     {
-        if (v1){
+        if (msRepeat){
             if (cc.currentms>=start && cc.currentms<=start+dur){
-                spawn_particles_directional(irandom_range(0, 320), -10, 701, o_pt_diamonddust_songgameplay, 1, 0, 1.5 * cc.mod_pburstspeed, 240, 1);
+                spawn_particles_directional(irandom_range(0, 320), -10, 701, o_pt_diamonddust, 1, 0, 1.5 * cc.mod_pburstspeed, 240, 1);
             }
         }
         else{
-        for (var i = 0; i < v2; i++)
-            spawn_particles_directional(irandom_range(0, 320), -10, 701, o_pt_diamonddust_songgameplay, 1, 0, 1.5 * cc.mod_pburstspeed, 240, 1);
+        for (var i = 0; i < repeatTime; i++)
+            spawn_particles_directional(irandom_range(0, 320), -10, 701, o_pt_diamonddust, 1, 0, 1.5 * cc.mod_pburstspeed, 240, 1);
         }
     });
     addExtraMod("sg_endblip",0 ,function(){

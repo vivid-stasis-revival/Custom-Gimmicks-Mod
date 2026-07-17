@@ -50,10 +50,35 @@
 
 ### v1.11.0
 - 现在支持皮肤更换
+
 - 支持图片插入
+
 - sides被细化成了unraveling_sidething, astellion_sidething和apocalypse_sidething
+
 - 常规SV（om的那种）支持
+
 - 暂时废弃ENABLE_DEBUG_INFO
+
 - 星星相关gmk支持
+
 - 修复了df相关特效图层错误问题
+
 - 改变了轨道变换的顺序
+
+### v1.12
+- 部分跟进了游戏更新
+
+### v1.12.1
+
+- 修复了NoteModsX导致的崩溃
+
+### v1.12.2
+
+- 修复了beat失效的问题
+
+### v1.12.3
+- 修复了部分shader失效的问题（如fish和barrel）
+- 部分更新了粒子系统（也是用上新粒子系统了喵喵喵）
+- 修复了scrollind失效的问题
+- 修复了字幕时间顺序出错的的问题
+- 修复了部分gmk v1和v2作用错位的问题

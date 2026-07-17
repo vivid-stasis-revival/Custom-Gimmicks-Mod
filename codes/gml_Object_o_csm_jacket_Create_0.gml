@@ -63,3 +63,5 @@ else if (cc.JACKET_MANAGE_MODE == "custom")
     FindJackets();
 }
 jacket=jackets[0]
+jacketBlend=c_white;
+jacketAlpha=1;

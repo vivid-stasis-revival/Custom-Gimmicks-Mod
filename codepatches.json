@@ -21,29 +21,6 @@
         "Function":"",
         "Type":2
     },{
-        "Entry":"gml_GlobalScript_NoteMods",
-        "Type":0,
-        "Find":"var yoff = 144 - (((arg0 - cc.mod_yoffset) / 10) * arg3 * cc.mod_velocity);",
-        "ExternalFile":"noteModsYchange.gml"
-
-    },
-    {
-        "Entry":"gml_GlobalScript_NoteMods",
-        "Type":0,
-        "Find":"cc.mod_boost_time",
-        "Value":"cc.mod_boost_time+variable_instance_get(cc, string(\"mod_boost_timeind{0}\", arg1))"
-    },{
-        "Entry":"gml_GlobalScript_NoteMods",
-        "Type":0,
-        "Find":"cc.mod_boost_distance",
-        "Value":"cc.mod_boost_distance+variable_instance_get(cc, string(\"mod_boost_distanceind{0}\", arg1))"
-    },
-    {
-        "Entry":"gml_GlobalScript_NoteMods",
-        "Type":1,
-        "Find":"return xpos;",
-        "Value":"xpos=xpos+cc.mod_xoffset+variable_instance_get(cc, string(\"mod_xoffsetind{0}\", arg1));return xpos;"
-    },{
         "Entry":"gml_Object_obj_note_rendering_Draw_0",
         "Type":0,
         "Find":"cc.mod_notealp",
@@ -84,5 +61,33 @@
         "Type":0,
         "Find":"cc.mod_notealp",
         "Value":"cc.mod_notealp*variable_instance_get(cc, string(\"mod_notealpind{0}\", i))"
+    },{
+        "Entry":"gml_Object_obj_pressed_holds_Draw_0",
+        "Type":0,
+        "Find":"NoteModsX(",
+        "Value":"global.gmlNoteModsX(i,"
+    },
+    {
+        "Entry":"gml_Object_obj_pressed_holds_Draw_0",
+        "Type":0,
+        "Find":"NoteModsY",
+        "Value":"global.gmlNoteModsY"
+    },{
+        "Entry":"gml_Object_obj_note_rendering_Draw_0",
+        "Type":0,
+        "Find":"NoteModsX(",
+        "Value":"global.gmlNoteModsX(i,"
+    },
+    {
+        "Entry":"gml_Object_obj_note_rendering_Draw_0",
+        "Type":0,
+        "Find":"NoteModsY",
+        "Value":"global.gmlNoteModsY"
+    },
+    {
+        "Entry":"gml_Object_obj_base_gimmick_Create_0",
+        "Type":3,
+        "Function":"",
+        "ExternalFile":"updateMod.gml"
     }
 ]

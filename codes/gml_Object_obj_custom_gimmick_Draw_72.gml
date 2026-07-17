@@ -1,3 +1,4 @@
+//DrawBegin
 if (!instance_exists(cc))
     exit;
 
@@ -123,7 +124,20 @@ while (i-- > 0)
     }
 }
 
-event_user(10);
+var hom = cc.mod_hom != 0;
+
+if (hom && surface_exists(pixelated_topscreen))
+{
+    aftsprite = sprite_create_from_surface(pixelated_topscreen, 0, 0, 320, 180, false, false, 160, 90);
+    var _xsc = 1.03;
+    var _ysc = 1.03;
+    var _ang = 2 * sin((beat * pi) / 16);
+    var _x = 160;
+    var _y = 90;
+    var _alpha = cc.mod_hom * 0.96;
+    draw_sprite_ext(aftsprite, 0, _x, _y, _xsc, _ysc, _ang, c_white, _alpha);
+}
+
 
 if (pixelate)
     surface_untarget();

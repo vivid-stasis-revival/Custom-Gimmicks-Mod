@@ -108,7 +108,7 @@ function textObj(tid) constructor{
             
         }
         file_text_close(fp);
-        array_sort(textDatas, function(a,b){
+        global.merge_sort(textDatas, function(a,b){
             return a.time-b.time;
         });
         if (array_length(textDatas)==0)

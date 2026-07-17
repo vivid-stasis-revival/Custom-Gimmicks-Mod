@@ -23,6 +23,7 @@ array_sort(text_array,
         return cur[0]-ne[0]
     }
 )
+
 if (array_length(text_array)>0){
     enable_text_gimmick=true
 }

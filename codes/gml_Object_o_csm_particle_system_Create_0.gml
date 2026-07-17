@@ -1,4 +1,3 @@
 timer = 0;
-star_timer=0;
-blackSurf=-1;
-blackSurfAlpha=1
+particles_fast = particle_system_create(0);
+particles_slow = particle_system_create(0);

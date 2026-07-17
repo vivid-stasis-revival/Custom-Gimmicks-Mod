@@ -18,26 +18,32 @@ for (var lane=0;lane<7;lane++){
     UnlimitedAddGlobalMod(string("boost_timeind{0}", lane), 2.5);
     UnlimitedAddGlobalMod(string("boost_distance{0}", lane), 2.5);
 }
-UnlimitedAddGlobalMod("jumpto_beat",0,function(start, dur, v1, toBeat){
+UnlimitedAddGlobalMod("jumpto_beat",0,function(start,dur, v1, toBeat){
     if (cc.playback != undefined && cc.ENABLE_MUSIC_CONTROL)
     {
         var pos = TimeFromBPMListAndBeat(cc.bpmlist, toBeat, cc.chartoffset);
-        audio_sound_set_track_position(cc.playback, pos);
+        if (global.op_use_gamemaker_audio)
+            audio_sound_set_track_position(cc.playback, pos);
+        else
+            precise_audio_set_time(pos);
     }
 });
-UnlimitedAddGlobalMod("jumpto_s",0,function(start, dur, isSec, v2){
+UnlimitedAddGlobalMod("jumpto_s",0,function(start,dur, isSec, v2){
     if (cc.playback != undefined && cc.ENABLE_MUSIC_CONTROL)
     {
-        audio_sound_set_track_position(cc.playback, v2/(isSec?1:1000));
+        if (global.op_use_gamemaker_audio)
+            audio_sound_set_track_position(cc.playback, v2/(isSec?1:1000));
+        else
+            precise_audio_set_time(v2/(isSec?1:1000));
     }
 });
-UnlimitedAddGlobalMod("playspeed", 0,function(start, dur, v1, playspeed){
+UnlimitedAddGlobalMod("playspeed", 0,function(start,dur, v1, playspeed){
     if (cc.playback != undefined && cc.ENABLE_MUSIC_CONTROL)
     {
         var val = round(playspeed * 100) / 100;
         cc.song_speed*=val
     }
 });
-UnlimitedAddGlobalMod("reset_scrollspeed",0,function(start){
+UnlimitedAddGlobalMod("reset_scrollspeed",0,function(){
     cc.mod_scrollspeed=(global.op_note_speed / 5) + 1;
 });
