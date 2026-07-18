@@ -4,4 +4,3 @@ for (var i=0;i<array_length(sprkys);i++){
     var asset=struct_get(existsSprites,ky);
     sprite_delete(asset);
 }
-event_inherited();

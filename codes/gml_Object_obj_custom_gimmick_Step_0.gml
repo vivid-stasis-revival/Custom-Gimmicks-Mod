@@ -15,6 +15,9 @@ if (cc.mod_slash_anycol > 0)
     cc.mod_slash_anycol = 0;
 }
 
+if(cc.plaudite_pburst_consist){
+    spawn_particles_directional(irandom_range(0, 320), -10, 701, o_pt_diamonddust, 1, 0, 1.5 * cc.mod_pburstspeed, 240, 1);
+}
 
 if(cc.ENABLE_DISTORT_BG){
     fx_set_parameter(blurEff, "g_Radius", cc.mod_BG_blurRadius);

@@ -17,7 +17,8 @@ var mI = matrix_build_identity();
 var mFinal = mI;
 var mScale, mSkew, mRot, mTrans;
 var timescaled = 1;
-var timemoved=0;
+var ytimemoved=0;
+var xtimemoved=0;
 var curIdx = 1;
 
 for (var i = 0; i < array_length(images); i++) {
@@ -35,11 +36,14 @@ for (var i = 0; i < array_length(images); i++) {
         vals[j] = variable_instance_get(cc, "mod_" + string(TEMPLATE_VALUE_GMK[j][0], spr.ID));
     }
     if (vals[2] != cc.ORIGINAL_FROM) {
-        timemoved = NoteModsY(vals[2], 0, 0);
+        ytimemoved = global.gmlNoteModsY(vals[2], spr.lane, 0,cc.mod_scrollspeed);
+    }
+    if (vals[10]!=cc.ORIGINAL_FROM){
+        xtimemoved=global.gmlNoteModsX(spr.lane,vals[10],0);
     }
     if (vals[6] != cc.ORIGINAL_FROM) {
-        var posO = NoteModsY(0, 0, 0);
-        var posEnd = NoteModsY(vals[6], 0, 0);
+        var posO = global.gmlNoteModsY(0, spr.lane,0 ,cc.mod_scrollspeed);
+        var posEnd = global.gmlNoteModsY(vals[6], spr.lane,0 ,cc.mod_scrollspeed);
         timescaled = posEnd - posO / spr.h;
     }
     var baseScaleW = spr.w / sprite_get_width(spr.asset);
@@ -48,7 +52,7 @@ for (var i = 0; i < array_length(images); i++) {
     mScale = MatrixScale(vals[4] * baseScaleW, vals[5] * timescaled * baseScaleH);
     mSkew = MatrixSkew(vals[7], vals[8]);
     mRot = MatrixRotateZ(vals[3]);
-    mTrans = MatrixTranslate(vals[0], vals[1] + timemoved);
+    mTrans = MatrixTranslate(vals[0]+xtimemoved, vals[1] + ytimemoved);
 
     mFinal = matrix_multiply(mFinal, mScale);
     mFinal = matrix_multiply(mFinal, mSkew);

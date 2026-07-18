@@ -10,6 +10,7 @@ TEMPLATE_VALUE_GMK=[
     ["imgskewx_{0}",0],
     ["imgskewy_{0}",0],
     ["imgcolrgb_{0}",c_white],
+    ["imgxtime_{0}",cc.ORIGINAL_FROM],
     ["imgalp_{0}",1]
 ];
 LEN_TEMPLATE_VALGMK=array_length(TEMPLATE_VALUE_GMK)
@@ -23,11 +24,17 @@ function sprite(_sprid,_asset,_type,_lyer,_w,_h,_framecnt) constructor
     framecnt=_framecnt;
     w=(_w==-1)?sprite_get_width(asset):_w;
     h=(_h==-1)?sprite_get_height(asset):_h;
+    lane=0;
+
+    function setLane(_l){
+        self.lane=_l;
+    }
 }
 
 function addImage(sprid,asset,assettype,lyer,w,h,framecnt=1){
     var spr=new sprite(sprid, asset, assettype, lyer, w, h,framecnt);
     array_push(images, spr);
+    return spr;
 }
 
 function sort(){

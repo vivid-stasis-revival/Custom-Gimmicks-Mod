@@ -28,7 +28,7 @@ function parseImage(raw){
         return;
     }
     var obj;
-    var type,name,path,priority,framecnt=1,h=-1,w=-1,_asset;
+    var type,name,path,priority,framecnt=1,h=-1,w=-1,_asset,lane=0;
     args=string_split(raw, ",");
     argscnt=array_length(args);
     type=struct_get(ENUM_IMGTYPES, args[0]);
@@ -44,6 +44,11 @@ function parseImage(raw){
                 w=real(args[4]);
                 h=real(args[5]);
             }
+            else if(argscnt==7){
+                w=real(args[4]);
+                h=real(args[5]);
+                lane=round(real(args[6]));
+            }
             break;
         case 1:
             framecnt=real(args[4]);
@@ -53,6 +58,11 @@ function parseImage(raw){
             else if (argscnt==7){
                 w=real(args[5]);
                 h=real(args[6]);
+            }
+            else if (argscnt==8){
+                w=real(args[5]);
+                h=real(args[6]);
+                lane=round(real(args[7]));
             }
             break;
     }
@@ -66,7 +76,8 @@ function parseImage(raw){
     }
     var obj=struct_get(existsDrawers,curLayer);
     //sprid,asset,assettype,lyer,w,h
-    obj.addImage(name,_asset,type,priority,w,h,framecnt);
+    var img=obj.addImage(name,_asset,type,priority,w,h,framecnt);
+    img.setLane(lane);
 }
 
 AREA_HANDLER={

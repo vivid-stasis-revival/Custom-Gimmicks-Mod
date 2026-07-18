@@ -1,3 +1,4 @@
 .ignore
-Modpacker.py
-objcreate.py
+*.py
+*.zip
+*.pdf

@@ -401,12 +401,11 @@ function InitMisc(){
     addExtraMod("slash_anycol")
     addExtraMod("set_slash_col")
     addExtraMod("wflash");
+    cc.plaudite_pburst_consist=-0.01
     addExtraMod("plaudite_pburst",0,function(start,dur, msRepeat, repeatTime)
     {
         if (msRepeat){
-            if (cc.currentms>=start && cc.currentms<=start+dur){
-                spawn_particles_directional(irandom_range(0, 320), -10, 701, o_pt_diamonddust, 1, 0, 1.5 * cc.mod_pburstspeed, 240, 1);
-            }
+            cc.CreateChartTween(start,repeatTime,cc,"plaudite_pburst_consist",EaseLinear,repeatTime,-0.01);
         }
         else{
         for (var i = 0; i < repeatTime; i++)
@@ -419,6 +418,7 @@ function InitMisc(){
     addExtraMod("sg_endblip_destroy",0 ,function(){
         instance_destroy(o_sg_endblip);
     });
+    cc.plaudite_pburst=0;
     cc.mod_col_convertion = 0;
     cc.mod_static=0;
     cc.mod_cover1 = 0;
