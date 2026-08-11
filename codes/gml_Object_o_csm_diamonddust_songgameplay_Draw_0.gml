@@ -1,0 +1,1 @@
+draw_sprite_ext(pt_diamonddust,imgidx,x,y,1,1,0,image_blend,image_alpha*cc.mod_particle_alpha)

@@ -33,7 +33,7 @@ function InitSkinChange(){
         [sp_note_bumper_stargazers, sp_note_bumper_timing_stargazers, sp_empty]
 
     ]
-    addExtraMod("changeskin", 0, function(dur,v1,skinID){
+    addExtraMod("changeskin", 0, function(start,dur,v1,skinID){
         for (var lane=0;lane<7;lane++)
         {
             if (lane<4)
@@ -227,8 +227,11 @@ function InitSides(){
         {
             dir: -1
         });
-        instance_create_depth(irandom_range(0, 120), irandom_range(0, 180), 260, o_ast_particle);
-        instance_create_depth(irandom_range(200, 320), irandom_range(0, 180), 260, o_ast_particle);
+        if (!instance_exists(o_ast_particle_particlesystem))
+            instance_create_depth(0, 0, 259, o_ast_particle_particlesystem);
+        
+        particle_system_add_particle(o_ast_particle_particlesystem.particles, irandom_range(0, 120), irandom_range(0, 180), 0, 0, 0, 0, 0, 0, 2, 0, make_color_hsv(random_range(0, 255), 255, 255));
+        particle_system_add_particle(o_ast_particle_particlesystem.particles, irandom_range(200, 320), irandom_range(0, 180), 0, 0, 0, 0, 0, 0, 2, 0, make_color_hsv(random_range(0, 255), 255, 255));
     });
     addExtraMod("apocalypse_sidething",0, function()
     {
@@ -418,7 +421,6 @@ function InitMisc(){
     addExtraMod("sg_endblip_destroy",0 ,function(){
         instance_destroy(o_sg_endblip);
     });
-    cc.plaudite_pburst=0;
     cc.mod_col_convertion = 0;
     cc.mod_static=0;
     cc.mod_cover1 = 0;

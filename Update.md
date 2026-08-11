@@ -90,5 +90,16 @@
 ### v1.12.5
 
 - 修复了图片gmk的ytime/scaleytime的计算错误问题
+- 修复了图层失效的问题
 - vsp的图片声明新增参数：所属轨道，用于指定按哪个轨道进行位置计算
 - 新增图片gmk:imgxtime
+
+### v1.12.6
+- 修复了文字透明度失效的问题
+- 修复了particle_alpha失效的问题
+- 修复了prtr系列失效的问题
+- 修复了使用xoffset这类gimmick时，打击特效和note实际位置错位的问题
+
+### v1.12.7
+- 修复了astellion_sidething崩溃问题
+- 修复了changeskin参数的错位问题

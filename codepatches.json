@@ -61,8 +61,15 @@
         "Type":0,
         "Find":"cc.mod_notealp",
         "Value":"cc.mod_notealp*variable_instance_get(cc, string(\"mod_notealpind{0}\", i))"
-    },{
+    },
+    {
         "Entry":"gml_Object_obj_pressed_holds_Draw_0",
+        "Type":0,
+        "Find":"NoteModsX(",
+        "Value":"global.gmlNoteModsX(i,"
+    },
+    {
+        "Entry":"gml_Object_obj_pressed_holds_Step_0",
         "Type":0,
         "Find":"NoteModsX(",
         "Value":"global.gmlNoteModsX(i,"
@@ -72,8 +79,15 @@
         "Type":0,
         "Find":"NoteModsY",
         "Value":"global.gmlNoteModsY"
-    },{
+    },
+    {
         "Entry":"gml_Object_obj_note_rendering_Draw_0",
+        "Type":0,
+        "Find":"NoteModsX(",
+        "Value":"global.gmlNoteModsX(i,"
+    },
+    {
+        "Entry":"gml_Object_obj_note_rendering_Step_0",
         "Type":0,
         "Find":"NoteModsX(",
         "Value":"global.gmlNoteModsX(i,"

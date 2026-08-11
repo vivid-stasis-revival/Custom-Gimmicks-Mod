@@ -16,7 +16,7 @@ for (var lane=0;lane<7;lane++){
     UnlimitedAddGlobalMod(string("xoffsetind{0}", lane), 1.5);
     UnlimitedAddGlobalMod(string("notealpind{0}", lane), 1.5);
     UnlimitedAddGlobalMod(string("boost_timeind{0}", lane), 2.5);
-    UnlimitedAddGlobalMod(string("boost_distance{0}", lane), 2.5);
+    UnlimitedAddGlobalMod(string("boost_distanceind{0}", lane), 2.5);
 }
 UnlimitedAddGlobalMod("jumpto_beat",0,function(start,dur, v1, toBeat){
     if (cc.playback != undefined && cc.ENABLE_MUSIC_CONTROL)

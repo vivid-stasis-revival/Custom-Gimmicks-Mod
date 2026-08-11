@@ -34,11 +34,9 @@ global.gmlNoteModsX=function (arg0, arg1, arg2)
             fAmount *= (bEvenBeat ? 1 : -1);
             var fShift = 11 * fAmount * sin((arg1 / 60) + 1.5707963267948966);
             xpos += ((cc.mod_beat / 100) * fShift);
-            xpos+=cc.mod_xoffset+variable_instance_get(cc, string("mod_xoffsetind{0}", arg0));
-            return xpos;
         }
     }
-    
+    xpos += cc.mod_xoffset+variable_instance_get(cc, string("mod_xoffsetind{0}", arg0));
     return xpos;
 }
 //arg0:dist, arg1:lane

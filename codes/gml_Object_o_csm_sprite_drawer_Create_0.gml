@@ -38,8 +38,8 @@ function addImage(sprid,asset,assettype,lyer,w,h,framecnt=1){
 }
 
 function sort(){
-    array_sort(images, function(pre,cur){
-        return sign(pre.lyer-cur.lyer);
+    global.merge_sort(images, function(pre,cur){
+        return pre.lyer-cur.lyer;
     });
 }
 

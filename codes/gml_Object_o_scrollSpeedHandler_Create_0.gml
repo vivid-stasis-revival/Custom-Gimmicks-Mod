@@ -48,12 +48,12 @@ function vsvLineArgsConvert(cmd,args){
     return oper;
 }
 function vsvLineParser(line){
-    _ln=string_trim(_ln);
+    _ln=string_trim(line);
     _ln=string_replace_all(_ln, " ", "");
-    var lb=string_pos("(", line);
-    var rb=string_pos(")", line);
-    var strArgs=string_copy(line, lb+1, rb-lb-1);
-    var command=string_copy(line, 1, lb-1);
+    var lb=string_pos("(", _ln);
+    var rb=string_pos(")", _ln);
+    var strArgs=string_copy(_ln, lb+1, rb-lb-1);
+    var command=string_copy(_ln, 1, lb-1);
     var args=string_split(strArgs, ",");
     args=vsvLineArgsConvert(command,args);
     method_call(struct_get(CommandMap,command),args);
@@ -67,7 +67,7 @@ function loadSSListFromFile(path){
             var line=file_text_readln(fp);
             vsvLineParser(line);
         }
-        array_sort(ssList,function(a,b){
+        global.merge_sort(ssList,function(a,b){
             return a.time-b.time;
         });
     }

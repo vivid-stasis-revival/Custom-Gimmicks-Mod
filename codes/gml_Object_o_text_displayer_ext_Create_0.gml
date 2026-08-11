@@ -65,7 +65,11 @@ function textObj(tid) constructor{
 
     static function updateSelf(){
         if (instance_exists(cc)){
+            if (curTextIdx<array_length(textDatas)-1 && cc.currentbeataccurate>=textDatas[curTextIdx+1].time)
+                curTextIdx+=1;
             alp=variable_instance_get(cc, "mod_textalp_"+string(ID));
+            if (alp<=0)
+                return;
             posX=variable_instance_get(cc, "mod_textX_"+string(ID))+variable_instance_get(cc, "mod_textX_"+string(ID)+"b");
             posY=variable_instance_get(cc, "mod_textY_"+string(ID))+variable_instance_get(cc, "mod_textY_"+string(ID)+"b");
             rotDeg=variable_instance_get(cc, "mod_textrot_"+string(ID));
@@ -77,8 +81,7 @@ function textObj(tid) constructor{
             vAlignMode=VERTICAL_ALIGN_MODES[vAlignMode%3];
             hAlignMode=HORIZONTAL_ALIGN_MODES[hAlignMode%3];
             maxRowChars=variable_instance_get(cc, "mod_textmaxwidth_"+string(ID));
-            if (curTextIdx<array_length(textDatas)-1 && cc.currentbeataccurate>=textDatas[curTextIdx+1].time)
-                curTextIdx+=1;
+            
         }
     }
     static function loadText(path){
@@ -127,6 +130,7 @@ function textObj(tid) constructor{
     static function drawSelf(){
         if (alp==0)
             return
+        var oAlp=draw_get_alpha()
         draw_set_alpha(alp);
         draw_set_valign(vAlignMode);
         draw_set_halign(hAlignMode);
@@ -136,6 +140,7 @@ function textObj(tid) constructor{
         draw_text_ext_transformed(posX,posY,currentText,sep,maxRowChars*CHAR_WIDTH,scale,scale,rotDeg);
         draw_set_valign(fa_top);
         draw_set_halign(fa_left);
+        draw_set_alpha(oAlp)
     }
     static function drawDebug(){
         draw_set_alpha(1);

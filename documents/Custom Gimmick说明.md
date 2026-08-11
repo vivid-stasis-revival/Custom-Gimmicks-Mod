@@ -270,15 +270,15 @@ animated,[图像名],[源图像路径],[图像层级],[图像帧个数]{,{图像
 
 ## Note效果
 此处[lane]指代第n条轨道，0~3为4k的1~4轨，456为左中右bumper
-|        gmk名         |                    作用                    |                   其它描述                    |
-| :------------------: | :----------------------------------------: | :-------------------------------------------: |
-|       xoffset        |                谱面横向偏移                |           单位px<br>*是全局gimmick*           |
-|   yoffsetind[lane]   |    效果同yoffset，但只对[lane]轨道生效     |    与yoffset是累加关系<br>*是全局gimmick*     |
-|   xoffsetind[lane]   |    效果同xoffset，但只对[lane]轨道生效     |    与xoffset是累加关系<br>*是全局gimmick*     |
-|   notealpind[lane]   |    效果同notealp，但只对[lane]轨道生效     |    与notealp是累乘关系<br>*是全局gimmick*     |
-| boost_timeind[lane]  |   效果同boost_time，但只对[lane]轨道生效   |   与boost_time是累加关系<br>*是全局gimmick*   |
-| boost_distance[lane] | 效果同boost_distance，但只对[lane]轨道生效 | 与boost_distance是累加关系<br>*是全局gimmick* |
-|  reset_scrollspeed   |              重置scrollspeed               |                *是全局gimmick*                |
+|          gmk名          |                    作用                    |                   其它描述                    |
+| :---------------------: | :----------------------------------------: | :-------------------------------------------: |
+|         xoffset         |                谱面横向偏移                |           单位px<br>*是全局gimmick*           |
+|    yoffsetind[lane]     |    效果同yoffset，但只对[lane]轨道生效     |    与yoffset是累加关系<br>*是全局gimmick*     |
+|    xoffsetind[lane]     |    效果同xoffset，但只对[lane]轨道生效     |    与xoffset是累加关系<br>*是全局gimmick*     |
+|    notealpind[lane]     |    效果同notealp，但只对[lane]轨道生效     |    与notealp是累乘关系<br>*是全局gimmick*     |
+|   boost_timeind[lane]   |   效果同boost_time，但只对[lane]轨道生效   |   与boost_time是累加关系<br>*是全局gimmick*   |
+| boost_distanceind[lane] | 效果同boost_distance，但只对[lane]轨道生效 | 与boost_distance是累加关系<br>*是全局gimmick* |
+|    reset_scrollspeed    |              重置scrollspeed               |                *是全局gimmick*                |
 
 ## 其它
 |          gmk名          |                                   作用                                   |                                       其它描述                                        |
