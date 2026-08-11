@@ -142,21 +142,21 @@ function textObj(tid) constructor{
         draw_set_halign(fa_left);
         draw_set_alpha(oAlp)
     }
-    static function drawDebug(){
-        draw_set_alpha(1);
-        draw_set_font(global.default_font);
-        draw_set_color(c_white);
-        var kys=debugShown;
-        draw_set_valign(fa_top);
-        draw_set_halign(fa_left);
+    // static function drawDebug(){
+    //     draw_set_alpha(1);
+    //     draw_set_font(global.default_font);
+    //     draw_set_color(c_white);
+    //     var kys=debugShown;
+    //     draw_set_valign(fa_top);
+    //     draw_set_halign(fa_left);
 
-        for (var i=0;i<array_length(kys);i++){
-            var ky=kys[i];
-            if (ky=="textDatas")
-                continue;
-            draw_text(20,20+11*i,ky+":"+string(variable_instance_get(self, ky)));
-        }
-    }
+    //     for (var i=0;i<array_length(kys);i++){
+    //         var ky=kys[i];
+    //         if (ky=="textDatas")
+    //             continue;
+    //         draw_text(20,20+11*i,ky+":"+string(variable_instance_get(self, ky)));
+    //     }
+    // }
     ID=tid;
     posX=0;
     posY=0;
