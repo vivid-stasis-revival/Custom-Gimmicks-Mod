@@ -30,6 +30,7 @@
 |    ENABLE_MUSIC_CONTROL     |       是否启用控制音乐的gmk(jumpto和playspeed)       |   true   |
 |     ENABLE_STARPARTICLE     |               是否启用星星粒子相关gmk                |  false   |
 |     ENABLE_SKIN_CHANGE      |              是否启用改变皮肤相关的gmk               |  false   |
+|     NEW_PRTRX_CALCULATION      |              是否使用prtr*的新算法             |  false   |
 |      ENABLE_DEBUG_INFO      |       是否在屏幕上绘制调试信息(于1.11暂时废弃)       |  false   |
 
 <br>
@@ -181,8 +182,10 @@ animated,[图像名],[源图像路径],[图像层级],[图像帧个数]{,{图像
 | :--------------------: | :-------------------------------------------------: | :----------------------------------------------------------: |
 |     imgx_[图像名]      |                  调整图像的横坐标                   |                      默认为160，单位px                       |
 |     imgy_[图像名]      |                  调整图像的纵坐标                   |                       默认为90，单位px                       |
+|     imgxb_[图像名]      |                  调整图像的横坐标                   |                      默认为160，单位px                       |
+|     imgyb_[图像名]      |                  调整图像的纵坐标                   |                       默认为90，单位px                       |
 |   imgxtime_[图像名]    |    在当前imgx上加上(N ms时所属lane的横坐标偏移)     |                   默认为_(573613)，单位ms                    |
-|   imgytime_[图像名]    |          在当前imgy上加上(N msx对应的px数)          |   默认为_(573613)，单位msx<br>当值为_时，这个gimmick不生效   |
+|   imgytime_[图像名]    |          在当前imgy上加上(离判定还有N ms时note的位置)          |   默认为_(573613)，单位msx<br>当值为_时，这个gimmick不生效   |
 |    imgrot_[图像名]     |                 调整图像的旋转角度                  |                       默认为0，角度制                        |
 |   imgscalex_[图像名]   |                 调整图像的横向缩放                  |                           默认为1                            |
 |   imgscaley_[图像名]   |                 调整图像的纵向缩放                  |                           默认为1                            |
@@ -193,8 +196,8 @@ animated,[图像名],[源图像路径],[图像层级],[图像帧个数]{,{图像
 |    imgalp_[图像名]     |                 调整图像的不透明度                  |                           默认为1                            |
 |    imgidx_[图像名]     |       调整当前所绘制的帧（只对动态图片生效）        | 默认为0；0代表第一帧<br>小于0会直接取0，大于总帧数会自动取余 |
 >注:<br>
-> I.1 msx指图片所属lane的流速下1ms移动的距离<br>
-> II.变换时参考的中心为图片的中心点
+> 变换时参考的中心为图片的中心点
+> 最终的imgx=imgx+imgxb+imgxtime；最终的imgy=imgy+imgyb+imgytime
 
 ## 滤镜/shader
 |         gmk名         |                            作用                            |                             其它描述                              |
@@ -251,8 +254,8 @@ animated,[图像名],[源图像路径],[图像层级],[图像帧个数]{,{图像
 | starspd_multiplier  |         星星下落速度倍率         |                                                                                                                                      |
 |     starspd_low     |         星星最慢下落速度         |                                                                                                                                      |
 |    starspd_high     |         星星最快下落速度         |                                                                                                                                      |
-|  active_starchgcol  |         启用渐变色型星星         |                                           使用hsv进行渐变，方式是h，对h，s和v各自单独补间                                            |
-|  active_startrans   |          启用蒙版型星星          |                                                      这种星星会在黑色蒙版上挖空                                                      |
+|  active_starchgcol  |         启用渐变色型星星         |                                           按hsv进行渐变，方式是对h，s和v各自单独补间                                            |
+|  active_startrans   |          启用蒙版型星星          |                                                      星星所在区域黑色底板是透明的                                                      |
 |   startrans_alpha   |        蒙版型星星不透明度        |                                                                                                                                      |
 |  starchgcol_alpha   |       渐变色型星星不透明度       |                                                                                                                                      |
 |  starchgcol_up_rgb  | 渐变色型星星在屏幕上半部分的颜色 |                                                   将hex颜色转为十进制后填入，下同                                                    |
@@ -264,8 +267,9 @@ animated,[图像名],[源图像路径],[图像层级],[图像帧个数]{,{图像
 ## 轨道Gimmick
 | gmk名 |         作用          |          其它描述          |
 | :---: | :-------------------: | :------------------------: |
-| prtrX | 真正意义上的绕x轴旋转 | 默认为0<br>*是全局gimmick* |
-| prtrY | 真正意义上的绕y轴旋转 | 默认为0<br>*是全局gimmick* |
+| prtrX | 绕x轴3D旋转 | 默认为0<br>新算法中单位为角度制，旧算法应写相应角度的正弦值<br>*是全局gimmick* |
+| prtrY | 绕y轴3D旋转 | 默认为0<br>新算法中单位为角度制，旧算法应写相应角度的正弦值<br>*是全局gimmick* |
+| prtrD | 3D旋转使用的物距，只在新算法内生效 | 默认为320<br>*是全局gimmick*<br> |
 | prsy  |       纵向斜切        | 默认为0<br>*是全局gimmick* |
 
 ## Note效果
@@ -273,44 +277,53 @@ animated,[图像名],[源图像路径],[图像层级],[图像帧个数]{,{图像
 |          gmk名          |                    作用                    |                   其它描述                    |
 | :---------------------: | :----------------------------------------: | :-------------------------------------------: |
 |         xoffset         |                谱面横向偏移                |           单位px<br>*是全局gimmick*           |
+|         xoffsetb         |                谱面横向偏移                |           单位px<br>*是全局gimmick*           |
+|         yoffsetb         |                效果同yoffset                |           单位px<br>*是全局gimmick*           |
 |    yoffsetind[lane]     |    效果同yoffset，但只对[lane]轨道生效     |    与yoffset是累加关系<br>*是全局gimmick*     |
 |    xoffsetind[lane]     |    效果同xoffset，但只对[lane]轨道生效     |    与xoffset是累加关系<br>*是全局gimmick*     |
+|    yoffsetindb[lane]     |    效果同yoffset，但只对[lane]轨道生效     |    与yoffset是累加关系<br>*是全局gimmick*     |
+|    xoffsetindb[lane]     |    效果同xoffset，但只对[lane]轨道生效     |    与xoffset是累加关系<br>*是全局gimmick*     |
 |    notealpind[lane]     |    效果同notealp，但只对[lane]轨道生效     |    与notealp是累乘关系<br>*是全局gimmick*     |
 |   boost_timeind[lane]   |   效果同boost_time，但只对[lane]轨道生效   |   与boost_time是累加关系<br>*是全局gimmick*   |
 | boost_distanceind[lane] | 效果同boost_distance，但只对[lane]轨道生效 | 与boost_distance是累加关系<br>*是全局gimmick* |
 |    reset_scrollspeed    |              重置scrollspeed               |                *是全局gimmick*                |
 
+> 某一轨的最终yoffset=yoffset+yoffsetb+yoffsetind[lane]；最终xoffset=xoffset+xoffsetb+xoffsetind[lane]
+
 ## 其它
-|          gmk名          |                                   作用                                   |                                       其它描述                                        |
-| :---------------------: | :----------------------------------------------------------------------: | :-----------------------------------------------------------------------------------: |
-|       jumpto_beat       |                             跳转谱面指定位置                             |                  在value2处填具体的值，单位为拍数<br>*是全局gimmick*                  |
-|        jumpto_s         |                             跳转谱面指定位置                             |        当value1>0时单位为秒否则为毫秒，在value2处填具体的值<br>*是全局gimmick*        |
-|        playspeed        |                             设置谱面播放速度                             |                             默认值为1<br>*是全局gimmick*                              |
-|     col_convertion      |                  将自定义gmk内部分调整颜色的gmk逻辑转换                  | 不为0时会将输入的颜色以rgb的形式使用，否则以bgr的形式<br>受该gmk影响的将在描述中标出  |
-|      slash_anycol       |                  生成一个slash，颜色由set_slash_col定义                  |                                                                                       |
-|      set_slash_col      |                          调整slash_anycol的颜色                          |                  将hex颜色转为10进制后填入<br>*受col_convertion影响*                  |
-|         cover1          |                           调整屏幕遮盖不透明度                           |                 虽然不是新的gmk，但是作用变了：控制的是整个屏幕的遮盖                 |
-|         cover2          |                          轨道外侧遮盖的不透明度                          |                                                                                       |
-|         cover3          |                            轨道遮盖的不透明度                            |                                                                                       |
-| angelstar_checker_mode  | 调整angelstar_checker的状态，0为受曲绘影响，1是不受影响，2是大于轨道图层 |                                        默认为0                                        |
-| angelstar_checker_alpha |                          调整棋盘效果的不透明度                          |                                                                                       |
-|  angelstar_checker_set  |                               刷新棋盘效果                               |                                                                                       |
-|         wflash          |                            白色闪屏的不透明度                            |                                                                                       |
-|         static          |                         调整雪花屏效果的不透明度                         |                                                                                       |
-|      df_sideline2       |                生成一对向外移动的黑色竖线，缓动为outCirc                 |                                                                                       |
-|       df_sideline       |                      绘制一对可以控制移动的白色竖线                      |                       范围[0,1]，1代表抵达屏幕边缘，0为轨道边缘                       |
-|    df_sideline_alpha    |                         控制df_sideline的透明度                          |                                                                                       |
-|       df_whitebg        |                                 白色背景                                 |                                                                                       |
-|      df_grid_alpha      |                          df中的网格效果不透明度                          |                                                                                       |
-|       df_grid_top       |                        控制网格可视部分的顶部位置                        |                                                                                       |
-|     df_grid_bottom      |                        控制网格可视部分的底部位置                        |                                                                                       |
-|         bgalph          |                        控制轨道非灰色部分的透明度                        |                                                                                       |
-|    holdoverlayalpha     |                           轨道灰色部分的透明度                           |                                                                                       |
-|       hide_combo        |                              隐藏combo显示                               |                                                                                       |
-|       changeskin        |                             修改当前显示皮肤                             | 取值范围为整数[0,3]<br>0~3分别代表正常，stopmotion，纯黑(entendnova)以及stargazer皮肤 |
-|  unraveling_sidething   |                      生成unraveling stasis的冲击波                       |                                                                                       |
-|   astellion_sidething   |                          生成astellion的冲击波                           |                                                                                       |
-|  apocalypse_sidething   |                       生成apocalypse call的冲击波                        |                                                                                       |
+|          gmk名          |                                   作用                                   |                                               其它描述                                                |
+| :---------------------: | :----------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------: |
+|       jumpto_beat       |                             跳转谱面指定位置                             |                          在value2处填具体的值，单位为拍数<br>*是全局gimmick*                          |
+|        jumpto_s         |                             跳转谱面指定位置                             |                当value1>0时单位为秒否则为毫秒，在value2处填具体的值<br>*是全局gimmick*                |
+|        playspeed        |                             设置谱面播放速度                             |                                     默认值为1<br>*是全局gimmick*                                      |
+|     col_convertion      |                  将自定义gmk内部分调整颜色的gmk逻辑转换                  |         *已于1.12.8移除*<br>不为0时会将输入的颜色以rgb的形式使用，否则以bgr的形式<br>受该gmk影响的将在描述中标出          |
+|         cover1          |                           调整屏幕遮盖不透明度                           |                         虽然不是新的gmk，但是作用变了：控制的是整个屏幕的遮盖                         |
+|         cover2          |                          轨道外侧遮盖的不透明度                          |                                                                                                       |
+|         cover3          |                            轨道遮盖的不透明度                            |                                                                                                       |
+| angelstar_checker_mode  | 调整angelstar_checker的状态，0为受曲绘影响，1是不受影响，2是大于轨道图层 |                                                默认为0                                                |
+| angelstar_checker_alpha |                          调整棋盘效果的不透明度                          |                                                                                                       |
+|  angelstar_checker_set  |                               刷新棋盘效果                               |                                                                                                       |
+|         wflash          |                            白色闪屏的不透明度                            |                                                                                                       |
+|         static          |                         调整雪花屏效果的不透明度                         |                                                                                                       |
+|      df_sideline2       |                生成一对向外移动的黑色竖线，缓动为outCirc                 |                                                                                                       |
+|       df_sideline       |                      绘制一对可以控制移动的白色竖线                      |                               范围[0,1]，1代表抵达屏幕边缘，0为轨道边缘                               |
+|    df_sideline_alpha    |                         控制df_sideline的透明度                          |                                                                                                       |
+|       df_whitebg        |                                 白色背景                                 |                                                                                                       |
+|      df_grid_alpha      |                          df中的网格效果不透明度                          |                                                                                                       |
+|       df_grid_top       |                        控制网格可视部分的顶部位置                        |                                                                                                       |
+|     df_grid_bottom      |                        控制网格可视部分的底部位置                        |                                                                                                       |
+|         bgalph          |                        控制轨道非灰色部分的透明度                        |                                                                                                       |
+|    holdoverlayalpha     |                           轨道灰色部分的透明度                           |                                                                                                       |
+|       hide_combo        |                              隐藏combo显示                               |                                                                                                       |
+|       changeskin        |                             修改当前显示皮肤                             |         取值范围为整数[0,3]<br>0~3分别代表正常，stopmotion，纯黑(entendnova)以及stargazer皮肤         |
+|  unraveling_sidething   |                      生成unraveling stasis的冲击波                       |                                                                                                       |
+|   astellion_sidething   |                          生成astellion的冲击波                           |                                                                                                       |
+|  apocalypse_sidething   |                       生成apocalypse call的冲击波                        |                                                                                                       |
+|      set_slash_col      |                          调整slash_anycol的颜色                          |                                     将hex颜色转为10进制后填入<br>                                     |
+|      slash_anycol       |                 生成横向的slash，颜色由set_slash_col定义                 |                                                                                                       |
+|    slash_anycol_new     |            生成数个横向的slash，颜色由set_slash_col或val2定义            | val1不为\_时指定一次生成几个slash，填\_则按1记；<br> val2指定生成slash的颜色，为\_时使用set_slash_col |
+|      lr_slash_col       |                            调整lr_slash的颜色                            |                                     将hex颜色转为10进制后填入<br>                                     |
+|        lr_slash         |          生成数个位于两侧的slash，颜色由lr_slash_col或val2定义           |     val1指定一次生成几个slash，为\_则按1记；<br> val2指定生成slash的颜色，为\_则使用lr_slash_col      |
 
 ## 变速(SV)
 这里的变速指om或其它音游内传统的允许不等距的变速。<br>

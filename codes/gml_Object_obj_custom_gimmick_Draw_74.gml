@@ -87,6 +87,7 @@ else{
             var _skewy = prsy;
             var _prtrX = prtrX;
             var _prtrY = prtrY;
+            var _prtrD = prtrD;
             var top = 0;
             var bottom = 165;
             var left = 113 - shxa;
@@ -115,9 +116,9 @@ else{
             var MSkew = MatrixSkew(-_skewx, -_skewy);
             var MTrans = MatrixTranslate(_x, _y);
             var MScale = MatrixScale(_xsc, _ysc);
-            var MScaleTrans = MatrixScaleTrans(_x, _y, _xsc, _ysc);
             var MRot = MatrixRotateZ(_ang * rotdir);
-            var MTrape=global.MatrixTrapezoidal(_prtrX,_prtrY);
+            //角度制分支：物距先写死 320px（按"缩放后/屏幕px"计，越大透视越弱），之后要调再改成设置项/gmk
+            var MTrape=cc.NEW_PRTRX_CALCULATION?MatrixTrapezoidalNew(_prtrX,_prtrY,_prtrD):MatrixTrapezoidal(_prtrX,_prtrY);
             var M = other.i_matrix;
             M = matrix_multiply(M, other.MToOrigin);
             M = matrix_multiply(M, MScale);

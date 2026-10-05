@@ -393,16 +393,42 @@ function InitMisc(){
     addExtraMod("cover1");
     addExtraMod("cover2");
     addExtraMod("cover3");
+
     addExtraMod("rainbow");
     addExtraMod("sides");
     addExtraMod("scorealph");
     addExtraMod("bgalph");
-    addExtraMod("col_convertion", 0)
     addExtraMod("static");
     addExtraMod("holdoverlayalpha");
     addExtraMod("hide_combo");
+
+    addExtraMod("slash_anycol_new",1,function(start,dur, slash_cnt, slash_col){
+        var col=(slash_col==cc.ORIGINAL_FROM) ? cc.mod_set_slash_col : slash_col;
+        var repeatTime=(slash_cnt==cc.ORIGINAL_FROM) ? 1 : slash_cnt;
+
+        repeat(repeatTime)
+        {
+            instance_create_depth(0, 0, 0, o_anycol_slash, {
+                color:col_convert(col)
+            })
+        }
+        
+    })
     addExtraMod("slash_anycol")
-    addExtraMod("set_slash_col")
+    addExtraMod("set_slash_col",1)
+    addExtraMod("lr_slash",1,function(start,dur, slash_cnt, slash_col){
+        var col=(slash_col==cc.ORIGINAL_FROM) ? cc.mod_lr_slash_col : slash_col;
+        var repeatTime=(slash_cnt==cc.ORIGINAL_FROM) ? 1 : slash_cnt;
+
+        repeat(repeatTime)
+        {
+            instance_create_depth(0, 0, 0, o_csm_side_slash, {
+                color:col_convert(col)
+            })
+        }
+    })
+    addExtraMod("lr_slash_col",1)
+
     addExtraMod("wflash");
     cc.plaudite_pburst_consist=-0.01
     addExtraMod("plaudite_pburst",0,function(start,dur, msRepeat, repeatTime)
@@ -421,7 +447,6 @@ function InitMisc(){
     addExtraMod("sg_endblip_destroy",0 ,function(){
         instance_destroy(o_sg_endblip);
     });
-    cc.mod_col_convertion = 0;
     cc.mod_static=0;
     cc.mod_cover1 = 0;
     cc.mod_cover2 = 0;
@@ -434,8 +459,9 @@ function InitMisc(){
     cc.mod_sg_endblip_destroy = 0;
     cc.mod_plaudite_pburst = 0;
     cc.mod_hide_combo = 0;
-    cc.mod_slash_anycol=0;
+    cc.mod_slash_anycol=0
     cc.mod_set_slash_col=16777215;
+    cc.mod_lr_slash_col=16777215;
 
     instance_create_depth(0,0,-400,o_csm_screen_cover_handler)
 }

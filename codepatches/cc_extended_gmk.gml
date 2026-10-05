@@ -9,7 +9,8 @@ var settings=[
     ["ENABLE_DISTORT_BG", true],
     ["ENABLE_MUSIC_CONTROL", true],
     ["ENABLE_STARPARTICLE",false],
-    ["ENABLE_SKIN_CHANGE",false]
+    ["ENABLE_SKIN_CHANGE",false],
+    ["PRTRX_USES_DEGREES",false]
 ];
 array_foreach(settings, function(ele){
     variable_instance_set(cc, ele[0], ele[1]);
@@ -18,9 +19,13 @@ mod_freeze = 0;
 mod_jumpto = 0;
 mod_playspeed = 1;
 mod_xoffset = 0;
+mod_xoffsetb = 0;
+mod_yoffsetb = 0;
 for (var lane=0;lane<7;lane++){
     variable_instance_set(cc,string("mod_yoffsetind{0}", lane), 0);
     variable_instance_set(cc,string("mod_xoffsetind{0}", lane), 0);
+    variable_instance_set(cc,string("mod_yoffsetindb{0}", lane), 0);
+    variable_instance_set(cc,string("mod_xoffsetindb{0}", lane), 0);
     variable_instance_set(cc,string("mod_notealpind{0}", lane), 1);
     variable_instance_set(cc,string("mod_boost_timeind{0}", lane), 300);
     variable_instance_set(cc,string("mod_boost_distanceind{0}", lane), 0);

@@ -107,3 +107,15 @@
 - 修复了游玩房间内，背景曲绘被错误缩放的问题(我才发现og在新版把背景曲绘大小调成420x268了XDD)
 - 彻底移除了字幕的debug模式
 - 移除了Herobrine
+
+# v1.13
+- 修复了vsv读取文件后未关闭导致的崩溃bug
+- 修复了使用vsv变速时boost系列和wave失效的bug
+- 添加了lr_slash,o_anycol_slash_new
+- 图片gimmick新增imgxb_\*和imgyb_\*
+- 新增yoffsetb，xoffsetb，yoffsetindb，xoffsetindb
+- 新增了NEW_PRTRX_CALCULATION配置项，代表是否使用prtr系列的新算法，为新算法增加了```prtrD``` gimmick @deepseek
+- 修复了imgscaleytime的运算优先级错误 @deepseek
+- 修复了同一Layer内图层优先级错误的问题 @deepseek
+- 修复了imgytime/imgxtime/imgscaleytime会串用到上一张图的数值的问题（现在每张图独立计算）@deepseek
+- 优化了图片绘制性能 @deepseek

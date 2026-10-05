@@ -16,11 +16,6 @@
         "Function":"",
         "Type": 2
     },{
-        "Entry":"gml_GlobalScript_Matrices",
-        "ExternalFile":"more_matrices.gml",
-        "Function":"",
-        "Type":2
-    },{
         "Entry":"gml_Object_obj_note_rendering_Draw_0",
         "Type":0,
         "Find":"cc.mod_notealp",
@@ -66,37 +61,37 @@
         "Entry":"gml_Object_obj_pressed_holds_Draw_0",
         "Type":0,
         "Find":"NoteModsX(",
-        "Value":"global.gmlNoteModsX(i,"
+        "Value":" gmlNoteModsX(i,"
     },
     {
         "Entry":"gml_Object_obj_pressed_holds_Step_0",
         "Type":0,
         "Find":"NoteModsX(",
-        "Value":"global.gmlNoteModsX(i,"
+        "Value":"gmlNoteModsX(i,"
     },
     {
         "Entry":"gml_Object_obj_pressed_holds_Draw_0",
         "Type":0,
         "Find":"NoteModsY",
-        "Value":"global.gmlNoteModsY"
+        "Value":"gmlNoteModsY"
     },
     {
         "Entry":"gml_Object_obj_note_rendering_Draw_0",
         "Type":0,
         "Find":"NoteModsX(",
-        "Value":"global.gmlNoteModsX(i,"
+        "Value":"gmlNoteModsX(i,"
     },
     {
         "Entry":"gml_Object_obj_note_rendering_Step_0",
         "Type":0,
         "Find":"NoteModsX(",
-        "Value":"global.gmlNoteModsX(i,"
+        "Value":"gmlNoteModsX(i,"
     },
     {
         "Entry":"gml_Object_obj_note_rendering_Draw_0",
         "Type":0,
         "Find":"NoteModsY",
-        "Value":"global.gmlNoteModsY"
+        "Value":"gmlNoteModsY"
     },
     {
         "Entry":"gml_Object_obj_base_gimmick_Create_0",

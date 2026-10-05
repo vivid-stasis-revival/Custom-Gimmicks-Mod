@@ -12,10 +12,7 @@ if (cc.mod_textalp>0 and enable_text_gimmick){
     draw_set_alpha(cc.mod_textalp);
     draw_set_halign(fa_center);
     draw_set_font(global.default_font);
-    var col=cc.mod_textcolhex
-    if (cc.mod_col_convertion){
-        col=global.col_convert(col)
-    }
+    var col=col_convert(col)
     draw_set_color(col);
     draw_text_transformed(cc.mod_textX,cc.mod_textY,current_text,cc.mod_textscale,cc.mod_textscale,cc.mod_textrot);
 }

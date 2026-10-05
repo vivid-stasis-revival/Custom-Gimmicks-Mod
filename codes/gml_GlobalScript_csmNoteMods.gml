@@ -1,5 +1,5 @@
 //arg0:lane,arg1:time
-global.gmlNoteModsX=function (arg0, arg1, arg2)
+function gmlNoteModsX(arg0, arg1, arg2)
 {
     var scale = function(arg0, arg1, arg2, arg3, arg4)
     {
@@ -7,7 +7,6 @@ global.gmlNoteModsX=function (arg0, arg1, arg2)
     };
     
     var xpos = 0;
-    
     if (cc.mod_beat != 0)
     {
         var fAccelTime = 0.3;
@@ -37,22 +36,25 @@ global.gmlNoteModsX=function (arg0, arg1, arg2)
         }
     }
     xpos += cc.mod_xoffset+variable_instance_get(cc, string("mod_xoffsetind{0}", arg0));
+    xpos += cc.mod_xoffsetb+variable_instance_get(cc, string("mod_xoffsetindb{0}", arg0));
     return xpos;
 }
 //arg0:dist, arg1:lane
-global.gmlNoteModsY=function(arg0, arg1,arg2,arg3=cc.mod_scrollspeed)
+function gmlNoteModsY(arg0, arg1,arg2)
 {
     var scrollind=variable_instance_get(cc, string("mod_scrollind{0}",arg1));
     var curms=(cc.mod_freeze==0)?cc.currentms:cc.mod_freeze;
-    var excatCurMs=o_scrollSpeedHandler.warpedTime(curms + cc.mod_yoffset+variable_instance_get(cc, string("mod_yoffsetind{0}", arg1)));
+    var yoff=cc.mod_yoffset+variable_instance_get(cc, string("mod_yoffsetind{0}", arg1))
+    yoff+=cc.mod_yoffsetb+variable_instance_get(cc, string("mod_yoffsetindb{0}", arg1))
+    var excatCurMs=o_scrollSpeedHandler.warpedTime(curms + yoff);
     var excatDist=(arg0+curms)-excatCurMs
-    var yoff = 144 - ((excatDist / 10) * arg3 * cc.mod_velocity * scrollind);
+    var yoff = 144 - ((excatDist / 10) * cc.mod_scrollspeed * cc.mod_velocity * scrollind);
     
     if (cc.mod_driven != 0)
-        yoff -= (cc.mod_driven * cc.bps * arg3 * cc.mod_velocity * 22 * scrollind);
+        yoff -= (cc.mod_driven * cc.bps * cc.mod_scrollspeed * cc.mod_velocity * 22 * scrollind);
     
     if (cc.mod_wave != 0)
-        yoff -= ((cc.mod_wave / 100) * 20 * sin(arg0 / 152));
+        yoff -= ((cc.mod_wave / 100) * 20 * sin(excatDist / 152));
     
     if (cc.mod_boost_distance != 0)
     {
@@ -60,8 +62,8 @@ global.gmlNoteModsY=function(arg0, arg1,arg2,arg3=cc.mod_scrollspeed)
         var arghenaMoveDistance = cc.mod_boost_distance+variable_instance_get(cc, string("mod_boost_distanceind{0}", arg1));
         var arghenaModded = -arghenaMoveDistance;
         
-        if (arg0 < arghenaTimeDistance && arghenaTimeDistance > 0)
-            arghenaModded = EaseInCubic(arghenaTimeDistance - arg0, -arghenaMoveDistance, arghenaMoveDistance, arghenaTimeDistance);
+        if (excatDist < arghenaTimeDistance && arghenaTimeDistance > 0)
+            arghenaModded = EaseInCubic(arghenaTimeDistance - excatDist, -arghenaMoveDistance, arghenaMoveDistance, arghenaTimeDistance);
         
         yoff += arghenaModded;
     }

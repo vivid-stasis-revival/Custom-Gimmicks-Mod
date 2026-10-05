@@ -1,4 +1,4 @@
-global.__merge=function(lpart,rpart,compareFunc){
+function __merge(lpart,rpart,compareFunc){
     var l = array_length(lpart), r = array_length(rpart);
     var i = 0, j = 0;
     var sorted = [];
@@ -26,7 +26,7 @@ global.__merge=function(lpart,rpart,compareFunc){
     return sorted;
 }
 
-global.merge_sort=function(arr,compareFunc){
+function merge_sort(arr,compareFunc){
     if (array_length(arr)<=1){
         return arr;
     }
@@ -40,9 +40,9 @@ global.merge_sort=function(arr,compareFunc){
     for (var i=mid; i<array_length(arr); i++){
         array_push(rarr,arr[i]);
     }
-    larr=global.merge_sort(larr,compareFunc);
-    rarr=global.merge_sort(rarr,compareFunc);
-    return global.__merge(larr,rarr,compareFunc);
+    larr=merge_sort(larr,compareFunc);
+    rarr=merge_sort(rarr,compareFunc);
+    return __merge(larr,rarr,compareFunc);
 }
 //【1，2，3，4，5】
 //【1，2】【3，4，5】

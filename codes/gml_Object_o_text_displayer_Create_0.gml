@@ -18,9 +18,9 @@ while (!file_text_eof(file))
     text_info[1] = string_replace_all(text_info[1], "{n}", "\n");
     array_push(text_array, text_info);
 }
-global.merge_sort(text_array,
+text_array=merge_sort(text_array,
     function(cur,ne){
-        return cur[0]-ne[0]
+        return cur[0]<=ne[0]
     }
 )
 

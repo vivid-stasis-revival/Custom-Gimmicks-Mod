@@ -9,11 +9,15 @@ function UnlimitedAddGlobalMod(modName,modWeight,callBack=undefined,endCallBack=
 UnlimitedAddGlobalMod("prsy", 2);
 UnlimitedAddGlobalMod("prtrX", 2);
 UnlimitedAddGlobalMod("prtrY", 2);
-UnlimitedAddGlobalMod("prta", 1);
+UnlimitedAddGlobalMod("prtrD", 2);
 UnlimitedAddGlobalMod("xoffset", 1.5);
+UnlimitedAddGlobalMod("xoffsetb", 1.5);
+UnlimitedAddGlobalMod("yoffsetb", 1.5);
 for (var lane=0;lane<7;lane++){
     UnlimitedAddGlobalMod(string("yoffsetind{0}", lane), 1.5);
-    UnlimitedAddGlobalMod(string("xoffsetind{0}", lane), 1.5);
+    UnlimitedAddGlobalMod(string("yoffsetind{0}", lane), 1.5);
+    UnlimitedAddGlobalMod(string("yoffsetindb{0}", lane), 1.5);
+    UnlimitedAddGlobalMod(string("xoffsetindb{0}", lane), 1.5);
     UnlimitedAddGlobalMod(string("notealpind{0}", lane), 1.5);
     UnlimitedAddGlobalMod(string("boost_timeind{0}", lane), 2.5);
     UnlimitedAddGlobalMod(string("boost_distanceind{0}", lane), 2.5);

@@ -40,3 +40,4 @@ shfr = 0;
 prsy = 0;
 prtrX = 0;
 prtrY = 0;
+prtrD = 320;

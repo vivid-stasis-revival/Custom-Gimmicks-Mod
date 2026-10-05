@@ -67,9 +67,10 @@ function loadSSListFromFile(path){
             var line=file_text_readln(fp);
             vsvLineParser(line);
         }
-        global.merge_sort(ssList,function(a,b){
-            return a.time-b.time;
+        ssList=merge_sort(ssList,function(a,b){
+            return a.time<=b.time;
         });
+        file_text_close(fp);
     }
     if (array_length(ssList)==0 || ssList[0].time>0)
         array_insert(ssList,0,new velocity(0,1));

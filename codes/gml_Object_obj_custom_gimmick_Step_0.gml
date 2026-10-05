@@ -2,16 +2,10 @@ event_inherited();
 if (!instance_exists(cc))
     exit;
 
-//global.NOTE_SIZE*=cc.mod_note_size;
-
 if (cc.mod_slash_anycol > 0)
 {
-    var the = instance_create_depth(0, 0, 255, o_anycol_slash);
-    var col = cc.mod_set_slash_col
-    if (cc.mod_col_convertion){
-        col=make_color_rgb(color_get_blue(col),color_get_green(col),color_get_red(col))
-    }
-    the.color = col;
+    var ins = instance_create_depth(0, 0, 255, o_anycol_slash);
+    ins.color = col_convert(cc.mod_set_slash_col);
     cc.mod_slash_anycol = 0;
 }
 
