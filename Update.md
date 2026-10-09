@@ -119,3 +119,9 @@
 - 修复了同一Layer内图层优先级错误的问题 @deepseek
 - 修复了imgytime/imgxtime/imgscaleytime会串用到上一张图的数值的问题（现在每张图独立计算）@deepseek
 - 优化了图片绘制性能 @deepseek
+
+# v1.13.1
+- 修复了xoffsetind失效的问题
+- 修复了drawuntil生效条件错误的问题
+- 添加了drawstop，代表距离判定线n msx时隐藏
+- 给两种slash新增了控制收束时间的gimmick：*_close_time

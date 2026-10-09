@@ -13,9 +13,10 @@ UnlimitedAddGlobalMod("prtrD", 2);
 UnlimitedAddGlobalMod("xoffset", 1.5);
 UnlimitedAddGlobalMod("xoffsetb", 1.5);
 UnlimitedAddGlobalMod("yoffsetb", 1.5);
+UnlimitedAddGlobalMod("drawstop", 2);
 for (var lane=0;lane<7;lane++){
     UnlimitedAddGlobalMod(string("yoffsetind{0}", lane), 1.5);
-    UnlimitedAddGlobalMod(string("yoffsetind{0}", lane), 1.5);
+    UnlimitedAddGlobalMod(string("xoffsetind{0}", lane), 1.5);
     UnlimitedAddGlobalMod(string("yoffsetindb{0}", lane), 1.5);
     UnlimitedAddGlobalMod(string("xoffsetindb{0}", lane), 1.5);
     UnlimitedAddGlobalMod(string("notealpind{0}", lane), 1.5);

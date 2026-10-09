@@ -10,13 +10,13 @@ var settings=[
     ["ENABLE_MUSIC_CONTROL", true],
     ["ENABLE_STARPARTICLE",false],
     ["ENABLE_SKIN_CHANGE",false],
-    ["PRTRX_USES_DEGREES",false]
+    ["NEW_PRTRX_CALCULATION",false]
 ];
 array_foreach(settings, function(ele){
     variable_instance_set(cc, ele[0], ele[1]);
 })
+mod_drawstop=-infinity;
 mod_freeze = 0;
-mod_jumpto = 0;
 mod_playspeed = 1;
 mod_xoffset = 0;
 mod_xoffsetb = 0;

@@ -37,7 +37,7 @@
         "Entry":"gml_GlobalScript_LoadSong",
         "Find":"if (global.op_mirror)",
         "Type":0,
-        "ExternalFile":"processLanes.gml"
+        "ExternalFile":"vsvPatch.gml"
     },
     {
         "Entry":"gml_Object_obj_pressed_holds_Draw_0",
@@ -52,6 +52,17 @@
 
     },
     {
+        "Entry":"gml_Object_obj_pressed_holds_Draw_0",
+        "Find":"note._svCachedDist > cc.mod_drawuntil",
+        "Type":0,
+        "Value":"false"
+    },{
+        "Entry":"gml_Object_obj_note_rendering_Draw_0",
+        "Find":"note._svCachedDist > cc.mod_drawuntil",
+        "Type":0,
+        "Value":"false"
+
+    },{
         "Entry":"gml_Object_obj_pressed_holds_Draw_0",
         "Type":0,
         "Find":"cc.mod_notealp",
@@ -92,6 +103,12 @@
         "Type":0,
         "Find":"NoteModsY",
         "Value":"gmlNoteModsY"
+    },
+    {
+        "Entry":"gml_Object_obj_note_rendering_Draw_0",
+        "Type":0,
+        "Find":"var distance = note._svCachedDist + visual_offset_ms;",
+        "Value":"var distance = note._svCachedDist + visual_offset_ms; if (gmlNoteExcatDist(distance, i) < cc.mod_drawstop) continue;"
     },
     {
         "Entry":"gml_Object_obj_base_gimmick_Create_0",

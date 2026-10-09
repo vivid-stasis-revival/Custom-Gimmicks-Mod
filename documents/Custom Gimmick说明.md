@@ -322,8 +322,10 @@ animated,[图像名],[源图像路径],[图像层级],[图像帧个数]{,{图像
 |      set_slash_col      |                          调整slash_anycol的颜色                          |                                     将hex颜色转为10进制后填入<br>                                     |
 |      slash_anycol       |                 生成横向的slash，颜色由set_slash_col定义                 |                                                                                                       |
 |    slash_anycol_new     |            生成数个横向的slash，颜色由set_slash_col或val2定义            | val1不为\_时指定一次生成几个slash，填\_则按1记；<br> val2指定生成slash的颜色，为\_时使用set_slash_col |
+|    slash_anycol_close_time     |            控制slash_anycol的收束时间，单位秒           | 默认为1 |
 |      lr_slash_col       |                            调整lr_slash的颜色                            |                                     将hex颜色转为10进制后填入<br>                                     |
 |        lr_slash         |          生成数个位于两侧的slash，颜色由lr_slash_col或val2定义           |     val1指定一次生成几个slash，为\_则按1记；<br> val2指定生成slash的颜色，为\_则使用lr_slash_col      |
+|        lr_slash_close_time         |          控制lr_slash的收束时间，单位秒          |     默认为1      |
 
 ## 变速(SV)
 这里的变速指om或其它音游内传统的允许不等距的变速。<br>

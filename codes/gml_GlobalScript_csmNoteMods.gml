@@ -1,9 +1,9 @@
 //arg0:lane,arg1:time
-function gmlNoteModsX(arg0, arg1, arg2)
+function gmlNoteModsX(lane, time, arg2)
 {
     var scale = function(arg0, arg1, arg2, arg3, arg4)
     {
-        return (((arg0 - arg1) * (arg4 - arg3)) / (arg2 - arg1)) + arg3;
+        return (((arg0 - arg1) * (arg4 - arg3)) / (arg2 - time)) + arg3;
     };
     
     var xpos = 0;
@@ -31,23 +31,30 @@ function gmlNoteModsX(arg0, arg1, arg2)
             }
             
             fAmount *= (bEvenBeat ? 1 : -1);
-            var fShift = 11 * fAmount * sin((arg1 / 60) + 1.5707963267948966);
+            var fShift = 11 * fAmount * sin((time / 60) + 1.5707963267948966);
             xpos += ((cc.mod_beat / 100) * fShift);
         }
     }
-    xpos += cc.mod_xoffset+variable_instance_get(cc, string("mod_xoffsetind{0}", arg0));
-    xpos += cc.mod_xoffsetb+variable_instance_get(cc, string("mod_xoffsetindb{0}", arg0));
+    xpos += cc.mod_xoffset+variable_instance_get(cc, string("mod_xoffsetind{0}", lane));
+    xpos += cc.mod_xoffsetb+variable_instance_get(cc, string("mod_xoffsetindb{0}", lane));
     return xpos;
 }
-//arg0:dist, arg1:lane
-function gmlNoteModsY(arg0, arg1,arg2)
+
+function gmlNoteExcatDist(dist, lane)
 {
-    var scrollind=variable_instance_get(cc, string("mod_scrollind{0}",arg1));
     var curms=(cc.mod_freeze==0)?cc.currentms:cc.mod_freeze;
-    var yoff=cc.mod_yoffset+variable_instance_get(cc, string("mod_yoffsetind{0}", arg1))
-    yoff+=cc.mod_yoffsetb+variable_instance_get(cc, string("mod_yoffsetindb{0}", arg1))
-    var excatCurMs=o_scrollSpeedHandler.warpedTime(curms + yoff);
-    var excatDist=(arg0+curms)-excatCurMs
+    var yoff=cc.mod_yoffset+variable_instance_get(cc, string("mod_yoffsetind{0}", lane))
+    yoff+=cc.mod_yoffsetb+variable_instance_get(cc, string("mod_yoffsetindb{0}", lane))
+    return (dist+curms)-global.vsvHandler.warpedTime(curms + yoff);
+}
+//arg0:dist, arg1:lane
+function gmlNoteModsY(notems, lane,arg2)
+{
+    var downscroll=NoteModsIsLaneDownscroll(lane)
+    var scrollind=variable_instance_get(cc, string("mod_scrollind{0}",lane));
+    var excatDist=gmlNoteExcatDist(notems, lane);
+    if (excatDist>cc.mod_drawuntil)
+        return downscroll ? -2147483647 : 2147483647;
     var yoff = 144 - ((excatDist / 10) * cc.mod_scrollspeed * cc.mod_velocity * scrollind);
     
     if (cc.mod_driven != 0)
@@ -58,8 +65,8 @@ function gmlNoteModsY(arg0, arg1,arg2)
     
     if (cc.mod_boost_distance != 0)
     {
-        var arghenaTimeDistance = cc.mod_boost_time+variable_instance_get(cc, string("mod_boost_timeind{0}", arg1));
-        var arghenaMoveDistance = cc.mod_boost_distance+variable_instance_get(cc, string("mod_boost_distanceind{0}", arg1));
+        var arghenaTimeDistance = cc.mod_boost_time+variable_instance_get(cc, string("mod_boost_timeind{0}", lane));
+        var arghenaMoveDistance = cc.mod_boost_distance+variable_instance_get(cc, string("mod_boost_distanceind{0}", lane));
         var arghenaModded = -arghenaMoveDistance;
         
         if (excatDist < arghenaTimeDistance && arghenaTimeDistance > 0)
@@ -67,6 +74,5 @@ function gmlNoteModsY(arg0, arg1,arg2)
         
         yoff += arghenaModded;
     }
-    
     return yoff;
 }
